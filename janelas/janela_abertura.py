@@ -1,22 +1,22 @@
 # --- ROBO PARA CONECTAR E EXECUTAR TRANSACOES NO SAP --- #
 import PySimpleGUI as sg
-from imagens import logo as imgs
-from robo import kob1
+from imagens import imagens_base64 as imgs
+from robos import fagll03, fbl3n, kob1
 import sys
 
 def inicializacao():
 
-    #sg.theme('DarkGrey14')
+    sg.theme('LightGrey1')
 
-    coluna_esquerda = [[sg.Text('CRIS', size=(25,1), justification='center', font=("Helvetica", 25))],
-                       [sg.Text('Central de Robôs para Interação com o SAP', size=(30,2), justification='center', font=("Helvetica", 15))],
+    coluna_esquerda = [[sg.Text('CRIS', size=(10,1), justification='center', font=("Helvetica", 50))],
+                       [sg.Text('Central de Robôs para Interação com o SAP', size=(20,2), justification='center', font=("Helvetica", 25))],
                        [sg.Text('')],
-                       [sg.Button('KOB1', size=(10,1), button_color='black on white', key='-KOB1-'),
-                        sg.Button('FBL3N', size=(10,1), button_color='black on white', key='-FAGLL03-'),
-                        sg.Button('KS03', size=(10,1), button_color='black on white', key='-FC10N-')],
-                       [sg.Button('FC10N', size=(10,1), button_color='black on white', key='-FBL5N_PA-'),
-                        sg.Button('FS10N', size=(10,1), button_color='black on white', key='-FBL1N_PA-'),
-                        sg.Button('KOC4', size=(10,1), button_color='black on white', key='-FS10N-')],
+                       [sg.Button('FBL3N', size=(10,1), key='-FBL3N-'),
+                        sg.Button('FAGLL03', size=(10,1), key='-FAGLL03-'),
+                        sg.Button('KOB1', size=(10,1), key='-KOB1-')],
+                       [sg.Button(' --- ', size=(10,1), key='-FBL5N_PA-'),
+                        sg.Button(' --- ', size=(10,1), key='-FBL1N_PA-'),
+                        sg.Button(' --- ', size=(10,1), key='-FS10N-')],
                        [sg.Text('')]
                       ]               
 
@@ -30,6 +30,12 @@ def inicializacao():
         event, values = janela.read()
         if event in (sg.WIN_CLOSED, 'Exit'):
             sys.exit()
+        if event == '-FBL3N-':
+            janela.close()
+            fbl3n.executa_robo()
+        if event == '-FAGLL03-':
+            janela.close()
+            fagll03.executa_robo()
         if event == '-KOB1-':
             janela.close()
             kob1.executa_robo()

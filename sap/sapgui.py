@@ -8,6 +8,8 @@ import sys
 import time
 import win32com.client as win32
 
+sg.theme('DarkGrey14')
+
 class SapGui(object):
     def __init__(self):
         self.path = 'C:/Program Files (x86)/SAP/FrontEnd/SAPgui/saplogon.exe'

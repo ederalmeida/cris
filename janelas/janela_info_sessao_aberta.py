@@ -2,13 +2,13 @@ import PySimpleGUI as sg
 import sys
 
 def janela_info_sessao_aberta(sistema, usuario):
-    #sg.theme('DarkGrey14')
+    sg.theme('LightGrey1')
     layout = [
         [sg.Text('Deseja efetuar a execução do robô com a instância abaixo?')],
         [sg.Text('Sistema: ' + sistema)],
         [sg.Text('Usuário: ' + usuario)],
         [sg.Text('')],
-        [sg.Button('Sim', button_color='black on white', key='-BOTAO_SIM-'), sg.Button('Não', button_color='black on white', key='-BOTAO_NAO-')]
+        [sg.Button('Sim', key='-BOTAO_SIM-'), sg.Button('Não', key='-BOTAO_NAO-')]
 
     ]
 

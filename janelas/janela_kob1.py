@@ -2,37 +2,37 @@ import PySimpleGUI as sg
 import sys
 
 def exibir():
-    #sg.theme('DarkGrey14')   
+    sg.theme('LightGrey1')   
 
-    linha1 = [[sg.Text('Extrair Custos Reais de OI - KOB1', size=(32, 1), justification='center', font=("Helvetica", 23), relief=sg.RELIEF_RIDGE)]]
+    linha1 = [[sg.Text('Extrair Custos Reais de OI - KOB1', size=(20, 2), justification='center', font=("Helvetica", 23))]]
 
-    linha2 = [[sg.Text('_'  * 100, size=(72, 1))],      
+    linha2 = [[sg.Text('_'  * 70, size=(45, 1))],      
               [sg.Text('Informações', font=('Helvetica', 15), justification='left')]
              ]
 
     linha3_coluna1 = [[sg.Frame('Data',
                         [[sg.Text('formato da data DDMMAAAA', size=(35, 1), font=('Helvetica', 8), key='-DATA_TEXTO-')],
                         [sg.Text('De', size=(5, 1), key='-DATA_DE_TEXTO-'),
-                        sg.InputText('', background_color='grey', size=(16,1), key='-DATA_DE-', enable_events=True),
+                        sg.InputText('', size=(16,1), key='-DATA_DE-', enable_events=True),
                         sg.Text('Até', size=(5, 1), key='-DATA_ATE_TEXTO-'),
-                        sg.InputText('', background_color='grey', size=(16,1), key='-DATA_ATE-', enable_events=True)]], size=(20,1))]
+                        sg.InputText('', size=(16,1), key='-DATA_ATE-', enable_events=True)]], size=(20,1))]
                     ]        
      
     linha5_coluna1 = [[sg.Frame('Dados',
                        [[sg.Text('Relação das Ordens')],
-                        [sg.InputText('', background_color='grey', key='-ARQUIVO_ORDENS-', size=(40, 1)), sg.FileBrowse('procurar', button_color='black on white')],
+                        [sg.InputText('', key='-ARQUIVO_ORDENS-', size=(40, 1)), sg.FileBrowse('procurar')],
                         [sg.Text('Pasta onde serão salvos os relatórios', size=(40, 1))],
-                        [sg.InputText('', background_color='grey', key='-PASTA-', size=(40, 1)), sg.FolderBrowse('procurar', button_color='black on white')]
+                        [sg.InputText('', key='-PASTA-', size=(40, 1)), sg.FolderBrowse('procurar')]
                        ], size=(40,1))
                     ]]
 
     linha5_coluna2= [[sg.Frame('Saída',
                     [[sg.Text('Layout'),
-                        sg.InputText(default_text='/1SAP1', background_color='grey', size=(16,1), key='-LAYOUT-', enable_events=True)]])
+                        sg.InputText(default_text='/1SAP1', size=(16,1), key='-LAYOUT-', enable_events=True)]])
                     ]]
 
     linha6 = [[sg.Text('')],
-              [sg.Button('Executar Robô', key='-EXECUTAR_ROBO-', button_color='black on white', enable_events=True)]]
+              [sg.Button('Executar Robô', key='-EXECUTAR_ROBO-', enable_events=True)]]
 
     layout = [linha1,
               linha2,
@@ -64,4 +64,3 @@ def exibir():
     janela.close()
 
     return values['-ARQUIVO_ORDENS-'], values['-PASTA-'], values['-DATA_DE-'], values['-DATA_ATE-'], values['-LAYOUT-']
-    

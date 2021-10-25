@@ -11,29 +11,29 @@ def winapi_path(dos_path, encoding=None):
     return u"\\\\?\\" + path
 
 
-def verifica_cria_subpastas(caminho_pasta, ordem):
+def verifica_cria_subpastas(caminho_pasta, conta):
     pastas = os.listdir(caminho_pasta)
-    tamanho_ordem = (len(ordem) - 1)
 
     '''Verfica se existe uma pasta que comece com os 10 dígitos da conta
         Se existir, utilizar ela e verifica se existe as subpastas print e relatórios
         Se não existirem, serão criadas. '''
     for pasta in pastas:
         if  os.path.isdir(os.sep.join([caminho_pasta, pasta])):
-            if str(pasta) == str(ordem):
+            if str(pasta[0:10]) == str(conta):
                 if not os.path.isdir(os.sep.join([caminho_pasta, pasta, 'prints'])):
                     os.makedirs(os.sep.join([caminho_pasta, pasta, 'prints']).replace('\\','/'))
+                    logging.info(os.sep.join([caminho_pasta, pasta, 'prints']).replace('\\','/'))
                 if not os.path.isdir(os.sep.join([caminho_pasta, pasta, 'relatorios'])):
                     os.makedirs(os.sep.join([caminho_pasta, pasta, 'relatorios']).replace('\\','/'))
-                    
+                    logging.info(os.sep.join([caminho_pasta, pasta, 'relatorios']).replace('\\','/'))
                 return os.sep.join([caminho_pasta, pasta]).replace('\\','/')
 
     ''' Se passou por todas as pastas e não achou nenhuma que comece com os 10 dígitos
         da conta, então cria a pasta e as subpastas print e relatorios'''
-    os.makedirs(os.sep.join([caminho_pasta, ordem]).replace('\\','/'))
-    
-    os.makedirs(os.sep.join([caminho_pasta, ordem, 'prints']).replace('\\','/'))
-    
-    os.makedirs(os.sep.join([caminho_pasta, ordem, 'relatorios']).replace('\\','/'))
-    
-    return os.sep.join([caminho_pasta, ordem]).replace('\\','/')
+    os.makedirs(os.sep.join([caminho_pasta, conta]).replace('\\','/'))
+    logging.info(os.sep.join([caminho_pasta, conta]).replace('\\','/'))
+    os.makedirs(os.sep.join([caminho_pasta, conta, 'prints']).replace('\\','/'))
+    logging.info(os.sep.join([caminho_pasta, conta, 'prints']).replace('\\','/'))
+    os.makedirs(os.sep.join([caminho_pasta, conta, 'relatorios']).replace('\\','/'))
+    logging.info(os.sep.join([caminho_pasta, conta, 'relatorios']).replace('\\','/'))
+    return os.sep.join([caminho_pasta, conta]).replace('\\','/')
