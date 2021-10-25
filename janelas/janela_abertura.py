@@ -1,7 +1,7 @@
 # --- ROBO PARA CONECTAR E EXECUTAR TRANSACOES NO SAP --- #
 import PySimpleGUI as sg
 from imagens import imagens_base64 as imgs
-from robos import fagll03, fbl3n, kob1
+from robos import fagll03, fbl3n, kob1, sgpmr
 import sys
 
 def inicializacao():
@@ -50,6 +50,9 @@ def inicializacao():
         if event == '-KOB1-':
             janela.close()
             kob1.executa_robo()
+        if event == '-SGPMR-':
+            janela.close()
+            sgpmr.executa_robo()
         else:
             continue
                 
