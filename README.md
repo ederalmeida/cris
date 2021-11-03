@@ -20,5 +20,3 @@ python setup.py build
 
 ## Agradecimento
 Agradeço ao Fabio Mitsueda (https://fabiomitsueda.com.br) pela liberação da macro criada em VBA por ele, que auxilia no processo de conexão com o SAP, a qual fiz um port para esse projeto.
-
-## licença GPLv3
