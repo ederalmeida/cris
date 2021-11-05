@@ -51,11 +51,9 @@ def exibir():
 
     layout = [linha1,
               linha2,
-              linha3_coluna1,
-              linha3_coluna2,
+              [sg.Column(linha3_coluna1), sg.Column(linha3_coluna2)],
               linha4,
-              linha5_coluna1,
-              linha5_coluna2,
+              [sg.Column(linha5_coluna1), sg.Column(linha5_coluna2)],
               linha6
             ]      
 

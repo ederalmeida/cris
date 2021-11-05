@@ -15,6 +15,22 @@ def inicializacao():
                         [[sg.Button('FBL3N', size=(10,1), key='-FBL3N-'),
                          sg.Button('FAGLL03', size=(10,1), key='-FAGLL03-'),
                          sg.Button('KOB1', size=(10,1), key='-KOB1-')]])],
+                       [sg.Text('')],
+                       [sg.Frame('AMBIENTAL',
+                        [[sg.Button('IBMA', size=(10,1), key='-IBAMA-'),
+                         sg.Button('INEA/RJ', size=(10,1), key='-INEARJ-'),
+                         sg.Button('CETESB/SP', size=(10,1), key='-CETESB/SP-')],
+                         [sg.Button('SEMAD/GO', size=(10,1), key='-SEMADGO-'),
+                         sg.Button('SEMAD/MG', size=(10,1), key='-SEMADMG-'),
+                         sg.Button('IEMA/ES', size=(10,1), key='-IEMAES-')]])],
+                       [sg.Text('')],
+                       [sg.Frame('REGULATÓRIO',
+                        [[sg.Button('BDIT', size=(10,1), key='-BDIT-'),
+                         sg.Button('SGT', size=(10,1), key='-SGT-'),
+                         sg.Button('BMP', size=(10,1), key='-BMP-')],
+                         [sg.Button('SIASE', size=(10,1), key='-SIASE-'),
+                         sg.Button('SINtegre', size=(10,1), key='-SINTEGRE-'),
+                         sg.Button('Dutonet', size=(10,1), key='-DUTONET-')]])],
                        [sg.Text('')]
                       ]               
 
