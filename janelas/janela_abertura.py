@@ -9,14 +9,12 @@ def inicializacao():
     sg.theme('LightGrey1')
 
     coluna_esquerda = [[sg.Text('CRIS', size=(10,1), justification='center', font=("Helvetica", 50))],
-                       [sg.Text('Central de Robôs para Interação com o SAP', size=(20,2), justification='center', font=("Helvetica", 25))],
+                       [sg.Text('Central de Robôs para Interação com Sistemas', size=(20,2), justification='center', font=("Helvetica", 20))],
                        [sg.Text('')],
-                       [sg.Button('FBL3N', size=(10,1), key='-FBL3N-'),
-                        sg.Button('FAGLL03', size=(10,1), key='-FAGLL03-'),
-                        sg.Button('KOB1', size=(10,1), key='-KOB1-')],
-                       [sg.Button(' --- ', size=(10,1), key='-FBL5N_PA-'),
-                        sg.Button(' --- ', size=(10,1), key='-FBL1N_PA-'),
-                        sg.Button(' --- ', size=(10,1), key='-FS10N-')],
+                       [sg.Frame('CONTÁBIL/FINANCEIRO',
+                        [[sg.Button('FBL3N', size=(10,1), key='-FBL3N-'),
+                         sg.Button('FAGLL03', size=(10,1), key='-FAGLL03-'),
+                         sg.Button('KOB1', size=(10,1), key='-KOB1-')]])],
                        [sg.Text('')]
                       ]               
 
