@@ -22,7 +22,7 @@ def exibir():
                         [sg.Text('', font=('Helvetica', 6))],
                         [sg.Checkbox('Partidas pré-editadas', size=(18, 1), default=False, key='-PPE-')]
                         ]
-                        
+
     linha4 = [[sg.Text('_'  * 100, size=(72, 1))],
               [sg.Text('Outras Informações', font=('Helvetica', 15), justification='left')]
              ]                 
@@ -49,7 +49,11 @@ def exibir():
     layout = [linha1,
               linha2,
               linha3_coluna1,
-              linha3_coluna2
+              linha3_coluna2,
+              linha4,
+              linha5_coluna1,
+              linha5_coluna2,
+              linha6
             ]      
 
     janela = sg.Window('Robô para Extrair Relatórios FBL3N', layout, default_element_size=(40, 1), element_justification='left', grab_anywhere=False) 
