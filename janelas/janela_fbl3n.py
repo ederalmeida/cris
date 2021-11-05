@@ -39,10 +39,10 @@ def exibir():
                     ]]
 
     linha5_coluna2= [[sg.Frame('Company Code',
-                    [[sg.Text('Empresa'),
+                      [[sg.Text('Empresa'),
                         sg.Combo(('ESUL', 'CHSF', 'CPEL', 'ELET', 'ENOR', 'ENUC', 'EPAR', 'FCE1'), key='-COMPANY_CODE-')]])],
                      [sg.Frame('Saída',
-                    [[sg.Text('Layout'),
+                      [[sg.Text('Layout'),
                         sg.InputText(default_text='/MD_CO_SECOG', size=(16,1), key='-LAYOUT-', enable_events=True)]], size=(20,1))
                     ]]
 
@@ -55,7 +55,7 @@ def exibir():
               linha4,
               [sg.Column(linha5_coluna1), sg.Column(linha5_coluna2)],
               linha6
-            ]      
+             ]      
 
     janela = sg.Window('Robô para Extrair Relatórios FBL3N', layout, default_element_size=(40, 1), element_justification='left', grab_anywhere=False) 
 
@@ -98,5 +98,3 @@ def exibir():
         return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', values['-DATA_EMDE-'], '', values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
     else:
         return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', values['-DATA_EMDE-'], values['-DATA_ATE-'], values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
-
-exibir()
