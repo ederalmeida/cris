@@ -23,37 +23,10 @@ def exibir():
                         [sg.Checkbox('Partidas pré-editadas', size=(18, 1), default=False, key='-PPE-')]
                         ]
 
-    linha4 = [[sg.Text('_'  * 100, size=(72, 1))],
-              [sg.Text('Outras Informações', font=('Helvetica', 15), justification='left')]
-             ]                 
-
-    linha5_coluna1 = [[sg.Frame('Dados',
-                       [[sg.Text('Relação das Contas Conciliáveis')],
-                        [sg.InputText('', key='-ARQUIVO_CONTAS-', size=(40, 1)), sg.FileBrowse('procurar')],
-                        [sg.Text('Pasta onde serão salvos os relatórios', size=(40, 1))],
-                        [sg.InputText('', key='-PASTA-', size=(40, 1)), sg.FolderBrowse('procurar')]
-                       ], size=(40,1))
-                    ]]
-
-    linha5_coluna2= [[sg.Frame('Company Code',
-                    [[sg.Text('Empresa'),
-                        sg.Combo(('ESUL', 'CHSF', 'CPEL', 'ELET', 'ENOR', 'ENUC', 'EPAR', 'FCE1'), key='-COMPANY_CODE-')]])],
-                     [sg.Frame('Saída',
-                    [[sg.Text('Layout'),
-                        sg.InputText(default_text='/MD_CO_SECOG', size=(16,1), key='-LAYOUT-', enable_events=True)]], size=(20,1))
-                    ]]
-
-    linha6 = [[sg.Text('')],
-              [sg.Button('Executar Robô', key='-EXECUTAR_ROBO-', enable_events=True)]]
-
     layout = [linha1,
               linha2,
               linha3_coluna1,
-              linha3_coluna2,
-              linha4,
-              linha5_coluna1,
-              linha5_coluna2,
-              linha6
+              linha3_coluna2
             ]      
 
     janela = sg.Window('Robô para Extrair Relatórios FBL3N', layout, default_element_size=(40, 1), element_justification='left', grab_anywhere=False) 
