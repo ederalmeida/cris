@@ -98,5 +98,3 @@ def exibir():
         return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', values['-DATA_EMDE-'], '', values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
     else:
         return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', values['-DATA_EMDE-'], values['-DATA_ATE-'], values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
-
-exibir()

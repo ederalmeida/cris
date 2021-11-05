@@ -17,13 +17,13 @@ def exibir():
                         [sg.Text('Em/De', size=(5, 1), key='-DATA_DE_TEXTO-'),
                         sg.InputText('', size=(13,1), key='-DATA_EMDE-', disabled=False, enable_events=True),
                         sg.Text('Até', size=(5, 1), key='-DATA_ATE_TEXTO-'),
-                        sg.InputText('', size=(13,1), key='-DATA_ATE-', disabled=True, enable_events=True)]], size=(20,1))]
+                        sg.InputText('', size=(13,1), key='-DATA_ATE-', disabled=True, enable_events=True)]])]
                     ]        
 
     linha3_coluna2 = [[sg.Frame('Tipo',
                        [[sg.Text('LEDGER'),
                         sg.Combo(('0L', '1L'), key='-LEDGER-')],
-                       [sg.Text('')]], size=(28,1))]]
+                       [sg.Text('')]])]]
 
     linha4 = [[sg.Text('_'  * 100, size=(72, 1))],
               [sg.Text('Outras Informações', font=('Helvetica', 15), justification='left')]
@@ -34,15 +34,15 @@ def exibir():
                         [sg.InputText('', key='-ARQUIVO_CONTAS-', size=(40, 1)), sg.FileBrowse('procurar')],
                         [sg.Text('Pasta onde serão salvos os relatórios', size=(40, 1))],
                         [sg.InputText('', key='-PASTA-', size=(40, 1)), sg.FolderBrowse('procurar')]
-                       ], size=(40,1))
+                       ])
                     ]]
 
-    linha5_coluna2= [[sg.Frame('Company Code',
+    linha5_coluna2 = [[sg.Frame('Company Code',
                     [[sg.Text('Empresa'),
                         sg.Combo(('ESUL', 'CHSF', 'CPEL', 'ELET', 'ENOR', 'ENUC', 'EPAR', 'FCE1'), key='-COMPANY_CODE-')]])],
                      [sg.Frame('Saída',
                     [[sg.Text('Layout'),
-                        sg.InputText(default_text='/MD_CO_SECOG', size=(16,1), key='-LAYOUT-', enable_events=True)]], size=(20,1))
+                        sg.InputText(default_text='/MD_CO_SECOG', size=(16,1), key='-LAYOUT-', enable_events=True)]])
                     ]]
 
     linha6 = [[sg.Text('')],

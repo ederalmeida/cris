@@ -15,7 +15,7 @@ def exibir():
                         [sg.Text('De', size=(5, 1), key='-DATA_DE_TEXTO-'),
                         sg.InputText('', size=(16,1), key='-DATA_DE-', enable_events=True),
                         sg.Text('Até', size=(5, 1), key='-DATA_ATE_TEXTO-'),
-                        sg.InputText('', size=(16,1), key='-DATA_ATE-', enable_events=True)]], size=(20,1))]
+                        sg.InputText('', size=(16,1), key='-DATA_ATE-', enable_events=True)]])]
                     ]        
      
     linha5_coluna1 = [[sg.Frame('Dados',
@@ -23,10 +23,10 @@ def exibir():
                         [sg.InputText('', key='-ARQUIVO_ORDENS-', size=(40, 1)), sg.FileBrowse('procurar')],
                         [sg.Text('Pasta onde serão salvos os relatórios', size=(40, 1))],
                         [sg.InputText('', key='-PASTA-', size=(40, 1)), sg.FolderBrowse('procurar')]
-                       ], size=(40,1))
+                       ])
                     ]]
 
-    linha5_coluna2= [[sg.Frame('Saída',
+    linha5_coluna2 = [[sg.Frame('Saída',
                     [[sg.Text('Layout'),
                         sg.InputText(default_text='/1SAP1', size=(16,1), key='-LAYOUT-', enable_events=True)]])
                     ]]
