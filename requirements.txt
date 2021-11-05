@@ -1,0 +1,5 @@
+cx_Freeze
+PySimpleGUI
+pyautogui
+pypiwin32
+psutil
