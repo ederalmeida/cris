@@ -10,18 +10,21 @@ def exibir():
               [sg.Text('Seleção de Partidas', font=('Helvetica', 15), justification='left')]
              ]
 
-    linha3_coluna1 = [[sg.Radio('Partidas em Aberto', 'STATUS_PARTIDAS', default=True, size=(18,1), key='-RADIO_PA-', enable_events=True),
-                        sg.Radio('Todas as Partidas', 'STATUS_PARTIDAS', size=(18,1), key='-RADIO_TP-', enable_events=True)],
-                        [sg.Text('formato da data DDMMAAAA', size=(35, 1), font=('Helvetica', 8), key='-DATA_TEXTO-')],
-                        [sg.Text('Em/De', size=(5, 1), key='-DATA_DE_TEXTO-'),
-                        sg.InputText('', size=(13,1), key='-DATA_EMDE-', disabled=False, enable_events=True),
-                        sg.Text('Até', size=(5, 1), key='-DATA_ATE_TEXTO-'),
-                        sg.InputText('', size=(13,1), key='-DATA_ATE-', disabled=True, enable_events=True)]]
+    linha3_coluna1 = [[sg.Frame('Status',
+                        [[sg.Radio('Partidas em Aberto', 'STATUS_PARTIDAS', default=True, size=(18,1), key='-RADIO_PA-', enable_events=True),
+                          sg.Radio('Todas as Partidas', 'STATUS_PARTIDAS', size=(18,1), key='-RADIO_TP-', enable_events=True)],
+                         [sg.Text('formato da data DDMMAAAA', size=(35, 1), font=('Helvetica', 8), key='-DATA_TEXTO-')],
+                         [sg.Text('Em/De', size=(5, 1), key='-DATA_DE_TEXTO-'),
+                          sg.InputText('', size=(13,1), key='-DATA_EMDE-', disabled=False, enable_events=True),
+                          sg.Text('Até', size=(5, 1), key='-DATA_ATE_TEXTO-'),
+                          sg.InputText('', size=(13,1), key='-DATA_ATE-', disabled=True, enable_events=True)]])]
+                     ]        
 
-    linha3_coluna2 = [[sg.Checkbox('Partidas normais', size=(18, 1), default=True, key='-PN-')],
+    linha3_coluna2 = [[sg.Frame('Tipo',
+                       [[sg.Checkbox('Partidas normais', size=(18, 1), default=True, key='-PN-')],
                         [sg.Text('', font=('Helvetica', 6))],
                         [sg.Checkbox('Partidas pré-editadas', size=(18, 1), default=False, key='-PPE-')]
-                        ]
+                        ])]]
 
     linha4 = [[sg.Text('_'  * 100, size=(72, 1))],
               [sg.Text('Outras Informações', font=('Helvetica', 15), justification='left')]
@@ -32,15 +35,15 @@ def exibir():
                         [sg.InputText('', key='-ARQUIVO_CONTAS-', size=(40, 1)), sg.FileBrowse('procurar')],
                         [sg.Text('Pasta onde serão salvos os relatórios', size=(40, 1))],
                         [sg.InputText('', key='-PASTA-', size=(40, 1)), sg.FolderBrowse('procurar')]
-                       ], size=(40,1))
+                       ])
                     ]]
 
-    linha5_coluna2= [[sg.Frame('Company Code',
+    linha5_coluna2 = [[sg.Frame('Company Code',
                     [[sg.Text('Empresa'),
                         sg.Combo(('ESUL', 'CHSF', 'CPEL', 'ELET', 'ENOR', 'ENUC', 'EPAR', 'FCE1'), key='-COMPANY_CODE-')]])],
                      [sg.Frame('Saída',
                     [[sg.Text('Layout'),
-                        sg.InputText(default_text='/MD_CO_SECOG', size=(16,1), key='-LAYOUT-', enable_events=True)]], size=(20,1))
+                        sg.InputText(default_text='/MD_CO_SECOG', size=(16,1), key='-LAYOUT-', enable_events=True)]])
                     ]]
 
     linha6 = [[sg.Text('')],
@@ -48,11 +51,9 @@ def exibir():
 
     layout = [linha1,
               linha2,
-              linha3_coluna1,
-              linha3_coluna2,
+              [sg.Column(linha3_coluna1), sg.Column(linha3_coluna2)],
               linha4,
-              linha5_coluna1,
-              linha5_coluna2,
+              [sg.Column(linha5_coluna1), sg.Column(linha5_coluna2)],
               linha6
             ]      
 
@@ -97,3 +98,5 @@ def exibir():
         return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', values['-DATA_EMDE-'], '', values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
     else:
         return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', values['-DATA_EMDE-'], values['-DATA_ATE-'], values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
+
+exibir()
