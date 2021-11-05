@@ -61,10 +61,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Python 3.8
+      - name: Set up Python 3.9
         uses: actions/setup-python@v2
         with:
-          python-version: 3.8
+          python-version: 3.9
 
       - name: Install dependencies
         run: |
@@ -100,8 +100,8 @@ jobs:
       - name: compress directory
         uses: papeloto/action-zip@v1
         with:
-          files: ./build/exe.win-amd64-3.8/
-          dest: ./build/exe.win-amd64-3.8/${{ matrix.OUT_FILE_NAME}}${{ steps.get_tag_info.outputs.tag_version }}.zip
+          files: ./build/exe.win-amd64-3.9/
+          dest: ./build/exe.win-amd64-3.9/${{ matrix.OUT_FILE_NAME}}${{ steps.get_tag_info.outputs.tag_version }}.zip
         
       - name: Upload Release Asset
         id: upload-release-asset
@@ -110,6 +110,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-          asset_path: ./build/exe.win-amd64-3.8/${{ matrix.OUT_FILE_NAME}}${{ steps.get_tag_info.outputs.tag_version }}.zip
+          asset_path: ./build/exe.win-amd64-3.9/${{ matrix.OUT_FILE_NAME}}${{ steps.get_tag_info.outputs.tag_version }}.zip
           asset_name: ${{ matrix.OUT_FILE_NAME}}${{ steps.get_tag_info.outputs.tag_version }}.zip
           asset_content_type: ${{ matrix.ASSET_MIME}}
