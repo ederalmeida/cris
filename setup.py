@@ -5,9 +5,9 @@ build_exe_options = {
 }
 
 exe = [cx_Freeze.Executable("cris.py", base = "Win32GUI",
-        target_name = "cris_v1.2.3.exe")]
+        target_name = "cris_v1.2.4.exe")]
 cx_Freeze.setup(
-    name = "CRIS v1.2.3",
+    name = "CRIS v1.2.4",
     options = {"build_exe": build_exe_options},
     executables = exe
 )

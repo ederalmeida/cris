@@ -68,6 +68,8 @@ def executa_robo():
     # Laço de repetição, executado para cada conta da relação de contas conciliáveis
     for conta in contas_conciliaveis:
 
+        i = 0 
+
         # Verificando se existe a subpasta para salvar as informações geradas. Se não existir, cria.
         caminho_pasta_salvar_ipes = vcs.verifica_cria_subpastas(caminho_pasta_relatorios, conta)
 
@@ -89,8 +91,24 @@ def executa_robo():
         sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
         sap.session.findById('wnd[0]/usr/ctxtPA_VARI').text = layout
 
+        # Abrindo tela de status para confirmar ambiente
+        sap.session.findById("wnd[0]/mbar/menu[3]/menu[11]").select()
+        
+        # colocando a tela de informação para o lado para não cobrir as informações geradas
+        time.sleep(1)
+        pag.press('alt')
+        pag.press('m')
+        for i in range(0, 11):
+            pag.press('right', presses=10)
+            time.sleep(0.5)
+        i = 0
+
         # tirando print da parametrização
         screenParametrizacao = pag.screenshot()
+
+        # fechando a tela de status
+        sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
+
 
         # executa a geração do relatório
         sap.session.findById('wnd[0]').sendVKey(8)
@@ -140,10 +158,10 @@ def executa_robo():
         # Abaixando a tela de informação para não cobrir as informações geradas
         pag.press('alt')
         pag.press('m')
-        pag.press('down', presses=12)
-        time.sleep(0.5)
-        pag.press('down', presses=12)
-        time.sleep(0.5)
+        for i in range(0,4):
+            pag.press('down', presses=10)
+            time.sleep(0.5)
+        i = 0
 
         # Print resultado
         screenExecucao = pag.screenshot()
