@@ -3,8 +3,4 @@ PySimpleGUI
 pyautogui
 pypiwin32
 psutil
-<<<<<<< HEAD
 pillow
-=======
-pillow
->>>>>>> 8ff0622da95d37278418d92929ca7c8b8c911c53
