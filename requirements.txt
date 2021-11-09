@@ -3,3 +3,4 @@ PySimpleGUI
 pyautogui
 pypiwin32
 psutil
+Pillow --upgrade

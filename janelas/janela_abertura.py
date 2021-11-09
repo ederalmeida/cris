@@ -32,7 +32,7 @@ def inicializacao():
                          sg.Button('SINtegre', size=(10,1), key='-SINTEGRE-'),
                          sg.Button('Dutonet', size=(10,1), key='-DUTONET-')]])],
                        [sg.Text('')],
-                       [sg.Text('v1.2.4', size=(10,1), justification='center', font=("Helvetica", 7))]
+                       [sg.Text('v1.2.5', size=(10,1), justification='center', font=("Helvetica", 7))]
                       ]               
 
     coluna_direita = [[sg.Image(data=imgs.logo_x_base64, size=(150, 200), key='key1')]]
@@ -42,6 +42,10 @@ def inicializacao():
     janela= sg.Window('CRIS', layout, resizable=True)
 
     while True:
+
+        robos_nao_desenvolvidos = ['-IBAMA-', '-INEARJ-', '-CETESB/SP-', '-SEMADGO-', '-SEMADMG-', '-IEMAES-',
+                                   '-BDIT-', '-SGT-', '-BMP-', '-SIASE-', '-SINTEGRE-', '-DUTONET-']
+
         event, values = janela.read()
         if event in (sg.WIN_CLOSED, 'Exit'):
             sys.exit()
@@ -54,6 +58,9 @@ def inicializacao():
         if event == '-KOB1-':
             janela.close()
             kob1.executa_robo()
+        if event in robos_nao_desenvolvidos:
+            sg.popup('Sem autorização para acessar esse robô', title='Aviso')
+            continue
         else:
             continue
                 
