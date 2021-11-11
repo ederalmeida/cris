@@ -2,6 +2,7 @@
 import PySimpleGUI as sg
 from imagens import imagens_base64 as imgs
 from robos import fagll03, fbl3n, kob1
+from apoio import versao_atual as versao
 import sys
 
 def inicializacao():
@@ -32,7 +33,7 @@ def inicializacao():
                          sg.Button('SINtegre', size=(10,1), key='-SINTEGRE-'),
                          sg.Button('Dutonet', size=(10,1), key='-DUTONET-')]])],
                        [sg.Text('')],
-                       [sg.Text('v1.2.5', size=(10,1), justification='center', font=("Helvetica", 7))]
+                       [sg.Text(versao.v, size=(10,1), justification='center', font=("Helvetica", 7))]
                       ]               
 
     coluna_direita = [[sg.Image(data=imgs.logo_x_base64, size=(150, 200), key='key1')]]
