@@ -103,6 +103,7 @@ def executa_robo():
         for i in range(0, 11):
             pag.press('right', presses=10)
             time.sleep(0.5)
+        pag.click()
         i = 0
         
         # tirando print da parametrização
@@ -159,6 +160,7 @@ def executa_robo():
         for i in range(0,4):
             pag.press('down', presses=10)
             time.sleep(0.5)
+        pag.click()
         i = 0
 
         # Print resultado
