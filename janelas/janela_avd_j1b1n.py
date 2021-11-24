@@ -15,21 +15,18 @@ def exibir():
 
     linha3 = [[sg.Text('Pasta com XMLs a serem importados')],
               [sg.InputText('', key='-PASTA-', size=(40, 1)), sg.FolderBrowse('procurar')]]
-    
-    
-    linha6 = [[sg.Text('')],
-              [sg.Button('Executar Robô', key='-EXECUTAR_ROBO-', enable_events=True)]]
 
     coluna_esquerda = [[sg.Column(linha2_coluna1), sg.Column(linha2_coluna2)],
-                       [sg.Column(linha3)],
-                       [sg.Column(linha6)]]
+                       [sg.Column(linha3)]]
 
-    coluna_direita = [[sg.Text('teste')]]
+    coluna_direita = [[sg.Button('Parametrização', key='-PARAMETRIZACAO-', enable_events=True)],
+                      [sg.Text('')],
+                      [sg.Button('Executar Robô ', key='-EXECUTAR_ROBO-', enable_events=True)]]
 
     layout = [cabecalho,
-              [sg.Column(coluna_esquerda), sg.Column(coluna_direita)]]
+              [sg.Column(coluna_esquerda), sg.VSeperator(), sg.Column(coluna_direita, element_justification='c')]]
 
-    janela = sg.Window('CRIS - Central de Robôs para Interação com Sistemas', layout, default_element_size=(40, 1), element_justification='left', grab_anywhere=False)
+    janela = sg.Window('CRIS - Central de Robôs para Interação com Sistemas', layout, element_justification='c', default_element_size=(40, 1), grab_anywhere=False)
 
     while True:
         event, values = janela.read()
@@ -37,7 +34,14 @@ def exibir():
             sys.exit()
 
         if event == '-EXECUTAR_ROBO-':
-            break
+            if values['-DATA_CONTABILIZACAO-'] == '':
+                sg.popup('Favor inserir data para contabilização das NFe', title='Erro')
+            elif values['-COMPANY_CODE-'] == '':
+                sg.popup('Favor indicar o Company Code', title='Erro')
+            elif values['-PASTA-'] == '':
+                sg.popup('Favor indicar a pasta onde estão as NFe', title='Erro')
+            else:
+                break
 
     janela.close()
 
