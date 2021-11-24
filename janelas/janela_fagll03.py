@@ -94,6 +94,6 @@ def exibir():
     janela.close()
 
     if values['-RADIO_PA-'] == True:
-        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', values['-DATA_EMDE-'], '', values['-LAYOUT-'],  values['-LEDGER-'], values['-COMPANY_CODE-']
+        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), '', values['-LAYOUT-'],  values['-LEDGER-'], values['-COMPANY_CODE-']
     else:
-        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', values['-DATA_EMDE-'], values['-DATA_ATE-'], values['-LAYOUT-'],  values['-LEDGER-'], values['-COMPANY_CODE-']
+        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), (values['-DATA_ATE-'].replace('.','')).replace('/',''), values['-LAYOUT-'],  values['-LEDGER-'], values['-COMPANY_CODE-']

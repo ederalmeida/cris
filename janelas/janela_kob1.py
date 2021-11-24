@@ -63,4 +63,4 @@ def exibir():
             
     janela.close()
 
-    return values['-ARQUIVO_ORDENS-'], values['-PASTA-'], values['-DATA_DE-'], values['-DATA_ATE-'], values['-LAYOUT-']
+    return values['-ARQUIVO_ORDENS-'], values['-PASTA-'], (values['-DATA_DE-'].replace('.','')).replace('/',''), (values['-DATA_ATE-'].replace('.','')).replace('/',''), values['-LAYOUT-']

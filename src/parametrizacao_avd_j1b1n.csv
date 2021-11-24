@@ -1,0 +1,31 @@
+ctg_nota_fiscal;ZL
+local_de_negocios;0001
+nf_funcao_parceiro;LF
+incl.ICMS/ISS;SIM
+tipo_de_item;1
+material;80005670
+centro;S01C
+unidade;un
+regiao_fical_empresa;42
+CFOP_para_NFe_da_mesma_regiao;1949/AA
+CFOP_para_NFe_de_outra_regiao;2949/AA
+dir_fisc_icms;Z05
+dir_fisc_ipi;Z03
+lei_cofins;C01
+lei_trib_pis;P01
+origem_material;0
+utilizacao_material;2
+situacao_tribut_icms;Não sujeito a imposto
+situacao_tribut_ipi;CST 03 - entrada-não-tributada
+situacao_fis_cofins;01
+situacao_fis_pis;01
+tipo_imposto_1;ICON
+taxa_imposto_1;7,6
+tipo_imposto_2;ICM2
+taxa_imposto_2;0
+tipo_imposto_3;IPI2
+taxa_imposto_3;0
+tipo_imposto_4;IPSN
+taxa_imposto_4;1,65
+forma_de_pagamento;1
+frm_pgto;99

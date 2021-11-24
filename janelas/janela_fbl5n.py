@@ -4,7 +4,7 @@ import sys
 def exibir():
     sg.theme('LightGrey1')   
 
-    linha1 = [[sg.Text('Robo para Extração de Relatórios FBL3N', size=(32, 1), justification='center', font=("Helvetica", 23))]]
+    linha1 = [[sg.Text('Robo para Extração de Relatórios FBL5N', size=(32, 1), justification='center', font=("Helvetica", 23))]]
 
     linha2 = [[sg.Text('_'  * 100, size=(72, 1))],      
               [sg.Text('Seleção de Partidas', font=('Helvetica', 15), justification='left')]
@@ -22,7 +22,7 @@ def exibir():
 
     linha3_coluna2 = [[sg.Frame('Tipo',
                        [[sg.Checkbox('Partidas normais', size=(18, 1), default=True, key='-PN-')],
-                        [sg.Text('', font=('Helvetica', 6))],
+                        [sg.Checkbox('Oper. Razão Especial', size=(18, 1), default=True, key='-ORE-')],
                         [sg.Checkbox('Partidas pré-editadas', size=(18, 1), default=False, key='-PPE-')]
                         ])]]
 
@@ -31,7 +31,7 @@ def exibir():
              ]                 
 
     linha5_coluna1 = [[sg.Frame('Dados',
-                       [[sg.Text('Relação das Contas Conciliáveis')],
+                       [[sg.Text('Relação de Contas de Clientes')],
                         [sg.InputText('', key='-ARQUIVO_CONTAS-', size=(40, 1)), sg.FileBrowse('procurar')],
                         [sg.Text('Pasta onde serão salvos os relatórios', size=(40, 1))],
                         [sg.InputText('', key='-PASTA-', size=(40, 1)), sg.FolderBrowse('procurar')]
@@ -57,7 +57,7 @@ def exibir():
               linha6
             ]      
 
-    janela = sg.Window('Robô para Extrair Relatórios FBL3N', layout, default_element_size=(40, 1), element_justification='left', grab_anywhere=False) 
+    janela = sg.Window('Robô para Extrair Relatórios FBL5N', layout, default_element_size=(40, 1), element_justification='left', grab_anywhere=False) 
 
     while True:
         event, values = janela.read()
@@ -95,6 +95,6 @@ def exibir():
     janela.close()
 
     if values['-RADIO_PA-'] == True:
-        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), '', values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
+        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), '', values['-LAYOUT-'], values['-PN-'], values['-ORE-'], values['-PPE-'], values['-COMPANY_CODE-']
     else:
-        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), (values['-DATA_ATE-'].replace('.','')).replace('/',''), values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
+        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), (values['-DATA_ATE-'].replace('.','')).replace('/',''), values['-LAYOUT-'], values['-PN-'], values['-ORE-'], values['-PPE-'], values['-COMPANY_CODE-']

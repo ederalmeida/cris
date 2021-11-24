@@ -8,7 +8,7 @@ from apoio import verifica_janelas as vj
 from apoio import verifica_cria_subpastas as vcs
 from janelas import janela_abertura as abertura
 from janelas import janela_kob1 as ja
-from sap import sapgui
+from classes import sapgui
 
 def executa_robo():
 
