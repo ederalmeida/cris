@@ -7,7 +7,7 @@ def obter():
 
     parametros = {}
 
-    with open(path_atual + '\\src\\parametrizacao_avd_j1b1n.csv') as arquivo:
+    with open(path_atual + '\\tabelas\\parametrizacao_avd_j1b1n.csv') as arquivo:
 
         tabela = csv.reader(arquivo, delimiter=';')
 

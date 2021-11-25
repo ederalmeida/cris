@@ -7,7 +7,7 @@ def obter():
 
     relacao_fornecedores = {}
 
-    with open(path_atual + '\\src\\tabela_cnpj_fornecedorsap.csv') as arquivo:
+    with open(path_atual + '\\tabelas\\tabela_cnpj_fornecedorsap.csv') as arquivo:
 
         tabela = csv.reader(arquivo, delimiter=';')
 
