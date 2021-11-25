@@ -1,5 +1,4 @@
 from janelas import janela_abertura as ja
-import tabelas
 import logging
 
 #if __name__ == '__main__':

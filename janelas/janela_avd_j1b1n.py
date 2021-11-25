@@ -19,9 +19,10 @@ def exibir():
     coluna_esquerda = [[sg.Column(linha2_coluna1), sg.Column(linha2_coluna2)],
                        [sg.Column(linha3)]]
 
-    coluna_direita = [[sg.Button('Parametrização', key='-PARAMETRIZACAO-', enable_events=True)],
-                      [sg.Text('')],
-                      [sg.Button('Executar Robô ', key='-EXECUTAR_ROBO-', enable_events=True)]]
+    coluna_direita = [[sg.Button('Parametrização', key='-PARAMETRIZACAO-', size=(20,1), enable_events=True)],
+                      [sg.Button('Cadastrar Fornecedores', key='-CADASTRAR_FORNECEDOR-', size=(20,1), enable_events=True)],
+                      [sg.Text('_'  * 26 ,justification='center', size=(23, 1))],
+                      [sg.Button('Executar Robô ', key='-EXECUTAR_ROBO-', size=(20,1), enable_events=True)]]
 
     layout = [cabecalho,
               [sg.Column(coluna_esquerda), sg.VSeperator(), sg.Column(coluna_direita, element_justification='c')]]

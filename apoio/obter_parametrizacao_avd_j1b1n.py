@@ -3,7 +3,8 @@ import csv
 
 def obter():
 
-    path_atual = os.getcwd()
+    #path_atual = os.getcwd()
+    path_atual = os.path.abspath(os.path.dirname(__file__))
 
     parametros = {}
 
