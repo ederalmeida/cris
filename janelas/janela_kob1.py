@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-import sys
+from janelas import janela_abertura as ja
 
 def exibir():
     sg.theme('LightGrey1')   
@@ -47,7 +47,8 @@ def exibir():
     while True:
         event, values = janela.read()
         if event in (sg.WIN_CLOSED, 'Exit'):
-            sys.exit()
+            janela.close()
+            ja.exibir()
 
         if event == '-EXECUTAR_ROBO-':
             if values['-DATA_DE-'] == '' or values['-DATA_ATE-'] == '':

@@ -7,4 +7,4 @@ while True:
                         level=logging.DEBUG,\
                         format='%(asctime)s :: %(levelno)s :: %(lineno)d :: %(message)s')
     logging.info('ROBO INICIADO')
-    ja.inicializacao()
+    ja.exibir()

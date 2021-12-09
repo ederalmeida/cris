@@ -20,6 +20,7 @@ class NFe():
         self.nProt = ''
         self.itens = []                 # Informaçãoes sobre os itens da nota fiscal
         self.caminho = ''               # Path do XML
+        self.arquivo = ''               # Nome do arquivo XML
 
     def criar(caminho):
 
@@ -35,7 +36,7 @@ class NFe():
 
         for i in range(0, len(relacao_xml)):
 
-            with open(relacao_xml[i], encoding='utf-8') as arquivo_nfe:
+            with open(relacao_xml[i][0] + '\\' + relacao_xml[i][1], encoding='utf-8') as arquivo_nfe:
                 xml = unt.parse(arquivo_nfe.read())
 
             NFes[i] = NFe()
@@ -80,7 +81,8 @@ class NFe():
             NFes[i].digito_verificador = xml.nfeProc.protNFe.infProt.chNFe.cdata[43:44]
 
             NFes[i].nProt = xml.nfeProc.protNFe.infProt.nProt.cdata
-            NFes[i].caminho = relacao_xml[i]
+            NFes[i].caminho = relacao_xml[i][0]
+            NFes[i].arquivo = relacao_xml[i][1]
 
             if type(xml.nfeProc.NFe.infNFe.det) == unt.Element:
                 NFes[i].itens = [[1,

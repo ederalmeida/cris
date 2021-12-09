@@ -4,7 +4,7 @@ from robos import fbl3n, fbl1n, fbl5n, fagll03, kob1, avd_j1b1n
 from apoio import versao_atual as versao
 import sys
 
-def inicializacao():
+def exibir():
 
     sg.theme('LightGrey1')
 
@@ -52,21 +52,27 @@ def inicializacao():
         event, values = janela.read()
         if event in (sg.WIN_CLOSED, 'Exit'):
             sys.exit()
+            
         if event == '-FBL3N-':
             janela.close()
             fbl3n.executa_robo()
+
         if event == '-FBL1N-':
             janela.close()
             fbl1n.executa_robo()
+
         if event == '-FBL5N-':
             janela.close()
-            fbl5n.executa_robo()       
+            fbl5n.executa_robo()  
+
         if event == '-FAGLL03-':
             janela.close()
             fagll03.executa_robo()
+
         if event == '-KOB1-':
             janela.close()
             kob1.executa_robo()
+            
         if event == '-AVDJ1B1N-':
             janela.close()
             avd_j1b1n.executa_robo()
