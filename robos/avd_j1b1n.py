@@ -45,9 +45,6 @@ def executa_robo():
         # e passa para a próxima NFe
         if NFe.id_sap == '#N/D':
             tabela_aux_log.append([NFe.chNFe + ' - CNPJ ' + NFe.CNPJ, 'SEM CÓD SAP PARA FORNECEDOR', 'NÃO ESCRITURADA'])
-            if not os.path.isdir(NFe.caminho + '\\NAO PROCESSADAS'):
-                os.mkdir(NFe.caminho + '\\NAO PROCESSADAS')
-            os.replace(NFe.caminho + '\\' + NFe.arquivo, NFe.caminho + '\\NAO PROCESSADAS\\' + NFe.arquivo )
             continue
         
         else:
@@ -225,19 +222,18 @@ def executa_robo():
         # Salvando a nota fiscal gerada
         sap.session.findById("wnd[0]/tbar[0]/btn[11]").press()
     
-        # Se a nota já existir, gera log, move para a pasta não processadas e passa para a próxima
+        # Se a nota já existir, gera log e passa para a próxima
         if sap.session.findById("wnd[0]/sbar").messagetype == "E":
             tabela_aux_log.append([NFe.chNFe, 'NOTA JÁ ESCRITURADA ' + sap.session.findById("wnd[0]/sbar").Text, 'NÃO ESCRITURADA'])
-            if not os.path.isdir(NFe.caminho + '\\NAO PROCESSADAS'):
-                os.mkdir(NFe.caminho + '\\NAO PROCESSADAS')
-            os.replace(NFe.caminho + '\\' + NFe.arquivo, NFe.caminho + '\\NAO PROCESSADAS\\' + NFe.arquivo )
             sap.session.findById("wnd[0]/tbar[0]/btn[12]").press()
             sap.session.findById("wnd[1]/usr/btnSPOP-OPTION1").press()
         else:
-            if not os.path.isdir(NFe.caminho + '\\PROCESSADAS'):
-                os.mkdir(NFe.caminho + '\\PROCESSADAS')
-            os.replace(NFe.caminho + '\\' + NFe.arquivo, NFe.caminho + '\\PROCESSADAS\\' + NFe.arquivo )            
             tabela_aux_log.append([NFe.chNFe, sap.session.findById("wnd[0]/sbar").Text, 'NOTA ESCRITURADA COM SUCESSO'])
+        
+        # transfere o XML para a pasta PROCESSADAS
+        if not os.path.isdir(NFe.caminho + '\\PROCESSADAS'):
+            os.mkdir(NFe.caminho + '\\PROCESSADAS')
+        os.replace(NFe.caminho + '\\' + NFe.arquivo, NFe.caminho + '\\PROCESSADAS\\' + NFe.arquivo ) 
     
         # Verifica se a NFe atual é última da lista de NFes
         if NFes_a_escriturar.index(NFe) != (len(NFes_a_escriturar) - 1):
