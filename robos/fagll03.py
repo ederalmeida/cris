@@ -21,35 +21,38 @@ def executa_robo():
     sap.logon()
 
     # CAMINHA_ARQUIVO_CONTAS_CONCILIAVEIS - indica o path e o caminho para obter a relação de contas conciliáveis
-    caminho_arquivo_contas_conciliaveis = informacoes_janela_fagll03[0]
+    caminho_arquivo_contas_conciliaveis = informacoes_janela_fagll03.get('arquivo_contas')
 
     # CAMINHA_PASTA_RELATORIOS - indica o path onde serão salvos os relatórios
-    caminho_pasta_relatorios = informacoes_janela_fagll03[1]
+    caminho_pasta_relatorios = informacoes_janela_fagll03.get('pasta')
 
     # TIPO_DE_PARTIDAS - indica qual o tipo de partidas o usuário deseja visualizar.
     #  PA = Partidas em Aberto e TP = Todas as Partidas
-    tipo_de_partidas = informacoes_janela_fagll03[2]
+    if informacoes_janela_fagll03.get('todas_partidas'):
+        tipo_de_partidas = 'TP'
+    else:
+        tipo_de_partidas = 'PA'
 
     # DATA REFERENCIA_1 - data para a posição do relatório. Caso o usuário tenha optado por Todas as Partidas,
     #  essa data se refere ao campo "DE"
-    data_referencia_1 = informacoes_janela_fagll03[3]
+    data_referencia_1 = informacoes_janela_fagll03.get('data_emde')
 
     # DATA REFERENCIA_2 - data para a posição do relatório. Caso o usuário tenha optado por Todas as Partidas,
     #  essa data se refere ao campo "ATÉ"
-    if tipo_de_partidas == 'TP':
-        data_referencia_2 = informacoes_janela_fagll03[4]
+    if informacoes_janela_fagll03.get('todas_partidas'):
+        data_referencia_2 = informacoes_janela_fagll03.get('data_ate')
 
     # MES REFERENCIA - AAAAMM para inserir no inicio do nome do relatório exportado e no nome do screenshot
-    mes_referencia = (informacoes_janela_fagll03[3][4:] + informacoes_janela_fagll03[3][2:4])
+    mes_referencia = (informacoes_janela_fagll03.get('data_emde')[4:] + informacoes_janela_fagll03.get('data_emde')[2:4])
 
     # LAYOUT - layout que será utilizado para visualizar o relatórios
-    layout = informacoes_janela_fagll03[5]
+    layout = informacoes_janela_fagll03.get('layout')
 
     # LEDGER - Qual o ledger foi selecionado pelo usuário
-    ledger = informacoes_janela_fagll03[6]
+    ledger = informacoes_janela_fagll03.get('ledger')
 
     # COMPANY_CODE - empresa a ser uilizada para extração dos relatórios
-    company_code = informacoes_janela_fagll03[7]
+    company_code = informacoes_janela_fagll03.get('company_code')
 
     # Obtendo contas conciliáveis
     contas_conciliaveis = orc.obter_relacao_contas(caminho_arquivo_contas_conciliaveis)
@@ -79,10 +82,10 @@ def executa_robo():
         # Insirindo as informações necessárias na tela de Parametros
         sap.session.findById('wnd[0]/usr/ctxtSD_SAKNR-LOW').text = conta
         sap.session.findById('wnd[0]/usr/ctxtSD_BUKRS-LOW').text = company_code
-        if tipo_de_partidas == 'PA':
+        if informacoes_janela_fagll03.get('partidas_aberta'):
             sap.session.findById("wnd[0]/usr/radX_OPSEL").select()
             sap.session.findById('wnd[0]/usr/ctxtPA_STIDA').text = data_referencia_1
-        if tipo_de_partidas == 'TP':
+        if informacoes_janela_fagll03.get('todas_partidas'):
             sap.session.findById("wnd[0]/usr/radX_AISEL").select()
             sap.session.findById("wnd[0]/usr/ctxtSO_BUDAT-LOW").text = data_referencia_1
             sap.session.findById("wnd[0]/usr/ctxtSO_BUDAT-HIGH").text = data_referencia_2
@@ -206,4 +209,4 @@ def executa_robo():
     # encerrar robo
     sap.session.findById("wnd[0]/tbar[0]/btn[3]").press()
     sg.popup('Execução efetuada com sucesso')
-    abertura.inicializacao()
+    abertura.exibir()

@@ -95,6 +95,16 @@ def exibir():
             
     janela.close()
 
+    informacoes_fbl1n = {'arquivo_contas': values['-ARQUIVO_CONTAS-'],
+                           'pasta': values['-PASTA-'],
+                           'data_emde': (values['-DATA_EMDE-'].replace('.','')).replace('/',''),
+                           'data_ate': (values['-DATA_ATE-'].replace('.','')).replace('/',''),
+                           'partidas_aberta':  values['-RADIO_PA-'],
+                           'todas_partidas':  values['-RADIO_TP-'],
+                           'layout': values['-LAYOUT-'],
+                           'ledger': values['-LEDGER-'],
+                           'company_code':values['-COMPANY_CODE-']}
+
     if values['-RADIO_PA-'] == True:
         return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), '', values['-LAYOUT-'], values['-PN-'], values['-ORE-'], values['-PPE-'], values['-COMPANY_CODE-']
     else:

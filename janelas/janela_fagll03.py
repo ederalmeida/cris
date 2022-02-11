@@ -94,7 +94,14 @@ def exibir():
             
     janela.close()
 
-    if values['-RADIO_PA-'] == True:
-        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), '', values['-LAYOUT-'],  values['-LEDGER-'], values['-COMPANY_CODE-']
-    else:
-        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), (values['-DATA_ATE-'].replace('.','')).replace('/',''), values['-LAYOUT-'],  values['-LEDGER-'], values['-COMPANY_CODE-']
+    informacoes_fagll03 = {'arquivo_contas': values['-ARQUIVO_CONTAS-'],
+                           'pasta': values['-PASTA-'],
+                           'data_emde': (values['-DATA_EMDE-'].replace('.','')).replace('/',''),
+                           'data_ate': (values['-DATA_ATE-'].replace('.','')).replace('/',''),
+                           'partidas_aberta':  values['-RADIO_PA-'],
+                           'todas_partidas':  values['-RADIO_TP-'],
+                           'layout': values['-LAYOUT-'],
+                           'ledger': values['-LEDGER-'],
+                           'company_code':values['-COMPANY_CODE-']}
+    
+    return informacoes_fagll03
