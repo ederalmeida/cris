@@ -11,13 +11,13 @@ def executa_robo():
     informacoes_janela_avd_j1b1n = ja.exibir()
 
     # DATA_CONTABILIZACAO - data para a contabilizacao das NFes
-    data_contabilizacao = informacoes_janela_avd_j1b1n[0]
+    data_contabilizacao = informacoes_janela_avd_j1b1n.get('data_contabilizacao')
 
     # COMPANY_CODE - empresa a ser uilizada para extração dos relatórios
-    company_code = informacoes_janela_avd_j1b1n[1]
+    company_code = informacoes_janela_avd_j1b1n.get('company_code')
     
     # XMLS_A_ESCRITURAR - informações sobre as NFes
-    NFes_a_escriturar = NFes.NFe.criar(informacoes_janela_avd_j1b1n[2])
+    NFes_a_escriturar = NFes.NFe.criar(informacoes_janela_avd_j1b1n.get('pasta'))
 
     # PARAMETRIZACAO - parametrizações para a transação
     parametrizacao = opaj.obter()

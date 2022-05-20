@@ -21,41 +21,44 @@ def executa_robo():
     sap.logon()
 
     # CAMINHA_ARQUIVO_CONTAS_CONCILIAVEIS - indica o path e o caminho para obter a relação de contas conciliáveis
-    caminho_arquivo_contas_conciliaveis = informacoes_janela_fbl1n[0]
+    caminho_arquivo_contas_conciliaveis = informacoes_janela_fbl1n.get('arquivo_contas')
 
     # CAMINHA_PASTA_RELATORIOS - indica o path onde serão salvos os relatórios
-    caminho_pasta_relatorios = informacoes_janela_fbl1n[1]
+    caminho_pasta_relatorios = informacoes_janela_fbl1n.get('pasta')
 
     # TIPO_DE_PARTIDAS - indica qual o tipo de partidas o usuário deseja visualizar.
     #  PA = Partidas em Aberto e TP = Todas as Partidas
-    tipo_de_partidas = informacoes_janela_fbl1n[2]
+    if informacoes_janela_fbl1n.get('todas_partidas'):
+        tipo_de_partidas = 'TP'
+    else:
+        tipo_de_partidas = 'PA'
 
     # DATA REFERENCIA_1 - data para a posição do relatório. Caso o usuário tenha optado por Todas as Partidas,
     #  essa data se refere ao campo "DE"
-    data_referencia_1 = informacoes_janela_fbl1n[3]
+    data_referencia_1 = informacoes_janela_fbl1n.get('data_emde')
 
     # DATA REFERENCIA_2 - data para a posição do relatório. Caso o usuário tenha optado por Todas as Partidas,
     #  essa data se refere ao campo "ATÉ"
-    if tipo_de_partidas == 'TP':
-        data_referencia_2 = informacoes_janela_fbl1n[4]
+    if informacoes_janela_fbl1n.get('todas_partidas'):
+        data_referencia_2 = informacoes_janela_fbl1n.get('data_ate')
 
     # MES REFERENCIA - AAAAMM para inserir no inicio do nome do relatório exportado e no nome do screenshot
-    mes_referencia = (informacoes_janela_fbl1n[3][4:] + informacoes_janela_fbl1n[3][2:4])
+    mes_referencia = (informacoes_janela_fbl1n.get('data_emde')[4:] + informacoes_janela_fbl1n.get('data_emde')[2:4])
 
     # LAYOUT - layout que será utilizado para visualizar o relatórios
-    layout = informacoes_janela_fbl1n[5]
+    layout = informacoes_janela_fbl1n.get('layout')
 
     # PARTIDAS_NORMAIS
-    partidas_normais = informacoes_janela_fbl1n[6]
+    partidas_normais = informacoes_janela_fbl1n.get('partidas_normais')
 
     # OPER_RAZAO_ESPECIAL
-    operacao_razao_especial = informacoes_janela_fbl1n[7]
+    operacao_razao_especial = informacoes_janela_fbl1n.get('operacao_razao_especial')
 
     # Partidas Pré-editadas
-    partidas_pre_editadas = informacoes_janela_fbl1n[8]
+    partidas_pre_editadas = informacoes_janela_fbl1n.get('partidas_pre_editadas')
 
     # Company code que será utilizado na extração das informarções
-    company_code = informacoes_janela_fbl1n[9]
+    company_code = informacoes_janela_fbl1n.get('company_code')
 
     # Obtendo contas conciliáveis
     contas_conciliaveis = orc.obter_relacao_contas(caminho_arquivo_contas_conciliaveis)
