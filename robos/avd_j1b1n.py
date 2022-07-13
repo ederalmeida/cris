@@ -16,8 +16,11 @@ def executa_robo():
     # COMPANY_CODE - empresa a ser uilizada para extração dos relatórios
     company_code = informacoes_janela_avd_j1b1n.get('company_code')
     
+    # CAMINHO_PASTA_XML - Caminho para a pasta contendo os XMLs
+    caminho_pasta_xml = informacoes_janela_avd_j1b1n.get('pasta')
+
     # XMLS_A_ESCRITURAR - informações sobre as NFes
-    NFes_a_escriturar = NFes.NFe.criar(informacoes_janela_avd_j1b1n.get('pasta'))
+    NFes_a_escriturar = NFes.NFe.criar(caminho_pasta_xml)
 
     # PARAMETRIZACAO - parametrizações para a transação
     parametrizacao = opaj.obter()
@@ -248,7 +251,7 @@ def executa_robo():
                 sap.session.findById("wnd[0]").sendVKey(0)
     
     # Criando arquivo de logging
-    arquivo_de_log = open(informacoes_janela_avd_j1b1n[2] + '\\log de execução ' + data_execucao + '.txt', 'w')
+    arquivo_de_log = open(caminho_pasta_xml + '\\log de execução ' + data_execucao + '.txt', 'w')
 
     for linha in tabela_aux_log:
         arquivo_de_log.writelines(linha[0] + ' - ' + linha[1] + ' - ' + linha[2] + '\n')
