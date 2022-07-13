@@ -260,7 +260,7 @@ def executa_robo():
         # encerrar robo
     sap.session.findById("wnd[0]/tbar[0]/btn[3]").press()
     sg.popup('Execução efetuada com sucesso')
-    abertura.inicializacao()
+    abertura.exibir()
 
 #TODO: melhorar a tela de parametrizacao
         
