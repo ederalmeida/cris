@@ -20,12 +20,12 @@ situacao_tribut_ipi;CST 03 - entrada-não-tributada
 situacao_fis_cofins;01
 situacao_fis_pis;01
 tipo_imposto_1;ICON
-tipo_imposto_2;ICM2
-tipo_imposto_3;IPI2
-tipo_imposto_4;IPSN
 taxa_imposto_1;7,6
+tipo_imposto_2;ICM2
 taxa_imposto_2;0
+tipo_imposto_3;IPI2
 taxa_imposto_3;0
+tipo_imposto_4;IPSN
 taxa_imposto_4;1,65
 forma_de_pagamento;1
 frm_pgto;99

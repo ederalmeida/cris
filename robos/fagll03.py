@@ -116,6 +116,7 @@ def executa_robo():
                 for sociedade in sociedades_parceiras:
                     sap.session.findById("wnd[1]/tbar[0]/btn[13]").press()
                     sap.session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]").text = sociedade
+                screenSociedadeParceira = pag.screenshot()
                 sap.session.findById("wnd[1]/tbar[0]/btn[8]").press()
                 sap.session.findById("wnd[0]/tbar[0]/btn[11]").press()
         primeira_execucao = False
@@ -156,7 +157,10 @@ def executa_robo():
                 data_execucao + ' - FAGLL03 - ' + tipo_de_partidas+ ' - ' + ledger + ' - 01 parametrizacao.jpg')
             screenExecucao.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
                 data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 02 resultados.jpg')
-            
+            if sociedades_parceiras != '':
+                screenSociedadeParceira.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
+                data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03 sociedade_parceira.jpg')
+
             # Volta para a tela de parâmetros
             if sap.session.findById('wnd[0]/sbar').text == 'Nenhuma partida selecionada (ver texto descritivo)':
                 sap.session.findById('wnd[0]').sendVKey(15)

@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from janelas import janela_avd_j1b1n_cadastro_fornecedor as jajcf
+from janelas import janela_avd_j1b1n_parametrizacao as jajp
 from janelas import janela_abertura as ja
 
 def exibir():
@@ -39,6 +40,10 @@ def exibir():
         if event == '-CADASTRAR_FORNECEDOR-':
             janela.close()
             jajcf.exibir()
+
+        if event == '-PARAMETRIZACAO-':
+            janela.close()
+            jajp.exibir()
 
         if event == '-EXECUTAR_ROBO-':
             if values['-DATA_CONTABILIZACAO-'] == '':

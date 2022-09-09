@@ -1,7 +1,7 @@
 from classes import NFes, sapgui
 from janelas import janela_avd_j1b1n as ja
 from janelas import janela_abertura as abertura
-from apoio import obter_parametrizacao_avd_j1b1n as opaj
+from apoio import parametrizacao_avd_j1b1n as paj
 from datetime import datetime
 import PySimpleGUI as sg
 import os
@@ -23,7 +23,7 @@ def executa_robo():
     NFes_a_escriturar = NFes.NFe.criar(caminho_pasta_xml)
 
     # PARAMETRIZACAO - parametrizações para a transação
-    parametrizacao = opaj.obter()
+    parametrizacao = paj.obter()
 
     # TABELA_AUX_LOG - tabela auxiliar para gerar logging da escrituração
     tabela_aux_log = []
@@ -98,49 +98,49 @@ def executa_robo():
                 sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-ITMTYP[1," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('tipo_de_item')
 
                 # Campo "Material"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-MATNR[4," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('material')
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-MATNR[2," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('material')
                 
                 # Campo "Centro"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-WERKS[6," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('centro')
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-WERKS[3," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('centro')
                 
                 # Campo "Quantidade"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/txtJ_1BDYLIN-MENGE[10," + str(linha_sintese_sap) + "]").Text = item[2]
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/txtJ_1BDYLIN-MENGE[7," + str(linha_sintese_sap) + "]").Text = item[2]
                 
                 # Campo "Unidade"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-MEINS[11," + str(linha_sintese_sap) + "]").Text = "UN"
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-MEINS[8," + str(linha_sintese_sap) + "]").Text = "UN"
                 
                 # Campo "Preço"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/txtJ_1BDYLIN-NETPR[19," + str(linha_sintese_sap) + "]").Text = item[3]
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/txtJ_1BDYLIN-NETPR[11," + str(linha_sintese_sap) + "]").Text = item[3]
                 
                 # Campo "Valor"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/txtJ_1BDYLIN-NETWR[20," + str(linha_sintese_sap) + "]").Text = item[4]
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/txtJ_1BDYLIN-NETWR[12," + str(linha_sintese_sap) + "]").Text = item[4]
                 
                 # Campo "CFOP"
-                if str(NFe.chNFe[0:2]) == str(parametrizacao.get('regiao_fical_empresa')):
-                    sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-CFOP[26," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('CFOP_para_NFe_da_mesma_regiao')
+                if str(NFe.chNFe[0:2]) == str(parametrizacao.get('regiao_fiscal_empresa')):
+                    sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-CFOP[18," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('CFOP_para_NFe_da_mesma_regiao')
                 else:
-                    sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-CFOP[26," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('CFOP_para_NFe_de_outra_regiao')
+                    sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-CFOP[18," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('CFOP_para_NFe_de_outra_regiao')
             
                 # Campo "Dir.fisc.:ICMS"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-TAXLW1[27," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('dir_fisc_icms')
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-TAXLW1[19," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('dir_fisc_icms')
                 
                 # Campo "Dir.fisc.:IPI"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-TAXLW2[28," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('dir_fisc_ipi')
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-TAXLW2[20," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('dir_fisc_ipi')
             
                 # Campo "Lei COFINS"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-TAXLW4[30," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('lei_cofins')
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-TAXLW4[22," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('lei_cofins')
             
                 # Campo "Lei Trib PIS"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-TAXLW5[31," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('lei_trib_pis')
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-TAXLW5[23," + str(linha_sintese_sap) + "]").Text = parametrizacao.get('lei_trib_pis')
             
                 # Campo "Origem Material"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/cmbJ_1BDYLIN-MATORG[32," + str(linha_sintese_sap) + "]").Key = parametrizacao.get('origem_material')
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/cmbJ_1BDYLIN-MATORG[24," + str(linha_sintese_sap) + "]").Key = parametrizacao.get('origem_material')
             
                 # Campo "Utilização Material"
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/cmbJ_1BDYLIN-MATUSE[33," + str(linha_sintese_sap) + "]").Key = parametrizacao.get('utilizacao_material')
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/cmbJ_1BDYLIN-MATUSE[25," + str(linha_sintese_sap) + "]").Key = parametrizacao.get('utilizacao_material')
             
                 # Campo "Cód. Controle" (NCM)
-                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-NBM[34," + str(linha_sintese_sap) + "]").Text = item[1]
+                sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL/ctxtJ_1BDYLIN-NBM[26," + str(linha_sintese_sap) + "]").Text = item[1]
             
                 # Selecionando a linha da aba que esta sendo preenchida
                 sap.session.findById("wnd[0]/usr/tabsTABSTRIP1/tabpTAB1/ssubHEADER_TAB:SAPLJ1BB2:2100/tblSAPLJ1BB2ITEM_CONTROL").getAbsoluteRow(linha_sintese_sap).Selected = True
