@@ -172,7 +172,7 @@ def executa_robo():
         sap.session.findById("wnd[1]/usr/btnAPP_FL_ALL").press()
         sap.session.findById("wnd[1]/usr/btnB_SORT_UP").press()
         sap.session.findById("wnd[1]/usr/btnB_SEARCH").press()
-        sap.session.findById("wnd[2]/usr/txtGD_SEARCHSTR").text = "Conta"
+        sap.session.findById("wnd[2]/usr/txtGD_SEARCHSTR").text = "CONTA *"
         sap.session.findById("wnd[2]/usr/txtGD_SEARCHSTR").caretPosition = 5
         sap.session.findById("wnd[2]/tbar[0]/btn[0]").press()
         sap.session.findById("wnd[1]/usr/tblSAPLSKBHTC_FIELD_LIST_820/txtGT_FIELD_LIST-SELTEXT[0,0]").setFocus
@@ -233,7 +233,10 @@ def executa_robo():
             data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 01 parametrizacao.jpg')
         screenExecucao.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
             data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 02 resultados.jpg')
-        
+        if sociedades_parceiras != '':
+                screenSociedadeParceira.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
+                data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03 sociedade_parceira.jpg')
+
         # Volta para a tela de parâmetros
         sap.session.findById('wnd[0]').sendVKey(15)
     

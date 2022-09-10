@@ -143,7 +143,7 @@ def executa_robo():
         sap.session.findById("wnd[1]/usr/btnAPP_FL_ALL").press()
         sap.session.findById("wnd[1]/usr/btnB_SORT_UP").press()
         sap.session.findById("wnd[1]/usr/btnB_SEARCH").press()
-        sap.session.findById("wnd[2]/usr/txtGD_SEARCHSTR").text = "Conta"
+        sap.session.findById("wnd[2]/usr/txtGD_SEARCHSTR").text = "Conta *"
         sap.session.findById("wnd[2]/usr/txtGD_SEARCHSTR").caretPosition = 5
         sap.session.findById("wnd[2]/tbar[0]/btn[0]").press()
         sap.session.findById("wnd[1]/usr/tblSAPLSKBHTC_FIELD_LIST_820/txtGT_FIELD_LIST-SELTEXT[0,0]").setFocus
