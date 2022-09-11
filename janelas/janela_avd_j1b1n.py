@@ -58,7 +58,7 @@ def exibir():
     janela.close()
 
     informacoes_avd_j1b1n = {'data_contabilizacao': values['-DATA_CONTABILIZACAO-'],
-                             'company_code':values['-COMPANY_CODE-'],
+                             'company_code': values['-COMPANY_CODE-'],
                              'pasta': values['-PASTA-']}
 
     return informacoes_avd_j1b1n
