@@ -30,11 +30,12 @@ def exibir():
              ]                 
 
     linha5_coluna1 = [[sg.Frame('Dados',
-                       [[sg.Text('Relação das Contas Conciliáveis')],
+                       [[sg.Text('Relação das Contas Conciliáveis (txt)')],
                         [sg.InputText('', key='-ARQUIVO_CONTAS-', size=(40, 1)), sg.FileBrowse('procurar')],
                         [sg.Text('Pasta onde serão salvos os relatórios', size=(40, 1))],
-                        [sg.InputText('', key='-PASTA-', size=(40, 1)), sg.FolderBrowse('procurar')]
-                       ])
+                        [sg.InputText('', key='-PASTA-', size=(40, 1)), sg.FolderBrowse('procurar')],
+                        [sg.Text('Relação de Socidades Parceiras (txt)', size=(40, 1))],
+                        [sg.InputText('', key='-ARQUIVO_SOCPAR-', size=(40, 1)), sg.FileBrowse('procurar')]]),
                     ]]
 
     linha5_coluna2 = [[sg.Frame('Company Code',
@@ -42,7 +43,7 @@ def exibir():
                         sg.Combo(('ESUL', 'CHSF', 'CPEL', 'ELET', 'ENOR', 'ENUC', 'EPAR', 'FCE1'), key='-COMPANY_CODE-')]])],
                      [sg.Frame('Saída',
                     [[sg.Text('Layout'),
-                        sg.InputText(default_text='/MD_CO_SECOG', size=(16,1), key='-LAYOUT-', enable_events=True)]])
+                        sg.InputText(default_text='/MD_CO_SECOG', size=(16,1), key='-LAYOUT-', enable_events=True)]]),
                     ]]
 
     linha6 = [[sg.Text('')],
@@ -96,6 +97,7 @@ def exibir():
 
     informacoes_fagll03 = {'arquivo_contas': values['-ARQUIVO_CONTAS-'],
                            'pasta': values['-PASTA-'],
+                           'socidades_parceiras': values['-ARQUIVO_SOCPAR-'],
                            'data_emde': (values['-DATA_EMDE-'].replace('.','')).replace('/',''),
                            'data_ate': (values['-DATA_ATE-'].replace('.','')).replace('/',''),
                            'partidas_aberta':  values['-RADIO_PA-'],

@@ -6,6 +6,7 @@ from datetime import datetime
 from apoio import obter_relacao_contas as orc
 from apoio import verifica_janelas as vj
 from apoio import verifica_cria_subpastas as vcs
+from apoio import obter_relacao_sociedades_parceiras as orsp
 from janelas import janela_fagll03 as ja
 from janelas import janela_abertura as abertura
 from classes import sapgui
@@ -54,6 +55,15 @@ def executa_robo():
     # COMPANY_CODE - empresa a ser uilizada para extração dos relatórios
     company_code = informacoes_janela_fagll03.get('company_code')
 
+    # caminho_arquivo_sociedades_pareceiras - relação das sociedades parceiras que irá filtrar a saída do relatório
+    caminho_arquivo_sociedades_pareceiras = informacoes_janela_fagll03.get('socidades_parceiras')
+
+    # Obtendo sociedades parceiras
+    if caminho_arquivo_sociedades_pareceiras != '':
+        sociedades_parceiras = orsp.obter_relacao_sociedades_parceiras(caminho_arquivo_sociedades_pareceiras)
+    else:
+        sociedades_parceiras = ''
+
     # Obtendo contas conciliáveis
     contas_conciliaveis = orc.obter_relacao_contas(caminho_arquivo_contas_conciliaveis)
 
@@ -69,6 +79,7 @@ def executa_robo():
         exit()
 
     # Laço de repetição, executado para cada conta da relação de contas conciliáveis
+    primeira_execucao = True
     for conta in contas_conciliaveis:
 
         i = 0 
@@ -93,6 +104,23 @@ def executa_robo():
         sap.session.findById("wnd[1]/usr/sub:SAPLSPO4:0300/ctxtSVALD-VALUE[0,21]").text = ledger
         sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
         sap.session.findById('wnd[0]/usr/ctxtPA_VARI').text = layout
+
+        # Se a relação de sociedades parceiras for diferente de vazio, executa o filtro
+        if primeira_execucao:
+            if sociedades_parceiras != '':
+                sap.session.findById("wnd[0]/tbar[1]/btn[25]").press()
+                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").expandNode('         44')
+                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").selectNode('         61')
+                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[1]/shell").pressButton('TAKE')
+                sap.session.findById("wnd[0]/usr/btn%_%%DYN001_%_APP_%-VALU_PUSH").press()
+                for sociedade in sociedades_parceiras:
+                    sap.session.findById("wnd[1]/tbar[0]/btn[13]").press()
+                    sap.session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]").text = sociedade
+                screenSociedadeParceira = pag.screenshot()
+                sap.session.findById("wnd[1]/tbar[0]/btn[8]").press()
+                sap.session.findById("wnd[0]/tbar[0]/btn[11]").press()
+        primeira_execucao = False
+        
 
         # Abrindo tela de status para confirmar ambiente
         sap.session.findById("wnd[0]/mbar/menu[3]/menu[11]").select()
@@ -129,7 +157,10 @@ def executa_robo():
                 data_execucao + ' - FAGLL03 - ' + tipo_de_partidas+ ' - ' + ledger + ' - 01 parametrizacao.jpg')
             screenExecucao.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
                 data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 02 resultados.jpg')
-            
+            if sociedades_parceiras != '':
+                screenSociedadeParceira.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
+                data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03 sociedade_parceira.jpg')
+
             # Volta para a tela de parâmetros
             if sap.session.findById('wnd[0]/sbar').text == 'Nenhuma partida selecionada (ver texto descritivo)':
                 sap.session.findById('wnd[0]').sendVKey(15)
@@ -141,7 +172,7 @@ def executa_robo():
         sap.session.findById("wnd[1]/usr/btnAPP_FL_ALL").press()
         sap.session.findById("wnd[1]/usr/btnB_SORT_UP").press()
         sap.session.findById("wnd[1]/usr/btnB_SEARCH").press()
-        sap.session.findById("wnd[2]/usr/txtGD_SEARCHSTR").text = "Conta"
+        sap.session.findById("wnd[2]/usr/txtGD_SEARCHSTR").text = "CONTA *"
         sap.session.findById("wnd[2]/usr/txtGD_SEARCHSTR").caretPosition = 5
         sap.session.findById("wnd[2]/tbar[0]/btn[0]").press()
         sap.session.findById("wnd[1]/usr/tblSAPLSKBHTC_FIELD_LIST_820/txtGT_FIELD_LIST-SELTEXT[0,0]").setFocus
@@ -202,7 +233,10 @@ def executa_robo():
             data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 01 parametrizacao.jpg')
         screenExecucao.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
             data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 02 resultados.jpg')
-        
+        if sociedades_parceiras != '':
+                screenSociedadeParceira.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
+                data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03 sociedade_parceira.jpg')
+
         # Volta para a tela de parâmetros
         sap.session.findById('wnd[0]').sendVKey(15)
     

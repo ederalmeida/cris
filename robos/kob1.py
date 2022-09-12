@@ -65,7 +65,7 @@ def executa_robo():
         + data_execucao + ' - KOB1.xlsx')
         sap.session.findById('wnd[1]').sendVKey(0)
 
-                # mapeando a janela ativa. Quando detectar que é o Excel, mata o processo.
+        # mapeando a janela ativa. Quando detectar que é o Excel, mata o processo.
         janela_ativa = ''
         while janela_ativa != 'EXCEL.EXE':
             time.sleep(1)

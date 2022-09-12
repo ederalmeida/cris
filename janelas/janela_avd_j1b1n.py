@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from janelas import janela_avd_j1b1n_cadastro_fornecedor as jajcf
+from janelas import janela_avd_j1b1n_parametrizacao as jajp
 from janelas import janela_abertura as ja
 
 def exibir():
@@ -40,6 +41,10 @@ def exibir():
             janela.close()
             jajcf.exibir()
 
+        if event == '-PARAMETRIZACAO-':
+            janela.close()
+            jajp.exibir()
+
         if event == '-EXECUTAR_ROBO-':
             if values['-DATA_CONTABILIZACAO-'] == '':
                 sg.popup('Favor inserir data para contabilização das NFe', title='Erro')
@@ -52,4 +57,8 @@ def exibir():
 
     janela.close()
 
-    return values['-DATA_CONTABILIZACAO-'], values['-COMPANY_CODE-'], values['-PASTA-']
+    informacoes_avd_j1b1n = {'data_contabilizacao': values['-DATA_CONTABILIZACAO-'],
+                             'company_code': values['-COMPANY_CODE-'],
+                             'pasta': values['-PASTA-']}
+
+    return informacoes_avd_j1b1n
