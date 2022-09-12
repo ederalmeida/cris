@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from janelas import janela_abertura as ja
+from robos import fbl1n
 
 def exibir():
     sg.theme('LightGrey1')   
@@ -91,11 +92,8 @@ def exibir():
             elif values['-PN-'] == False and values['-PPE-'] == False:
                 sg.popup('Favor selecionar tipo de partida', title='Erro')
             else:
-                break
-            
-    janela.close()
-
-    informacoes_fbl1n = {'arquivo_contas': values['-ARQUIVO_CONTAS-'],
+                janela.close()
+                informacoes_fbl1n = {'arquivo_contas': values['-ARQUIVO_CONTAS-'],
                            'pasta': values['-PASTA-'],
                            'data_emde': (values['-DATA_EMDE-'].replace('.','')).replace('/',''),
                            'data_ate': (values['-DATA_ATE-'].replace('.','')).replace('/',''),
@@ -107,5 +105,4 @@ def exibir():
                            'layout': values['-LAYOUT-'],
                            'ledger': values['-LEDGER-'],
                            'company_code':values['-COMPANY_CODE-']}
-
-    return informacoes_fbl1n
+                fbl1n.executar_robo(informacoes_fbl1n)

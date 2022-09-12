@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from janelas import janela_abertura as ja
+from robos import fagll03
 
 def exibir():
     sg.theme('LightGrey1')   
@@ -91,11 +92,8 @@ def exibir():
             elif values['-LEDGER-'] == '':
                 sg.popup('Favor inserir o ledger a ser analisado', title='Erro')
             else:
-                break
-            
-    janela.close()
-
-    informacoes_fagll03 = {'arquivo_contas': values['-ARQUIVO_CONTAS-'],
+                janela.close()
+                informacoes_fagll03 = {'arquivo_contas': values['-ARQUIVO_CONTAS-'],
                            'pasta': values['-PASTA-'],
                            'socidades_parceiras': values['-ARQUIVO_SOCPAR-'],
                            'data_emde': (values['-DATA_EMDE-'].replace('.','')).replace('/',''),
@@ -105,5 +103,4 @@ def exibir():
                            'layout': values['-LAYOUT-'],
                            'ledger': values['-LEDGER-'],
                            'company_code':values['-COMPANY_CODE-']}
-    
-    return informacoes_fagll03
+                fagll03.executar_robo(informacoes_fagll03)

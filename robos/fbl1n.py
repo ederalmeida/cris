@@ -10,11 +10,9 @@ from janelas import janela_abertura as abertura
 from janelas import janela_fbl1n as ja
 from classes import sapgui
 
-sg.theme('LightGrey1')
-
-def executa_robo():
+def executa_robo(informacoes_janela_fbl1n):
     # Chama a janela de interação do robô
-    informacoes_janela_fbl1n = ja.exibir()
+    # informacoes_janela_fbl1n = ja.exibir()
     
     # Conectar ao SAP (seja por logon ou usando uma sessão já aberta)
     sap = sapgui.SapGui()

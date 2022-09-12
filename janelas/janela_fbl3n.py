@@ -91,11 +91,10 @@ def exibir():
             elif values['-PN-'] == False and values['-PPE-'] == False:
                 sg.popup('Favor selecionar tipo de partida', title='Erro')
             else:
-                break
-            
-    janela.close()
+                janela.close()
+                if values['-RADIO_PA-'] == True:
+                    return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), '', values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
+                else:
+                    return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), (values['-DATA_ATE-'].replace('.','')).replace('/',''), values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
 
-    if values['-RADIO_PA-'] == True:
-        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), '', values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
-    else:
-        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), (values['-DATA_ATE-'].replace('.','')).replace('/',''), values['-LAYOUT-'], values['-PN-'], values['-PPE-'], values['-COMPANY_CODE-']
+   

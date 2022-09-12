@@ -2,6 +2,7 @@ import PySimpleGUI as sg
 from janelas import janela_avd_j1b1n_cadastro_fornecedor as jajcf
 from janelas import janela_avd_j1b1n_parametrizacao as jajp
 from janelas import janela_abertura as ja
+from robos import avd_j1b1n
 
 def exibir():
     sg.theme('LightGrey1')
@@ -53,12 +54,10 @@ def exibir():
             elif values['-PASTA-'] == '':
                 sg.popup('Favor indicar a pasta onde estão as NFe', title='Erro')
             else:
-                break
-
-    janela.close()
-
-    informacoes_avd_j1b1n = {'data_contabilizacao': values['-DATA_CONTABILIZACAO-'],
+                janela.close()
+                informacoes_avd_j1b1n = {'data_contabilizacao': values['-DATA_CONTABILIZACAO-'],
                              'company_code': values['-COMPANY_CODE-'],
                              'pasta': values['-PASTA-']}
+                avd_j1b1n.executar_robo(informacoes_avd_j1b1n)
+                break
 
-    return informacoes_avd_j1b1n

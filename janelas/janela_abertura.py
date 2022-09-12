@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 from imagens import imagens_base64 as imgs
 from robos import fbl3n, fbl1n, fbl5n, fagll03, kob1, avd_j1b1n
+from janelas import janela_avd_j1b1n, janela_fagll03, janela_fbl1n, janela_fbl3n, janela_fbl5n, janela_kob1
 from apoio import versao_atual as versao
 import sys
 
@@ -55,27 +56,27 @@ def exibir():
             
         if event == '-FBL3N-':
             janela.close()
-            fbl3n.executa_robo()
+            janela_fbl3n.exibir()
 
         if event == '-FBL1N-':
             janela.close()
-            fbl1n.executa_robo()
+            janela_fbl1n.exibir()
 
         if event == '-FBL5N-':
             janela.close()
-            fbl5n.executa_robo()  
+            janela_fbl5n.exibir() 
 
         if event == '-FAGLL03-':
             janela.close()
-            fagll03.executa_robo()
+            janela_fagll03.exibir()
 
         if event == '-KOB1-':
             janela.close()
-            kob1.executa_robo()
+            janela_kob1.exibir()
             
         if event == '-AVDJ1B1N-':
             janela.close()
-            avd_j1b1n.executa_robo()
+            janela_avd_j1b1n.exibir()
 
         if event in robos_nao_desenvolvidos:
             sg.popup('Sem autorização para acessar esse robô', title='Aviso')

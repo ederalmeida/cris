@@ -6,9 +6,9 @@ from datetime import datetime
 import PySimpleGUI as sg
 import os
 
-def executa_robo():
+def executa_robo(informacoes_janela_avd_j1b1n):
     # Chama a janela de interação do robô
-    informacoes_janela_avd_j1b1n = jaj.exibir()
+    # informacoes_janela_avd_j1b1n = jaj.exibir()
 
     # DATA_CONTABILIZACAO - data para a contabilizacao das NFes
     data_contabilizacao = informacoes_janela_avd_j1b1n.get('data_contabilizacao')
