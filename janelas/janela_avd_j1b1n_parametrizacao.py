@@ -3,7 +3,7 @@ from janelas import janela_avd_j1b1n as jaj
 from apoio import parametrizacao_avd_j1b1n as paj
 
 def exibir():
-    sg.theme('LightGrey1')
+    sg.theme('Reddit')
 
     parametros = paj.obter()
 

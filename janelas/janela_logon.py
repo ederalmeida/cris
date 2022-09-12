@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 import sys 
 
 def janela_logon():
-    sg.theme('LightGrey1')
+    sg.theme('Reddit')
     layout = [
         [sg.Text('Nome da Conexão', size=(15,1)), sg.InputText('', key='-NOME_CONEXAO-')],
         [sg.Text('Usuário SAP', size=(15,1)), sg.InputText('', key='-USUARIO_SAP-')],

@@ -3,7 +3,7 @@ from janelas import janela_abertura as ja
 from robos import fagll03
 
 def exibir():
-    sg.theme('LightGrey1')   
+    sg.theme('Reddit')   
 
     linha1 = [[sg.Text('Robô para Extração de Relatórios FAGLL03', size=(34, 1), justification='center', font=("Helvetica", 22))]]
 

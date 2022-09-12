@@ -1,8 +1,9 @@
 import PySimpleGUI as sg
 from janelas import janela_abertura as ja
+from robos import fbl5n
 
 def exibir():
-    sg.theme('LightGrey1')   
+    sg.theme('Reddit')   
 
     linha1 = [[sg.Text('Robo para Extração de Relatórios FBL5N', size=(32, 1), justification='center', font=("Helvetica", 23))]]
 
@@ -91,11 +92,16 @@ def exibir():
             elif values['-PN-'] == False and values['-PPE-'] == False:
                 sg.popup('Favor selecionar tipo de partida', title='Erro')
             else:
-                break
-            
-    janela.close()
-
-    if values['-RADIO_PA-'] == True:
-        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'PA', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), '', values['-LAYOUT-'], values['-PN-'], values['-ORE-'], values['-PPE-'], values['-COMPANY_CODE-']
-    else:
-        return values['-ARQUIVO_CONTAS-'], values['-PASTA-'], 'TP', (values['-DATA_EMDE-'].replace('.','')).replace('/',''), (values['-DATA_ATE-'].replace('.','')).replace('/',''), values['-LAYOUT-'], values['-PN-'], values['-ORE-'], values['-PPE-'], values['-COMPANY_CODE-']
+                janela.close()
+                informacoes_fbl5n = {'arquivo_contas': values['-ARQUIVO_CONTAS-'],
+                           'pasta': values['-PASTA-'],
+                           'data_emde': (values['-DATA_EMDE-'].replace('.','')).replace('/',''),
+                           'data_ate': (values['-DATA_ATE-'].replace('.','')).replace('/',''),
+                           'partidas_aberta':  values['-RADIO_PA-'],
+                           'todas_partidas':  values['-RADIO_TP-'],
+                           'partidas_normais': values['-PN-'],
+                           'operacao_razao_especial': values['-ORE-'],
+                           'partidas_pre_editadas': values['-PPE-'],
+                           'layout': values['-LAYOUT-'],
+                           'company_code':values['-COMPANY_CODE-']}
+                fbl5n.executar_robo(informacoes_fbl5n)

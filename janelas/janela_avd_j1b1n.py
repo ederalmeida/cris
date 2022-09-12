@@ -5,7 +5,7 @@ from janelas import janela_abertura as ja
 from robos import avd_j1b1n
 
 def exibir():
-    sg.theme('LightGrey1')
+    sg.theme('Reddit')
 
     cabecalho = [[sg.Text('Robô para Escriturar AVDs com J1B1N', size=(34, 1), justification='center', font=("Helvetica", 22))],
                  [sg.Text('_'  * 100, size=(72, 1))]]

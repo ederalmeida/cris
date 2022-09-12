@@ -3,7 +3,7 @@ from janelas import janela_abertura as ja
 from robos import fbl1n
 
 def exibir():
-    sg.theme('LightGrey1')   
+    sg.theme('Reddit')   
 
     linha1 = [[sg.Text('Robo para Extração de Relatórios FBL1N', size=(32, 1), justification='center', font=("Helvetica", 23))]]
 
@@ -103,6 +103,5 @@ def exibir():
                            'operacao_razao_especial': values['-ORE-'],
                            'partidas_pre_editadas': values['-PPE-'],
                            'layout': values['-LAYOUT-'],
-                           'ledger': values['-LEDGER-'],
                            'company_code':values['-COMPANY_CODE-']}
                 fbl1n.executar_robo(informacoes_fbl1n)

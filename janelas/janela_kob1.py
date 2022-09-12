@@ -1,8 +1,9 @@
 import PySimpleGUI as sg
 from janelas import janela_abertura as ja
+from robos import kob1
 
 def exibir():
-    sg.theme('LightGrey1')   
+    sg.theme('Reddit')   
 
     linha1 = [[sg.Text('Extrair Custos Reais de OI - KOB1', size=(20, 2), justification='center', font=("Helvetica", 23))]]
 
@@ -60,8 +61,12 @@ def exibir():
             elif values['-LAYOUT-'] == '':
                 sg.popup('Favor inserir um layout para visualização dos relatórios', title='Erro')
             else:
-                break
-            
-    janela.close()
-
-    return values['-ARQUIVO_ORDENS-'], values['-PASTA-'], (values['-DATA_DE-'].replace('.','')).replace('/',''), (values['-DATA_ATE-'].replace('.','')).replace('/',''), values['-LAYOUT-']
+                janela.close()
+                informacoes_kob1 = {
+                    'arquvio_ordens': values['-ARQUIVO_ORDENS-'],
+                    'pasta': values['-PASTA-'],
+                    'data_de': (values['-DATA_DE-'].replace('.','')).replace('/',''),
+                    'data_ate': (values['-DATA_ATE-'].replace('.','')).replace('/',''),
+                    'layout': values['-LAYOUT-']
+                }
+                kob1.executar_robo(informacoes_kob1)  

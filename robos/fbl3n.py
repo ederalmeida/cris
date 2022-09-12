@@ -10,49 +10,50 @@ from janelas import janela_abertura as abertura
 from janelas import janela_fbl3n as ja
 from classes import sapgui
 
-sg.theme('LightGrey1')
-
-def executa_robo():
+def executa_robo(informacoes_janela_fbl3n):
     # Chama a janela de interação do robô
-    informacoes_janela_fbl3n = ja.exibir()
+    # informacoes_janela_fbl3n = ja.exibir()
     
     # Conectar ao SAP (seja por logon ou usando uma sessão já aberta)
     sap = sapgui.SapGui()
     sap.logon()
 
     # CAMINHA_ARQUIVO_CONTAS_CONCILIAVEIS - indica o path e o caminho para obter a relação de contas conciliáveis
-    caminho_arquivo_contas_conciliaveis = informacoes_janela_fbl3n[0]
+    caminho_arquivo_contas_conciliaveis = informacoes_janela_fbl3n.get('arquivo_contas')
 
     # CAMINHA_PASTA_RELATORIOS - indica o path onde serão salvos os relatórios
-    caminho_pasta_relatorios = informacoes_janela_fbl3n[1]
+    caminho_pasta_relatorios = informacoes_janela_fbl3n.get('pasta')
 
     # TIPO_DE_PARTIDAS - indica qual o tipo de partidas o usuário deseja visualizar.
     #  PA = Partidas em Aberto e TP = Todas as Partidas
-    tipo_de_partidas = informacoes_janela_fbl3n[2]
+    if informacoes_janela_fbl3n.get('todas_partidas'):
+        tipo_de_partidas = 'TP'
+    else:
+        tipo_de_partidas = 'PA'
 
     # DATA REFERENCIA_1 - data para a posição do relatório. Caso o usuário tenha optado por Todas as Partidas,
     #  essa data se refere ao campo "DE"
-    data_referencia_1 = informacoes_janela_fbl3n[3]
+    data_referencia_1 = informacoes_janela_fbl3n.get('data_emde')
 
     # DATA REFERENCIA_2 - data para a posição do relatório. Caso o usuário tenha optado por Todas as Partidas,
     #  essa data se refere ao campo "ATÉ"
-    if tipo_de_partidas == 'TP':
-        data_referencia_2 = informacoes_janela_fbl3n[4]
+    if informacoes_janela_fbl3n.get('todas_partidas'):
+        data_referencia_2 = informacoes_janela_fbl3n.get('data_ate')
 
     # MES REFERENCIA - AAAAMM para inserir no inicio do nome do relatório exportado e no nome do screenshot
-    mes_referencia = (informacoes_janela_fbl3n[3][4:] + informacoes_janela_fbl3n[3][2:4])
+    mes_referencia = (informacoes_janela_fbl3n.get('data_emde')[4:] + informacoes_janela_fbl3n.get('data_emde')[2:4])
 
     # LAYOUT - layout que será utilizado para visualizar o relatórios
-    layout = informacoes_janela_fbl3n[5]
+    layout = informacoes_janela_fbl3n.get('layout')
 
     # PARTIDAS_NORMAIS
-    partidas_normais = informacoes_janela_fbl3n[6]
+    partidas_normais = informacoes_janela_fbl3n.get('partidas_normais')
 
     # Partidas Pré-editadas
-    partidas_pre_editadas = informacoes_janela_fbl3n[7]
+    partidas_pre_editadas = informacoes_janela_fbl3n.get('partidas_pre_editadas')
 
     # Company code que será utilizado na extração das informarções
-    company_code = informacoes_janela_fbl3n[8]
+    company_code = informacoes_janela_fbl3n.get('company_code')
 
     # Obtendo contas conciliáveis
     contas_conciliaveis = orc.obter_relacao_contas(caminho_arquivo_contas_conciliaveis)

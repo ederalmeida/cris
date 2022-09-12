@@ -10,19 +10,19 @@ from janelas import janela_abertura as abertura
 from janelas import janela_kob1 as ja
 from classes import sapgui
 
-def executa_robo():
+def executa_robo(informacoes_janela_kob1):
 
-    informacoes_janela_kob1 = ja.exibir()
+    # informacoes_janela_kob1 = ja.exibir()
 
     sap = sapgui.SapGui()
     sap.logon()
 
-    caminho_arquivo_ordens = informacoes_janela_kob1[0]
-    caminho_pasta_relatorios = informacoes_janela_kob1[1]
-    data_referencia_de = informacoes_janela_kob1[2]
-    data_referencia_ate = informacoes_janela_kob1[3]
-    mes_referencia = (informacoes_janela_kob1[3][4:] + informacoes_janela_kob1[3][2:4])
-    layout = informacoes_janela_kob1[4]
+    caminho_arquivo_ordens = informacoes_janela_kob1.get('arquvio_ordens')
+    caminho_pasta_relatorios = informacoes_janela_kob1.get('pasta')
+    data_referencia_de = informacoes_janela_kob1.get('data_de')
+    data_referencia_ate = informacoes_janela_kob1.get('data_ate')
+    mes_referencia = (informacoes_janela_kob1.get('data_ate')[4:] + informacoes_janela_kob1.get('data_ate')[2:4])
+    layout = informacoes_janela_kob1.get('layout')
     relacao_ordens = oro.obter_relacao_ordens(caminho_arquivo_ordens)
 
     # Abrindo a transação KOB1

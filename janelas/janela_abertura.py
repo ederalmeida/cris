@@ -7,7 +7,7 @@ import sys
 
 def exibir():
 
-    sg.theme('LightGrey1')
+    sg.theme('Reddit')
 
     coluna_esquerda = [[sg.Text('CRIS', size=(10,1), justification='center', font=("Helvetica", 50))],
                        [sg.Text('Central de Robôs para Interação com Sistemas', size=(20,2), justification='center', font=("Helvetica", 20))],

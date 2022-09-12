@@ -4,7 +4,7 @@ from apoio import cadastrar_fornecedor_avd_j1b1n as cfaj
 from janelas import janela_avd_j1b1n as jaj
 
 def exibir():
-    sg.theme('LightGrey1')
+    sg.theme('Reddit')
 
     cabecalho = [[sg.Text('Cadastro de Fornecedor', size=(20, 1), justification='center', font=("Helvetica", 22))],
                  [sg.Text('_'  * 100, size=(50, 1))]]
