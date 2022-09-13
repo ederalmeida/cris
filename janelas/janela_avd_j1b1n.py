@@ -58,6 +58,6 @@ def exibir():
                 informacoes_avd_j1b1n = {'data_contabilizacao': values['-DATA_CONTABILIZACAO-'],
                              'company_code': values['-COMPANY_CODE-'],
                              'pasta': values['-PASTA-']}
-                avd_j1b1n.executar_robo(informacoes_avd_j1b1n)
+                avd_j1b1n.executa_robo(informacoes_avd_j1b1n)
                 break
 
