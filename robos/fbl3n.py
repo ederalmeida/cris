@@ -10,7 +10,7 @@ from janelas import janela_abertura as abertura
 from janelas import janela_fbl3n as ja
 from classes import sapgui
 
-def executa_robo(informacoes_janela_fbl3n):
+def executar_robo(informacoes_janela_fbl3n):
     # Chama a janela de interação do robô
     # informacoes_janela_fbl3n = ja.exibir()
     

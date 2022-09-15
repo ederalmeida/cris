@@ -12,7 +12,7 @@ from janelas import janela_abertura as abertura
 from classes import sapgui
 
 
-def executa_robo(informacoes_janela_fagll03):
+def executar_robo(informacoes_janela_fagll03):
     # Chama a janela de interação do robô
     # informacoes_janela_fagll03 = ja.exibir()
     
@@ -35,15 +35,24 @@ def executa_robo(informacoes_janela_fagll03):
 
     # DATA REFERENCIA_1 - data para a posição do relatório. Caso o usuário tenha optado por Todas as Partidas,
     #  essa data se refere ao campo "DE"
-    data_referencia_1 = informacoes_janela_fagll03.get('data_emde')
+    data_referencia_1 = informacoes_janela_fagll03.get('data_cont_emde')
 
     # DATA REFERENCIA_2 - data para a posição do relatório. Caso o usuário tenha optado por Todas as Partidas,
     #  essa data se refere ao campo "ATÉ"
     if informacoes_janela_fagll03.get('todas_partidas'):
-        data_referencia_2 = informacoes_janela_fagll03.get('data_ate')
+        data_referencia_2 = informacoes_janela_fagll03.get('data_cont_ate')
 
     # MES REFERENCIA - AAAAMM para inserir no inicio do nome do relatório exportado e no nome do screenshot
-    mes_referencia = (informacoes_janela_fagll03.get('data_emde')[4:] + informacoes_janela_fagll03.get('data_emde')[2:4])
+    mes_referencia = (informacoes_janela_fagll03.get('data_cont_emde')[4:] + informacoes_janela_fagll03.get('data_cont_emde')[2:4])
+
+    # DATA EFETIVA 1 - data efetiva, que registra a data corrente de quando o lançamento foi realizado (e não a data da sensibilização do razão)
+    # Campo DE
+    data_efetiva_1 = informacoes_janela_fagll03.get('data_efet_emde')
+
+    # DATA EFETIVA 2 - data efetiva, que registra a data corrente de quando o lançamento foi realizado (e não a data da sensibilização do razão)
+    # Campo ATE
+    data_efetiva_2 = informacoes_janela_fagll03.get('data_efet_ate')
+
 
     # LAYOUT - layout que será utilizado para visualizar o relatórios
     layout = informacoes_janela_fagll03.get('layout')
@@ -106,6 +115,7 @@ def executa_robo(informacoes_janela_fagll03):
 
         # Se a relação de sociedades parceiras for diferente de vazio, executa o filtro
         if primeira_execucao:
+            
             if sociedades_parceiras != '':
                 sap.session.findById("wnd[0]/tbar[1]/btn[25]").press()
                 sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").expandNode('         44')
@@ -117,7 +127,18 @@ def executa_robo(informacoes_janela_fagll03):
                     sap.session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]").text = sociedade
                 screenSociedadeParceira = pag.screenshot()
                 sap.session.findById("wnd[1]/tbar[0]/btn[8]").press()
+            if data_efetiva_1 != '':
+                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").expandNode('         22')
+                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").selectNode('         40')
+                #sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").topNode('          1')
+                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").doubleClickNode('         40')
+                sap.session.findById("wnd[0]/usr/ctxt%%DYN001-LOW").text = data_efetiva_1
+                sap.session.findById("wnd[0]/usr/ctxt%%DYN001-HIGH").text = data_efetiva_2
+                screenDataEfetiva = pag.screenshot()
+                
+            if sociedades_parceiras != '' or data_efetiva_1 != '':
                 sap.session.findById("wnd[0]/tbar[0]/btn[11]").press()
+                
         primeira_execucao = False
         
 
@@ -159,7 +180,9 @@ def executa_robo(informacoes_janela_fagll03):
             if sociedades_parceiras != '':
                 screenSociedadeParceira.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
                 data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03 sociedade_parceira.jpg')
-
+            if data_efetiva_1 != '':
+                screenDataEfetiva.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
+                data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 04 data_efetiva.jpg')
             # Volta para a tela de parâmetros
             if sap.session.findById('wnd[0]/sbar').text == 'Nenhuma partida selecionada (ver texto descritivo)':
                 sap.session.findById('wnd[0]').sendVKey(15)
@@ -233,8 +256,11 @@ def executa_robo(informacoes_janela_fagll03):
         screenExecucao.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
             data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 02 resultados.jpg')
         if sociedades_parceiras != '':
-                screenSociedadeParceira.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
-                data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03 sociedade_parceira.jpg')
+            screenSociedadeParceira.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
+            data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03 sociedade_parceira.jpg')
+        if data_efetiva_1 != '':
+            screenDataEfetiva.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
+            data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 04 data_efetiva.jpg')
 
         # Volta para a tela de parâmetros
         sap.session.findById('wnd[0]').sendVKey(15)
