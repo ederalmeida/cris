@@ -1,6 +1,6 @@
 # Coleção de Robôs para Geração de IPEs
 
-##### Desenvolvido por Éder Almeida (eder.almeida@cgteletrosul.gov.br - eder.almeida@gmail.com)
+##### Desenvolvido por Éder Almeida (eder.almeida@cgteletrosul.com.br - eder.almeida@gmail.com)
 ##### Apoio e colaboração de Thiago Paes (https://github.com/mrprompt - mrprompt@gmail.com)
 
 
