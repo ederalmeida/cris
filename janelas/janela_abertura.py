@@ -1,7 +1,6 @@
 import PySimpleGUI as sg
 from imagens import imagens_base64 as imgs
-from robos import fbl3n, fbl1n, fbl5n, fagll03, kob1, avd_j1b1n
-from janelas import janela_avd_j1b1n, janela_fagll03, janela_fbl1n, janela_fbl3n, janela_fbl5n, janela_kob1
+from janelas import janela_avd_j1b1n, janela_fagll03, janela_fbl1n, janela_fbl3n, janela_fbl5n, janela_kob1, janela_inadimplencia_amse
 from apoio import versao_atual as versao
 import sys
 
@@ -18,7 +17,8 @@ def exibir():
                           sg.Button('FBL5N', size=(10,1), key='-FBL5N-'),
                           sg.Button('FAGLL03', size=(10,1), key='-FAGLL03-')],
                          [sg.Button('KOB1', size=(10,1), key='-KOB1-'),
-                         sg.Button('AVD J1B1N', size=(10,1), key='-AVDJ1B1N-')]])],
+                          sg.Button('AVD J1B1N', size=(10,1), key='-AVDJ1B1N-'),
+                          sg.Button('ONS AMSE', size=(10,1), key='-INADIMPLENCIA_AMSE-')]])],
                        [sg.Text('')],
                        [sg.Frame('AMBIENTAL',
                         [[sg.Button('IBMA', size=(10,1), key='-IBAMA-'),
@@ -77,6 +77,10 @@ def exibir():
         if event == '-AVDJ1B1N-':
             janela.close()
             janela_avd_j1b1n.exibir()
+
+        if event == '-INADIMPLENCIA_AMSE-':
+            janela.close()
+            janela_inadimplencia_amse.exibir()
 
         if event in robos_nao_desenvolvidos:
             sg.popup('Sem autorização para acessar esse robô', title='Aviso')

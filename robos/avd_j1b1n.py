@@ -1,5 +1,4 @@
 from classes import NFes, sapgui
-from janelas import janela_avd_j1b1n as jaj
 from janelas import janela_abertura as abertura
 from apoio import parametrizacao_avd_j1b1n as paj
 from datetime import datetime

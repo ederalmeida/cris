@@ -5,3 +5,7 @@ pypiwin32
 psutil
 pillow
 untangle
+selenium
+webdriver-manager
+pandas
+openpyxl

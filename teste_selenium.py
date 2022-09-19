@@ -1,7 +1,6 @@
 from classes import amse
 
 teste = amse.amse_site()
-
-while True:
-    teste.logon()
-
+teste.logon()
+#teste.liquidacao()
+teste.teste()
