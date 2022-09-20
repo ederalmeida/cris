@@ -23,19 +23,10 @@ class documento():
         i = 0
         for i in range(0, len(documentos_inadimplentes)):
             
-            #if documentos_inadimplentes[i][0] not in relacao_concessoes:
-                # gerar log de erro
-            #    continue
-            
-            #if documentos_inadimplentes[i][0] not in relacao_clientes:
-                # gerar log de erro
-            #    continue
-
             documentos_inadimplentes[i] = documento()
-
             documentos_inadimplentes[i].concessao = dados_documentos[i][0]
             documentos_inadimplentes[i].cliente = dados_documentos[i][1]
-            documentos_inadimplentes[i].competencia = dados_documentos[i][2]
+            documentos_inadimplentes[i].competencia = dados_documentos[i][2].strftime('%Y%m')
             documentos_inadimplentes[i].vencimento = dados_documentos[i][3].strftime('%Y%m%d')
             documentos_inadimplentes[i].montante = dados_documentos[i][4]
 

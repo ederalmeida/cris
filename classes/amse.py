@@ -27,8 +27,10 @@ class amse_site():
         botao_ok_login = self.driver.find_element(By.ID, 'btnOk')
         botao_ok_login.click()
         self.driver.implicitly_wait(2)
-
-    def ir_para_liquidacao(self):
+        self.driver.switch_to.frame('PerfFoco')
+        Select(self.driver.find_element(By.ID,'drpDownSistema')).select_by_value('AMSE      ')
+        Select(self.driver.find_element(By.ID, 'ddwListaPerfis')).select_by_value('AMSE_AGETR - AMSE - Agentes de Transmissão                                                                       ')
+        self.driver.find_element(By.ID, 'ImageBtnConfirmar').click()
         self.driver.switch_to.frame('topFrame')
         self.driver.find_element(By.XPATH, '/html/body/form/div[3]/table/tbody/tr[5]/td/table/tbody/tr/td[2]/div').click()
         self.driver.implicitly_wait(1)
@@ -39,19 +41,20 @@ class amse_site():
         self.driver.execute_script("arguments[0].click();", button)
         self.driver.implicitly_wait(11)
 
-    def preencher_dados_liquidacao(self, cliente, competencia, vencimento):
+    def inserir_documento_inadimplente(self, documento):
+        Select(self.driver.find_element(By.ID, 'cmp_pesquisa_age_ddl_pesquisa')).select_by_visible_text(documento.concessao)
         campo_codigo_usuario = self.driver.find_element(By.NAME, 'txt_usuaria')
         campo_codigo_usuario.clear()
-        campo_codigo_usuario.send_keys(cliente)
+        campo_codigo_usuario.send_keys(documento.cliente)
         pg.press('enter')
         self.driver.implicitly_wait(2)
         campo_apuracao = self.driver.find_element(By.NAME, 'cbo_mes_ano_Apur')
         campo_apuracao_combo = Select(campo_apuracao)
-        campo_apuracao_combo.select_by_visible_text(competencia)
+        campo_apuracao_combo.select_by_value(documento.competencia)
         self.driver.implicitly_wait(6)
         campo_vencimento = self.driver.find_element(By.NAME, 'cbo_vencimento')
         campo_vencimento_combo = Select(campo_vencimento)
-        campo_vencimento_combo.select_by_value(vencimento)
+        campo_vencimento_combo.select_by_value(documento.vencimento)
         botao_pesquisar = self.driver.find_element(By.NAME, 'ibt_pesquisar')
         botao_pesquisar.click()
         time.sleep(5)

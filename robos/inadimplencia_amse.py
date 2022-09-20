@@ -15,14 +15,8 @@ def executar_robo(informacoes_janela_inadimplencia_amse):
     sistema_amse = amse.amse_site()
     sistema_amse.logon(informacoes_janela_inadimplencia_amse.get('login'), informacoes_janela_inadimplencia_amse.get('passwd'))
 
-    concessao_anterior = ''
-
     for documento in documentos_atrasados:
-        concessao_atual = documento.concessao
-        if concessao_atual != concessao_anterior:
-            sistema_amse.ir_para_liquidacao()
-            concessao_anterior = concessao_atual
-        sistema_amse.preencher_dados_liquidacao(documento.cliente, documento.competencia, documento.vencimento)
+        sistema_amse.inserir_documento_inadimplente(documento)
 
 
 

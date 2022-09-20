@@ -25,7 +25,6 @@ def obter(arquivo, ignorar=True):
         dados_linha = []
 
     dados_documentos_inadimplentes.sort()
-
     documentos_inadimplentes = di.documento.criar(dados_documentos_inadimplentes)
-
+    
     return documentos_inadimplentes
