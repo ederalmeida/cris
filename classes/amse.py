@@ -1,11 +1,12 @@
+import os
+import time
+import pyautogui as pg
+import PySimpleGUI as sg
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.by import By
-import os
-import time
-import pyautogui as pg
-
+from selenium.webdriver.common.alert import Alert
 
 class amse_site():
     def __init__ (self):
@@ -20,12 +21,9 @@ class amse_site():
         self.imagem_codigo_usuario = self.dir_path + '/imagens/amse_codigo_usuario.png'
 
     def logon(self, login_informado, passwd_informado):
-        login = self.driver.find_element(By.ID, 'txtLogin')
-        login.send_keys(login_informado)
-        passwd = self.driver.find_element(By.ID, 'txtSenha')
-        passwd.send_keys(passwd_informado)
-        botao_ok_login = self.driver.find_element(By.ID, 'btnOk')
-        botao_ok_login.click()
+        self.driver.find_element(By.ID, 'txtLogin').send_keys(login_informado)  # preenchendo login
+        self.driver.find_element(By.ID, 'txtSenha').send_keys(passwd_informado) # preenchendo senha
+        self.driver.find_element(By.ID, 'btnOk').click()                        # clicando ok
         self.driver.implicitly_wait(2)
         self.driver.switch_to.frame('PerfFoco')
         Select(self.driver.find_element(By.ID,'drpDownSistema')).select_by_value('AMSE      ')
@@ -43,29 +41,13 @@ class amse_site():
 
     def inserir_documento_inadimplente(self, documento):
         Select(self.driver.find_element(By.ID, 'cmp_pesquisa_age_ddl_pesquisa')).select_by_visible_text(documento.concessao)
-        campo_codigo_usuario = self.driver.find_element(By.NAME, 'txt_usuaria')
-        campo_codigo_usuario.clear()
-        campo_codigo_usuario.send_keys(documento.cliente)
+        campo_cliente = self.driver.find_element(By.NAME, 'txt_usuaria')
+        campo_cliente.clear()
+        campo_cliente.send_keys(documento.cliente)
         pg.press('enter')
         self.driver.implicitly_wait(2)
-        campo_apuracao = self.driver.find_element(By.NAME, 'cbo_mes_ano_Apur')
-        campo_apuracao_combo = Select(campo_apuracao)
-        campo_apuracao_combo.select_by_value(documento.competencia)
+        Select(self.driver.find_element(By.NAME, 'cbo_mes_ano_Apur')).select_by_value(documento.competencia)
         self.driver.implicitly_wait(6)
-        campo_vencimento = self.driver.find_element(By.NAME, 'cbo_vencimento')
-        campo_vencimento_combo = Select(campo_vencimento)
-        campo_vencimento_combo.select_by_value(documento.vencimento)
-        botao_pesquisar = self.driver.find_element(By.NAME, 'ibt_pesquisar')
-        botao_pesquisar.click()
+        Select(self.driver.find_element(By.NAME, 'cbo_vencimento')).select_by_value(documento.vencimento)
+        self.driver.find_element(By.NAME, 'ibt_pesquisar').click()
         time.sleep(5)
-
-        
-    def liquidacao_antiga(self):
-        localizacao_botao_liquidacao = pg.locateOnScreen(self.imagem_liquidacao, confidence=0.7)
-        if localizacao_botao_liquidacao != None:
-            pg.click(x=localizacao_botao_liquidacao[0] + 5, y=localizacao_botao_liquidacao[1] + 5)
-        time.sleep(1)
-        localizacao_botao_informacao = pg.locateOnScreen(self.imagem_informacao, confidence=0.7)
-        if localizacao_botao_informacao != None:
-            pg.click(x=localizacao_botao_informacao[0] + 5, y=localizacao_botao_informacao[1] + 5)
-        time.sleep(10)

@@ -1,9 +1,7 @@
-from cmath import inf
-from logging import info
+import PySimpleGUI as sg
 from classes import amse
-from janelas import janela_abertura as abertura
+from janelas import janela_inadimplencia_amse as jia
 from apoio import obter_arquivo_inadimplencia_amse as oaia
-from classes import documentos_inadimplente as di
 
 
 def executar_robo(informacoes_janela_inadimplencia_amse):
@@ -18,5 +16,6 @@ def executar_robo(informacoes_janela_inadimplencia_amse):
     for documento in documentos_atrasados:
         sistema_amse.inserir_documento_inadimplente(documento)
 
+    sg.popup('cadastro de inadimplência efetuado com sucesso!')
 
-
+    jia.exibir()
