@@ -1,4 +1,5 @@
 import datetime
+from apoio import obter_informacoes_csv as oic
 
 class documento():
 
@@ -24,7 +25,10 @@ class documento():
         for i in range(0, len(documentos_inadimplentes)):
             
             documentos_inadimplentes[i] = documento()
-            documentos_inadimplentes[i].concessao = dados_documentos[i][0]
+
+            dados_concessoes = oic.obter('\\tabelas\\de_para_atribuicao_concessao.csv')
+
+            documentos_inadimplentes[i].concessao = dados_concessoes.get(dados_documentos[i][0])
             documentos_inadimplentes[i].cliente = dados_documentos[i][1]
             documentos_inadimplentes[i].competencia = dados_documentos[i][2].strftime('%Y%m')
             documentos_inadimplentes[i].vencimento = dados_documentos[i][3].strftime('%Y%m%d')

@@ -14,6 +14,7 @@ def executar_robo(informacoes_janela_inadimplencia_amse):
     sistema_amse.logon(informacoes_janela_inadimplencia_amse.get('login'), informacoes_janela_inadimplencia_amse.get('passwd'))
 
     for documento in documentos_atrasados:
+        # TODO - criar ação para caso não exista concessão na tabela de DE-PARA
         sistema_amse.inserir_documento_inadimplente(documento)
 
     sg.popup('cadastro de inadimplência efetuado com sucesso!')
