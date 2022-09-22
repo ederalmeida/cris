@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 from imagens import imagens_base64 as imgs
-from janelas import janela_avd_j1b1n, janela_fagll03, janela_fbl1n, janela_fbl3n, janela_fbl5n, janela_kob1, janela_inadimplencia_amse
+from janelas import janela_avd_j1b1n, janela_fagll03, janela_fbl1n, janela_fbl3n, janela_fbl5n, janela_kob1,\
+     janela_inadimplencia_amse, janela_zfw100
 from apoio import versao_atual as versao
 import sys
 
@@ -21,8 +22,11 @@ def exibir():
                           ]])],
                        [sg.Text('')],
                        [sg.Frame('TESOURARIA',
-                        [[sg.Button('ONS AMSE', size=(10,1), key='-INADIMPLENCIA_AMSE-')]], size=(397, 50))],
+                        [[sg.Button('ONS AMSE', size=(10,1), key='-INADIMPLENCIA_AMSE-'),
+                         sg.Button('ZWF100', size=(10,1), key='-ZWF100-')]], size=(397, 50))],
                        [sg.Text('')],
+                       [sg.Frame('TRIBUTARIO',
+                        [[sg.Button('ZMD_DIRF', size=(10,1), key='-ZMD_DIRF-')]], size=(397, 50))],
                        [sg.Text(versao.v, size=(10,1), justification='center', font=("Helvetica", 7))]
                       ]               
 
@@ -65,6 +69,10 @@ def exibir():
         if event == '-INADIMPLENCIA_AMSE-':
             janela.close()
             janela_inadimplencia_amse.exibir()
+
+        if event == '-ZWF100-':
+            janela.close()
+            janela_zfw100.exibir()
 
         else:
             continue
