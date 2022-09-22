@@ -7,7 +7,6 @@ from apoio import obter_relacao_contas as orc
 from apoio import verifica_janelas as vj
 from apoio import verifica_cria_subpastas as vcs
 from apoio import obter_relacao_sociedades_parceiras as orsp
-from janelas import janela_fagll03 as ja
 from janelas import janela_abertura as abertura
 from classes import sapgui
 

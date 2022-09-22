@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 from imagens import imagens_base64 as imgs
 from janelas import janela_avd_j1b1n, janela_fagll03, janela_fbl1n, janela_fbl3n, janela_fbl5n, janela_kob1,\
-     janela_inadimplencia_amse, janela_zfw100
+     janela_inadimplencia_amse, janela_zwf100
 from apoio import versao_atual as versao
 import sys
 
@@ -72,7 +72,7 @@ def exibir():
 
         if event == '-ZWF100-':
             janela.close()
-            janela_zfw100.exibir()
+            janela_zwf100.exibir()
 
         else:
             continue
