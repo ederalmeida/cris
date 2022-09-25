@@ -1,5 +1,7 @@
+from cmath import inf
 import PySimpleGUI as sg
-#from janelas import janela_abertura as ja
+from janelas import janela_abertura as ja
+from robos import zwf100
 
 def exibir():
     sg.theme('Reddit')
@@ -12,11 +14,11 @@ def exibir():
                        [sg.Text(' ', font=("Helvetica", 2))],
                       [sg.Text('Fornecedor', size=(8, 1), key='-TXT_FORNECEDOR-'), sg.InputText('', size=(16,1), key='-FORNECEDOR-', enable_events=True)]]
 
-    linha1_coluna2 = [[sg.Frame('Data Contabilização',
-               [[sg.Text('De', size=(5, 1), key='-DATA_CONT_DE_TEXTO-'),
-                sg.InputText('', size=(13,1), key='-DATA_CONT_DE-', enable_events=True)],
-               [sg.Text('Até', size=(5, 1), key='-DATA_CONT_ATE_TEXTO-'),
-                sg.InputText('', size=(13,1), key='-DATA_CONT_ATE-', enable_events=True)]])]]
+    linha1_coluna2 = [[sg.Frame('Data Compensação',
+               [[sg.Text('De', size=(5, 1), key='-DATA_COMP_DE_TEXTO-'),
+                sg.InputText('', size=(13,1), key='-DATA_COMP_DE-', enable_events=True)],
+               [sg.Text('Até', size=(5, 1), key='-DATA_COMP_ATE_TEXTO-'),
+                sg.InputText('', size=(13,1), key='-DATA_COMP_ATE-', enable_events=True)]])]]
 
     linha2 = [sg.Text('_'  * 70, size=(48, 1))]
 
@@ -43,11 +45,17 @@ def exibir():
                 sg.popup('Favor inserir um Company Code!', title='Erro')
             elif values['-FORNECEDOR-'] == '':
                 sg.popup('Favor inserir cód. SAP para o fornecedor', title='Erro')
-            elif values['-DATA_CONT_DE-'] == '':
+            elif values['-DATA_COMP_DE-'] == '':
                 sg.popup('Favor inserir data de início', title='Erro')
-            elif values['-DATA_CONT_ATE-'] == '':
+            elif values['-DATA_COMP_ATE-'] == '':
                 sg.popup('Favor inserir data de fim', title='Erro')
             else:
-                pass
-
-exibir()
+                janela.close()
+                informacoes_zwf100 = {
+                    'empresa': values['-COMPANY_CODE-'],
+                    'pasta': values['-PASTA-'],
+                    'fornecedor': values['-FORNECEDOR-'],
+                    'data_comp_de': values['-DATA_COMP_DE-'],
+                    'data_comp_ate': values['-DATA_COMP_ATE-']
+                }
+                zwf100.executar_robo(informacoes_zwf100)
