@@ -25,6 +25,7 @@ def obter(arquivo, ignorar=True):
         
         for coluna in range(1, ultima_coluna + 1):
             dados_linha.append(aba.cell(row=linha, column=coluna).value)
+            
         dados_documentos_inadimplentes.append(dados_linha)
         dados_linha = []
 
