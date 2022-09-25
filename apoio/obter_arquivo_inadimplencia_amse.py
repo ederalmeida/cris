@@ -20,16 +20,16 @@ def obter(arquivo, ignorar=True):
         pular_primeira_linha = 0
 
     for linha in range(1 + pular_primeira_linha, ultima_linha + 1):
-        if aba.cell(row=linha, column=1) == '':
+        if aba.cell(row=linha, column=1).value == None :
             break
         
         for coluna in range(1, ultima_coluna + 1):
             dados_linha.append(aba.cell(row=linha, column=coluna).value)
-            
+
         dados_documentos_inadimplentes.append(dados_linha)
         dados_linha = []
 
-    if dados_documentos_inadimplentes != '':
+    if len(dados_documentos_inadimplentes) != 0:
         dados_documentos_inadimplentes.sort()
         documentos_inadimplentes = di.documento.criar(dados_documentos_inadimplentes)
     else:
