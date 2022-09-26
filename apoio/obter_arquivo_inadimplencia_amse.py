@@ -19,6 +19,7 @@ def obter(arquivo, ignorar=True):
         pular_primeira_linha = 0
 
     for linha in range(1 + pular_primeira_linha, ultima_linha + 1):
+        dados_linha.append(linha)
         for coluna in range(1, ultima_coluna + 1):
             dados_linha.append(aba.cell(row=linha, column=coluna).value)
         dados_documentos_inadimplentes.append(dados_linha)
