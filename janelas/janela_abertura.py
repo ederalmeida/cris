@@ -23,10 +23,10 @@ def exibir():
                        [sg.Text('')],
                        [sg.Frame('TESOURARIA',
                         [[sg.Button('ONS AMSE', size=(10,1), key='-INADIMPLENCIA_AMSE-'),
-                         sg.Button('ZWF100', size=(10,1), key='-ZWF100-')]], size=(435, 62))],
+                         sg.Button('ZWF100', size=(10,1), key='-ZWF100-')]], size=(400, 57))],
                        [sg.Text('')],
                        [sg.Frame('TRIBUTARIO',
-                        [[sg.Button('ZMD_DIRF', size=(10,1), key='-ZMD_DIRF-')]], size=(435, 62))],
+                        [[sg.Button('ZMD_DIRF', size=(10,1), key='-ZMD_DIRF-')]], size=(400, 57))],
                        [sg.Text('')],
                        [sg.Text(versao.v, size=(10,1), justification='center', font=("Helvetica", 7))]
                       ]               

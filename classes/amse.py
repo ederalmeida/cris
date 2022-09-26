@@ -25,6 +25,16 @@ class amse_site():
         self.driver.find_element(By.ID, 'txtSenha').send_keys(passwd_informado) # preenchendo senha
         self.driver.find_element(By.ID, 'btnOk').click()                        # clicando ok
         self.driver.implicitly_wait(2)
+        # TODO essa parte do try não está legal. Precisa ser melhorada.
+        try:
+            alerta_autenticacao = Alert(self.driver)
+            sg.popup(alerta_autenticacao.text)
+            alerta_autenticacao.accept()
+            self.driver.close()
+            return False
+        except:
+            pass
+
         self.driver.switch_to.frame('PerfFoco')
         Select(self.driver.find_element(By.ID,'drpDownSistema')).select_by_value('AMSE      ')
         Select(self.driver.find_element(By.ID, 'ddwListaPerfis')).select_by_value('AMSE_AGETR - AMSE - Agentes de Transmissão                                                                       ')
@@ -37,7 +47,8 @@ class amse_site():
         self.driver.implicitly_wait(1)
         button = self.driver.find_element(By.XPATH, '//*[@id="mni_2592"]')
         self.driver.execute_script("arguments[0].click();", button)
-        self.driver.implicitly_wait(11)
+        self.driver.implicitly_wait(1)
+        return True
 
     def inserir_documento_inadimplente(self, documento):
         Select(self.driver.find_element(By.ID, 'cmp_pesquisa_age_ddl_pesquisa')).select_by_visible_text(documento.concessao)
@@ -45,10 +56,17 @@ class amse_site():
         campo_cliente.clear()
         campo_cliente.send_keys(documento.cliente)
         self.driver.find_element(By.ID, 'cmp_pesquisa_age_ibt_lupapesquisa').click()
-        #pg.press('enter')
-        self.driver.implicitly_wait(2)
         Select(self.driver.find_element(By.NAME, 'cbo_mes_ano_Apur')).select_by_value(documento.competencia)
-        self.driver.implicitly_wait(6)
+        self.driver.implicitly_wait(1)
         Select(self.driver.find_element(By.NAME, 'cbo_vencimento')).select_by_value(documento.vencimento)
         self.driver.find_element(By.NAME, 'ibt_pesquisar').click()
-        time.sleep(5)
+        self.driver.find_element(By.ID, 'grdLiquidacao__ctl2_chk_pagou').click()
+        Select(self.driver.find_element(By.ID,'grdLiquidacao__ctl2_ddl_tpocorr')).select_by_value('2')
+        self.driver.find_element(By.ID, 'imgAtualizar').click()
+        self.driver.find_element(By.ID, 'ibtAdimpTotal').click()
+        alerta_sucesso = Alert(self.driver)
+        alerta_sucesso.accept()
+        self.driver.implicitly_wait(1)
+
+    def logoff():
+        self.driver.close()
