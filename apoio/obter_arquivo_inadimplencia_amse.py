@@ -20,13 +20,11 @@ def obter(arquivo, ignorar=True):
         pular_primeira_linha = 0
 
     for linha in range(1 + pular_primeira_linha, ultima_linha + 1):
-<<<<<<< HEAD
         dados_linha.append(linha)
-=======
+       
         if aba.cell(row=linha, column=1).value == None :
             break
         
->>>>>>> 939958924149951706357c726a49784e95d8f486
         for coluna in range(1, ultima_coluna + 1):
             dados_linha.append(aba.cell(row=linha, column=coluna).value)
 
