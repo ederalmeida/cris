@@ -68,5 +68,5 @@ class amse_site():
         alerta_sucesso.accept()
         self.driver.implicitly_wait(1)
 
-    def logoff():
+    def logoff(self):
         self.driver.close()
