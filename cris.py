@@ -1,7 +1,6 @@
 from janelas import janela_abertura as ja
 #import logging
  
-#if __name__ == '__main__':
 while True:
     #logging.basicConfig(filename='log_file.txt', \
     #                    level=logging.DEBUG,\
