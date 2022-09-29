@@ -14,6 +14,8 @@ def obter(arquivo, ignorar=True):
 
     dados_documentos_inadimplentes = []
 
+    erro_encontrado = False
+
     if ignorar:
         pular_primeira_linha = 1
     else:
@@ -22,19 +24,28 @@ def obter(arquivo, ignorar=True):
     for linha in range(1 + pular_primeira_linha, ultima_linha + 1):
         dados_linha.append(linha)
        
-        if aba.cell(row=linha, column=1).value == None :
-            break
-        
         for coluna in range(1, ultima_coluna + 1):
-            dados_linha.append(aba.cell(row=linha, column=coluna).value)
+            if aba.cell(row=linha, column=coluna).value == None or \
+               aba.cell(row=linha, column=1).value == ' ' or \
+               aba.cell(row=linha, column=1).value == '':
+                pg.popup('Arquivo excel com dados faltando.\n\nFavor verificar linha ' + str(linha))
+                erro_encontrado = True
+                break
+            else:
+                dados_linha.append(aba.cell(row=linha, column=coluna).value)
 
         dados_documentos_inadimplentes.append(dados_linha)
         dados_linha = []
 
+    if erro_encontrado:
+        return None
+
     if len(dados_documentos_inadimplentes) != 0:
         dados_documentos_inadimplentes.sort()
         documentos_inadimplentes = di.documento.criar(dados_documentos_inadimplentes)
+        return documentos_inadimplentes
     else:
         pg.popup('Arquivo excel sem dados. Favor verificar')
+        return None
 
-    return documentos_inadimplentes
+    

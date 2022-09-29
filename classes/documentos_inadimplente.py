@@ -21,13 +21,12 @@ class documento():
         #relacao_clientes =[]
         
         documentos_inadimplentes = ['documento_inadimplente' + str(i) for i in range(0, len(dados_documentos))]
+        dados_concessoes = oic.obter('\\tabelas\\de_para_atribuicao_concessao.csv')
 
         i = 0
         for i in range(0, len(documentos_inadimplentes)):
             
             documentos_inadimplentes[i] = documento()
-
-            dados_concessoes = oic.obter('\\tabelas\\de_para_atribuicao_concessao.csv')
             documentos_inadimplentes[i].linha = dados_documentos[i][0]
             documentos_inadimplentes[i].concessao = dados_concessoes.get(dados_documentos[i][1])
             documentos_inadimplentes[i].cliente = dados_documentos[i][2]
