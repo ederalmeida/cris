@@ -115,27 +115,35 @@ def executar_robo(informacoes_janela_fagll03):
         # Se a relação de sociedades parceiras for diferente de vazio, executa o filtro
         if primeira_execucao:
             
-            if sociedades_parceiras != '':
-                sap.session.findById("wnd[0]/tbar[1]/btn[25]").press()
-                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").expandNode('         44')
-                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").selectNode('         61')
-                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[1]/shell").pressButton('TAKE')
-                sap.session.findById("wnd[0]/usr/btn%_%%DYN001_%_APP_%-VALU_PUSH").press()
-                for sociedade in sociedades_parceiras:
-                    sap.session.findById("wnd[1]/tbar[0]/btn[13]").press()
-                    sap.session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]").text = sociedade
-                screenSociedadeParceira = pag.screenshot()
-                sap.session.findById("wnd[1]/tbar[0]/btn[8]").press()
-            if data_efetiva_1 != '':
-                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").expandNode('         22')
-                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").selectNode('         40')
-                #sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").topNode('          1')
-                sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").doubleClickNode('         40')
-                sap.session.findById("wnd[0]/usr/ctxt%%DYN001-LOW").text = data_efetiva_1
-                sap.session.findById("wnd[0]/usr/ctxt%%DYN001-HIGH").text = data_efetiva_2
-                screenDataEfetiva = pag.screenshot()
-                
             if sociedades_parceiras != '' or data_efetiva_1 != '':
+                sap.session.findById("wnd[0]/tbar[1]/btn[25]").press()
+            
+                if sociedades_parceiras != '':
+                    
+                    sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").expandNode('         44')
+                    sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").selectNode('         61')
+                    sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[1]/shell").pressButton('TAKE')
+                    sap.session.findById("wnd[0]/usr/btn%_%%DYN001_%_APP_%-VALU_PUSH").press()
+                    total_sociedade_parceiras = len(sociedades_parceiras)
+                    contador_de_sociedade_parceiras_inseridas = 0
+                    screenSociedadeParceira = []
+                    numero_do_print_sociedade_parceira_tirado = 0
+                    for sociedade in sociedades_parceiras:
+                        sap.session.findById("wnd[1]/tbar[0]/btn[13]").press()
+                        sap.session.findById("wnd[1]/usr/tabsTAB_STRIP/tabpSIVA/ssubSCREEN_HEADER:SAPLALDB:3010/tblSAPLALDBSINGLE/ctxtRSCSEL_255-SLOW_I[1,0]").text = sociedade
+                        contador_de_sociedade_parceiras_inseridas += 1
+                        if (contador_de_sociedade_parceiras_inseridas % 7 == 0) or contador_de_sociedade_parceiras_inseridas == total_sociedade_parceiras:
+                            numero_do_print_sociedade_parceira_tirado += 1
+                            screenSociedadeParceira.append([numero_do_print_sociedade_parceira_tirado, pag.screenshot()])
+                    sap.session.findById("wnd[1]/tbar[0]/btn[8]").press()
+                if data_efetiva_1 != '':
+                    sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").expandNode('         22')
+                    sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").selectNode('         40')
+                    sap.session.findById("wnd[0]/shellcont/shellcont/shell/shellcont[0]/shell").doubleClickNode('         40')
+                    sap.session.findById("wnd[0]/usr/ctxt%%DYN001-LOW").text = data_efetiva_1
+                    sap.session.findById("wnd[0]/usr/ctxt%%DYN001-HIGH").text = data_efetiva_2
+                    screenDataEfetiva = pag.screenshot()
+                
                 sap.session.findById("wnd[0]/tbar[0]/btn[11]").press()
                 
         primeira_execucao = False
@@ -172,13 +180,15 @@ def executar_robo(informacoes_janela_fagll03):
             time.sleep(1)
             screenExecucao = pag.screenshot()
             # Salvando os prints tirados
+            # TODO Código repetido, dá para refatorar
             screenParametrizacao.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
                 data_execucao + ' - FAGLL03 - ' + tipo_de_partidas+ ' - ' + ledger + ' - 01 parametrizacao.jpg')
             screenExecucao.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
                 data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 02 resultados.jpg')
             if sociedades_parceiras != '':
-                screenSociedadeParceira.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
-                data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03 sociedade_parceira.jpg')
+                for screen in screenSociedadeParceira:
+                    screen[1].save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
+                    data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03.' + str(screen[0]) + ' sociedade_parceira.jpg')
             if data_efetiva_1 != '':
                 screenDataEfetiva.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
                 data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 04 data_efetiva.jpg')
@@ -255,8 +265,9 @@ def executar_robo(informacoes_janela_fagll03):
         screenExecucao.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
             data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 02 resultados.jpg')
         if sociedades_parceiras != '':
-            screenSociedadeParceira.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
-            data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03 sociedade_parceira.jpg')
+            for screen in screenSociedadeParceira:
+                screen[1].save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
+                data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 03.' + str(screen[0]) + ' sociedade_parceira.jpg')
         if data_efetiva_1 != '':
             screenDataEfetiva.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + mes_referencia + ' - ' + conta +  ' - ' + \
             data_execucao + ' - FAGLL03 - ' + tipo_de_partidas + ' - ' + ledger + ' - 04 data_efetiva.jpg')
