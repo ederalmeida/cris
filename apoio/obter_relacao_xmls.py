@@ -14,7 +14,7 @@ def obter_relacao_xmls(caminho):
     for objeto in listar_objetos_diretorio:
         
         # se o final do arquivo for .xml adiciona na lista
-        if objeto[-4:] == '.xml':
+        if objeto[-4:].lower() == '.xml':
             enderecos_arquivos_xml.append([caminho, objeto])
 
     # Se a lista não for vazia, retorna a lista

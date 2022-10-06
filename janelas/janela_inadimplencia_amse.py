@@ -17,11 +17,9 @@ def exibir():
     linha2 = [sg.Text(' ', font=("Helvetica", 2))]
 
     linha3_coluna1 = [[sg.Frame('Cadastros',
-                       [[sg.Button('Cadastrar Concessões', key='-CADASTRAR_CONCESSOES-', size=(21,1), enable_events=True)],
-                        [sg.Text(' ', size=(21,1), font=("Helvetica", 2))],
-                        [sg.Button('Cadastrar Clientes', key='-CADASTRAR_CLIENTES-', size=(21,1), enable_events=True)],
-                        [sg.Text(' ', size=(21,1), font=("Helvetica", 2))]],
-                        size=(215, 107), element_justification="center")]]
+                       [[sg.Button('Cadastrar Concessões', key='-CADASTRAR_CONCESSOES-', size=(21,1), enable_events=True)]],size=(215, 50))],
+                      [sg.Frame('Navegadores',
+                       [[sg.Combo(('Google Chrome', 'Microsoft Edge', 'Firerox'), default_value='Google Chrome', size=(25,1), key='-NAVEGADOR-')]], size=(215, 50))]]
 
     linha3_coluna2 = [[sg.Frame('Dados Usuário',
                       [[sg.Text('Login', size=(5, 1), key='-TEXTO_LOGIN_ONS_AMSE-'),
@@ -70,7 +68,8 @@ def exibir():
                     'arquivo_inadimplencia': values['-ARQUIVO_INADIMPLENCIA-'],
                     'ignorar_primeira_linha': values['-IGNORAR_PRIMEIRA_LINHA-'],
                     'login': values['-LOGIN_ONS_AMSE-'],
-                    'passwd': values['-SENHA_ONS_AMSE-']
+                    'passwd': values['-SENHA_ONS_AMSE-'],
+                    'navegador': values['-NAVEGADOR-']
                 }
                 
                 janela.close()

@@ -108,33 +108,3 @@ class NFe():
                 NFes[i].itens = itens
         
         return NFes
-
-    def exibir(self):
-        print('')
-        print('==========================================================')
-        print('Dados NFe:')
-        print('==========================================================')
-        print('CNPJ Emitente: ', self.CNPJ)
-        print('ID SAP: ', self.id_sap)
-        print('Numero NF: ', self.nNF)
-        print('Serie NFe: ', self.serie)
-        print('Chave NFe: ', self.chNFe)
-        print('Tipo Emissão: ', self.tipo_emissao)
-        print('Data Emissao: ', self.data_emissao)
-        print('Data processamento: ', self.data_processamento)
-        print('Hora processamento: ', self.hora_processamento)
-        print('Número Aleatório: ', self.numero_aleatorio)
-        print('Dígito verificador: ', self.digito_verificador)   
-        print('nProt(?): ', self.nProt)
-        for i in range(0,len(self.itens )):
-            print('Item: ', self.itens[i][0] )
-            print('     NCM: ', self.itens[i][1] )
-            print('     qCom: ', self.itens[i][2] )
-            print('     vUnCom: ', self.itens[i][3] )
-            print('     vProd: ', self.itens[i][4] )
-        print('Caminho: ', self.caminho)
-        print('==========================================================')
-        print('')
-
-
-
