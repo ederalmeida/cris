@@ -7,5 +7,4 @@ pillow
 untangle
 selenium
 webdriver-manager
-pandas
 openpyxl

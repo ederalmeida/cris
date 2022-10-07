@@ -7,7 +7,7 @@ def obter():
 
     parametros = {}
 
-    with open(path_atual + '\\tabelas\\parametrizacao_avd_j1b1n.csv', encoding='utf-8') as arquivo:
+    with open(path_atual + '\\tabelas\\parametrizacao_avd_j1b1n.csv', encoding='ISO-8859-1') as arquivo:
 
         tabela = csv.reader(arquivo, delimiter=';')
 
@@ -24,7 +24,7 @@ def salvar(parametros_salvos):
 
     csv.register_dialect("pv", delimiter=";")
 
-    with open(path_atual + '\\tabelas\\parametrizacao_avd_j1b1n.csv', 'w',  newline='') as arquivo:
+    with open(path_atual + '\\tabelas\\parametrizacao_avd_j1b1n.csv', 'w', encoding='ISO-8859-1', newline='') as arquivo:
         escrever = csv.writer(arquivo, dialect='pv')
         for parametro, valor in parametros_salvos.items():
             escrever.writerow((parametro, valor))
