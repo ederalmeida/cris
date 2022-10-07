@@ -89,8 +89,8 @@ class NFe():
                                 (xml.nfeProc.NFe.infNFe.det.prod.NCM.cdata[0:4] + '.' + \
                                     xml.nfeProc.NFe.infNFe.det.prod.NCM.cdata[4:6] + '.' + \
                                     xml.nfeProc.NFe.infNFe.det.prod.NCM.cdata[6:8]),
-                                int(float(xml.nfeProc.NFe.infNFe.det.prod.qCom.cdata)),
-                                str(round(float(xml.nfeProc.NFe.infNFe.det.prod.vUnCom.cdata), 4)).replace('.',','),
+                                str(round(float(xml.nfeProc.NFe.infNFe.det.prod.qCom.cdata),2)).replace('.',','),
+                                str(round(float(xml.nfeProc.NFe.infNFe.det.prod.vUnCom.cdata), 6)).replace('.',','),
                                 str(round(float(xml.nfeProc.NFe.infNFe.det.prod.vProd.cdata), 2)).replace('.',',')]]
             
             if type(xml.nfeProc.NFe.infNFe.det) == list:
@@ -101,8 +101,8 @@ class NFe():
                                 (xml.nfeProc.NFe.infNFe.det[l].prod.NCM.cdata[0:4] + '.' + \
                                     xml.nfeProc.NFe.infNFe.det[l].prod.NCM.cdata[4:6] + '.' + \
                                     xml.nfeProc.NFe.infNFe.det[l].prod.NCM.cdata[6:8]),
-                                int(float(xml.nfeProc.NFe.infNFe.det[l].prod.qCom.cdata)),
-                                str(round(float(xml.nfeProc.NFe.infNFe.det[l].prod.vUnCom.cdata), 4)).replace('.',','),
+                                str(round(float(xml.nfeProc.NFe.infNFe.det[l].prod.qCom.cdata),2)).replace('.',','),
+                                str(round(float(xml.nfeProc.NFe.infNFe.det[l].prod.vUnCom.cdata), 6)).replace('.',','),
                                 str(round(float(xml.nfeProc.NFe.infNFe.det[l].prod.vProd.cdata), 2)).replace('.',',')])
                     l += 1
                 NFes[i].itens = itens
