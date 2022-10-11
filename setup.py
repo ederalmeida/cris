@@ -5,10 +5,13 @@ build_exe_options = {
 "include_msvcr": True
 }
 
-exe = [cx_Freeze.Executable("cris.py", base = "Win32GUI",
-        target_name = "cris.exe")]
-cx_Freeze.setup(
-    name = "cris",
-    options = {"build_exe": build_exe_options},
-    executables = exe
+exe = [cx_Freeze.Executable("cris.py",
+                            base = "Win32GUI",
+                            target_name = "cris.exe",
+                            icon='cris.ico')]
+
+cx_Freeze.setup(name = "cris",
+                version=versao.v,
+                options = {"build_exe": build_exe_options},
+                executables = exe
 )
