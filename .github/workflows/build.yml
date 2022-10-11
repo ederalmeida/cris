@@ -55,7 +55,7 @@ jobs:
           - os: windows-latest
             TARGET: windows
             CMD_BUILD: python setup.py build
-            OUT_FILE_NAME: CRIS_
+            OUT_FILE_NAME: cris
             ASSET_MIME: application/vnd.microsoft.portable-executable
 
     steps:
