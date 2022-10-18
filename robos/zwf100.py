@@ -10,6 +10,9 @@ def executar_robo(informacoes_janela_zwf100):
     # Captura da data e hora para inserção no nome dos relatórios e dos prints
     data_execucao = datetime.now().strftime('%Y-%m-%d %H-%M-%S')
 
+    # Competencia - Baseada na data_comp_de, que vem da janela da transação
+    competencia = str(informacoes_janela_zwf100.get('data_comp_de')[4:]) + str(informacoes_janela_zwf100.get('data_comp_de')[2:4])
+
     # Verificando se existe a subpasta para salvar as informações geradas. Se não existir, cria.
     caminho_pasta_salvar_ipes = vcs.verifica_cria_subpastas(informacoes_janela_zwf100.get('pasta'),\
                                                             informacoes_janela_zwf100.get('fornecedor'))
@@ -64,13 +67,13 @@ def executar_robo(informacoes_janela_zwf100):
     sap.session.findById("wnd[0]/usr/cntlCCTR_9000/shellcont/shell").selectContextMenuItem("&XXL")
     sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
     sap.session.findById("wnd[1]/usr/ctxtDY_PATH").text = caminho_pasta_salvar_ipes + '/relatorios'
-    sap.session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = ('ZWF100 - ' + fornecedor +  ' - ' + data_execucao + '.xlsx')
+    sap.session.findById("wnd[1]/usr/ctxtDY_FILENAME").text = ('ZWF100 - ' + competencia + ' - ' + fornecedor +  ' - ' + data_execucao + '.xlsx')
     sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
 
     # Salvando os prints
-    screenParametrizacao.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\ZWF100 - ' + fornecedor +  ' - ' + data_execucao + ' - 01 parametrizacao.jpg')
-    screen_topo_relatorio.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\ZWF100 - ' + fornecedor +  ' - ' + data_execucao + ' - 02 topo_relatorio.jpg')
-    screen_total_relatorio.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\ZWF100 - ' + fornecedor +  ' - ' + data_execucao + ' - 03 total_relatorio.jpg')
+    screenParametrizacao.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\ZWF100 - ' + competencia + ' - ' + fornecedor +  ' - ' + data_execucao + ' - 01 parametrizacao.jpg')
+    screen_topo_relatorio.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\ZWF100 - ' + competencia + ' - ' + fornecedor +  ' - ' + data_execucao + ' - 02 topo_relatorio.jpg')
+    screen_total_relatorio.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\ZWF100 - ' + competencia + ' - ' + fornecedor +  ' - ' + data_execucao + ' - 03 total_relatorio.jpg')
 
     sg.popup('Execução efetuada com sucesso')
     jzwf.exibir()
