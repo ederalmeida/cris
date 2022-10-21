@@ -42,11 +42,25 @@ def executar_robo(informacoes_janela_zwf100):
     sap.session.findById("wnd[0]/usr/ctxtS_AUGDT-LOW").text = informacoes_janela_zwf100.get('data_comp_de')
     sap.session.findById("wnd[0]/usr/ctxtS_AUGDT-HIGH").text = informacoes_janela_zwf100.get('data_comp_ate')
     sap.session.findById("wnd[0]/usr/ctxtS_LIFNR-LOW").text = fornecedor
-    sap.session.findById("wnd[0]/usr/ctxtS_LIFNR-HIGH").setFocus()
-    sap.session.findById("wnd[0]/usr/ctxtS_LIFNR-HIGH").caretPosition = 0
+
+    # Abrindo tela de status para confirmar ambiente
+    sap.session.findById("wnd[0]/mbar/menu[3]/menu[11]").select()
+        
+    # colocando a tela de informação para o lado para não cobrir as informações geradas
+    time.sleep(1)
+    pag.press('alt')
+    pag.press('m')
+    for i in range(0, 11):
+        pag.press('right', presses=10)
+        time.sleep(0.5)
+    pag.click()
+    i = 0
 
     # tirando print da parametrização
     screenParametrizacao = pg.screenshot()
+
+    # fechando a tela de status
+    sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
 
     sap.session.findById("wnd[0]/tbar[1]/btn[8]").press()
     sap.session.findById("wnd[0]/usr/cntlCCTR_9000/shellcont/shell").selectColumn("WRBTR")
