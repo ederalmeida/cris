@@ -2,7 +2,7 @@ import PySimpleGUI as sg
 from imagens import imagens_base64 as imgs
 from janelas import janela_avd_j1b1n, janela_fagll03, janela_fbl1n, janela_fbl3n, janela_fbl5n, janela_kob1,\
      janela_inadimplencia_amse, janela_zwf100
-from apoio import versao_atual as versao
+from apoio import versao_local as vl
 import sys
 
 def exibir():
@@ -28,7 +28,7 @@ def exibir():
                        [sg.Frame('TRIBUTARIO',
                         [[sg.Button('ZMD_DIRF', size=(10,1), key='-ZMD_DIRF-')]], size=(400, 57))],
                        [sg.Text('')],
-                       [sg.Text(versao.v, size=(10,1), justification='center', font=("Helvetica", 7))]
+                       [sg.Text(vl.v, size=(10,1), justification='center', font=("Helvetica", 7))]
                       ]               
 
     coluna_direita = [[sg.Image(data=imgs.logo_x_base64, size=(150, 170), key='key1')]]

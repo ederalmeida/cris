@@ -1,6 +1,7 @@
 from classes import sapgui
 import PySimpleGUI as sg
 import pyautogui as pg
+import time
 from datetime import datetime
 from apoio import verifica_cria_subpastas as vcs
 from janelas import janela_zwf100 as jzwf
@@ -48,12 +49,12 @@ def executar_robo(informacoes_janela_zwf100):
         
     # colocando a tela de informação para o lado para não cobrir as informações geradas
     time.sleep(1)
-    pag.press('alt')
-    pag.press('m')
+    pg.press('alt')
+    pg.press('m')
     for i in range(0, 11):
-        pag.press('right', presses=10)
+        pg.press('right', presses=10)
         time.sleep(0.5)
-    pag.click()
+    pg.click()
     i = 0
 
     # tirando print da parametrização

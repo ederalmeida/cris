@@ -1,5 +1,5 @@
 import cx_Freeze
-from apoio import versao_atual as versao
+from apoio import versao_local as vl
 import hashlib
 import os.path
 
@@ -13,7 +13,7 @@ exe = [cx_Freeze.Executable('cris.py',
                             icon='imagens\cris.ico')]
 
 cx_Freeze.setup(name = 'cris',
-                version=versao.v,
+                version=vl.v,
                 options = {'build_exe': build_exe_options},
                 executables = exe
 )
