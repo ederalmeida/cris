@@ -47,8 +47,8 @@ def update():
     update_files()
     
     # Excluindo o arquivo baixado
-    #shutil.rmtree(os.sep.join([path, 'tmp']))
-    #os.remove(path + '\\cris.zip')
+    shutil.rmtree(os.sep.join([path, 'tmp']))
+    os.remove(path + '\\cris.zip')
     
 def update_files():
     path = os.getcwd()
@@ -60,7 +60,7 @@ def update_files():
     hal.close()
 
     # HAR = hash_arquivos_remoto
-    with open(os.sep.join([path, 'lib', 'tmp', 'hash_arquivos_versao.csv']), 'r') as har:
+    with open(os.sep.join([path, 'lib', 'tmp', 'lib', 'hash_arquivos_versao.csv']), 'r') as har:
         csv_reader_har = csv.reader(har, delimiter=';')
         lista_har = {linha[0]: linha[1] for linha in csv_reader_har}
     har.close()
