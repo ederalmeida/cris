@@ -48,7 +48,7 @@ for path in lista_paths_por_pasta:
             lista_path_hash_por_arquivo.append([path, sha1.hexdigest()])
     f.close()
 
-with open(os.path.join('build', 'exe.win-amd64-3.10', 'lib','hash_arquivos_versao.txt'), 'w') as hash:
+with open(os.path.join('build', 'exe.win-amd64-3.10', 'lib','hash_arquivos_versao.csv'), 'w') as hash:
     for linha in lista_path_hash_por_arquivo:
         novo_path = linha[0].replace(os.path.join('build', 'exe.win-amd64-3.10', 'lib'), 'lib')
         hash.writelines(novo_path + ";" + linha[1] + '\n')

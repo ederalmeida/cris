@@ -55,7 +55,6 @@ def executar_robo(informacoes_janela_zwf100):
         pg.press('right', presses=10)
         time.sleep(0.5)
     pg.click()
-    i = 0
 
     # tirando print da parametrização
     screenParametrizacao = pg.screenshot()
