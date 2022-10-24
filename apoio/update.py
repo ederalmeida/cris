@@ -2,6 +2,7 @@ import urllib3
 import PySimpleGUI as sg
 import os
 import shutil
+import csv
 from urllib import request
 from zipfile import ZipFile
 from apoio import versao_local as vl
@@ -46,10 +47,31 @@ def update():
     update_files()
     
     # Excluindo o arquivo baixado
-    shutil.rmtree(os.sep.join([path, 'tmp']))
-    os.remove(path + '\\cris.zip')
+    #shutil.rmtree(os.sep.join([path, 'tmp']))
+    #os.remove(path + '\\cris.zip')
     
 def update_files():
-    pass
+    hash_arquivos_local = {}
+    hash_arquivos_remoto = {}
+    
+    with open('', 'r') as hal:
+        entradas = csv.reader(hal, delimiter=';')
+        for linha in entradas:
+            hash_arquivos_local[linha[0]] = linha[1]
+    hal.close()
+    
+    with open('', 'r') as har:
+        entradas = csv.reader(har, delimiter=';')
+        for linha in entradas:
+            hash_arquivos_remoto[linha[0] = linha[1]]
+    har.close()
+    
+    # se o caminho existir no local, mas não no remoto, apagar o local
+    # se o caminho existir no local e no remoto, comparar hash
+        # se os hash forem iguais, fazer nada
+        # se forem diferentes, copiar aquivo remoto para local
+    # se o caminho existir no remoto e não no local, copiar para local
+    if 
+        
     
     
