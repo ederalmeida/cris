@@ -25,10 +25,9 @@ def check_update():
         atualizar = 'No'
         
     if atualizar == 'Yes':
-        update()
+        update(url_update)
 
-def update():
-    url = 'https://robocris.000webhostapp.com/cris/cris.zip'
+def update(url):
     file = 'cris.zip'
 
     path = os.getcwd()
@@ -46,8 +45,12 @@ def update():
     
     update_files()
     
+    # Substituindo o arquivo de hash local
+    os.remove(os.sep.join([path, 'lib', 'hash_arquivos_versao.csv']))
+    shutil.copyfile(os.sep.join([path, 'lib', 'tmp', 'lib', 'hash_arquivos_versao.csv']), os.sep.join([path, 'lib', 'hash_arquivos_versao.csv']))
+    
     # Excluindo o arquivo baixado
-    shutil.rmtree(os.sep.join([path, 'tmp']))
+    shutil.rmtree(os.sep.join([path, 'lib', 'tmp']))
     os.remove(path + '\\cris.zip')
     
 def update_files():
@@ -72,19 +75,21 @@ def update_files():
 
         # se o caminho existir no local, mas não no remoto, apagar o local
         if hash_har == None:
+            os.remove(os.sep.join([path, key]))
             tabela_aux_log.append([hash_hal, hash_har, 'Excluir arquivo'])
         
         # se o caminho existir no local e no remoto, comparar hash
-        if hash_hal == hash_har:
-            tabela_aux_log.append([hash_hal, hash_har, 'Manter arquivo'])
-        else:
-            # se forem diferentes, copiar aquivo remoto para local
+        # se forem diferentes, copiar aquivo remoto para local
+        if hash_hal != hash_har:
+            os.remove(os.sep.join([path, key]))
+            shutil.copyfile(os.sep.join([path, 'lib', 'tmp', key]), os.sep.join([path, 'lib', key]))
             tabela_aux_log.append([hash_hal, hash_har, 'Atualizar'])
 
     # se o caminho existir no remoto e não no local, copiar para local
     for key in lista_har.keys():
         hash_hal = lista_hal.get(key)
         if hash_hal == None:
+            shutil.copyfile(os.sep.join([path, 'lib', key]), os.sep.join([path, 'lib', 'tmp', key]))
             tabela_aux_log.append([hash_hal, hash_har, 'Transferir'])
 
         # Criando arquivo de logging
