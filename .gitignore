@@ -6,3 +6,4 @@ imagens/*pyc
 janelas/*.pyc
 robos/*.pyc
 build
+.vscode
