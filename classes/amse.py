@@ -1,5 +1,5 @@
 import os
-import time
+import logging
 import pyautogui as pg
 import PySimpleGUI as sg
 from selenium import webdriver
@@ -11,15 +11,13 @@ from apoio import gravar_log_cadastro_documento_inadimplente as glcdi
 
 class amse_site():
     def __init__ (self):
+        os.environ['WDM_LOG'] = str(logging.NOTSET)
         self.dir_path = os.getcwd()
         self.chrome = self.dir_path + r'/apoio/webdriver'
         self.options = webdriver.ChromeOptions()
         self.options.add_argument(r"user-data-dir="+self.dir_path+"/apoio/webdriver/profile/wpp")
         self.driver = webdriver.Chrome(ChromeDriverManager().install())
         self.driver.get('http://amse.ons.org.br/intunica/')
-        self.imagem_liquidacao = self.dir_path + '/imagens/amse_botao_liquidacao.png'
-        self.imagem_informacao = self.dir_path + '/imagens/amse_botao_informacao.png'
-        self.imagem_codigo_usuario = self.dir_path + '/imagens/amse_codigo_usuario.png'
 
     def logon(self, login_informado, passwd_informado):
         self.driver.find_element(By.ID, 'txtLogin').send_keys(login_informado)  # preenchendo login
