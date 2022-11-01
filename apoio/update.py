@@ -9,12 +9,14 @@ from apoio import versao_local as vl
 
 def check_update():
     versao_local = vl.v
-    url_update = 'https://robocris.000webhostapp.com/cris/version.txt'
-    
+    url_version = 'https://robocris.000webhostapp.com/cris/version.txt'
+    url_file = 'https://robocris.000webhostapp.com/cris/cris.zip'
     http = urllib3.PoolManager()
     
+    atualizar = ''
+    
     try:
-        r = http.request('GET', url_update, timeout=5.0)
+        r = http.request('GET', url_version, timeout=5.0)
         versao_remota = r.data.decode('utf-8')
         
         if versao_local != versao_remota:
@@ -25,7 +27,7 @@ def check_update():
         atualizar = 'No'
         
     if atualizar == 'Yes':
-        update(url_update)
+        update(url_file)
 
 def update(url):
     file = 'cris.zip'
