@@ -11,12 +11,12 @@ from apoio import gravar_log_cadastro_documento_inadimplente as glcdi
 
 class amse_site():
     def __init__ (self):
-        os.environ['WDM_LOG'] = str(logging.NOTSET)
+        #os.environ['WDM_LOG'] = str(logging.NOTSET)
         self.dir_path = os.getcwd()
-        self.chrome = self.dir_path + r'/apoio/webdriver'
+        #self.chrome = os.sep.join([self.dir_path, 'apoio', 'webdriver'])
         self.options = webdriver.ChromeOptions()
-        self.options.add_argument(r"user-data-dir="+self.dir_path+"/apoio/webdriver/profile/wpp")
-        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+        self.options.add_argument(r"user-data-dir=" + os.sep.join([self.dir_path, 'apoio', 'webdriver', 'profile', 'wpp']))
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=self.options)
         self.driver.get('http://amse.ons.org.br/intunica/')
 
     def logon(self, login_informado, passwd_informado):
