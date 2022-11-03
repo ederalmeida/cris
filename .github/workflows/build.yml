@@ -85,23 +85,24 @@ jobs:
           value=`cat release_url/release_url.txt`
           echo ::set-output name=upload_url::$value
 
-      - name: Load tag_version
-        uses: actions/download-artifact@v1
-        with:
-          name: tag_version
-
-      - name: Get Release File Name & Upload URL
-        id: get_tag_info
-        shell: bash
-        run: |
-          value=`cat ./build/exe.win-amd64-3.10/site/tag_version.txt`
-          echo ::set-output name=tag_version::$value
-         
       - name: compress directory
         uses: papeloto/action-zip@v1
         with:
           files: ./build/exe.win-amd64-3.10/
           dest: ./build/exe.win-amd64-3.10/site/${{ matrix.OUT_FILE_NAME}}.zip
+
+      - name: Load tag_version
+        uses: actions/download-artifact@v1
+        with:
+          name: tag_version
+          path: ./build/exe.win-amd64-3.10/site/
+          
+      - name: Get Release File Name & Upload URL
+        id: get_tag_info
+        shell: bash
+        run: |
+          value=`cat tag_version/tag_version.txt`
+          echo ::set-output name=tag_version::$value
         
       - name: Upload Release Asset
         id: upload-release-asset
