@@ -1,9 +1,11 @@
 __pycache__/
 *.pyc
 apoio/*.pyc
+apoio/__pycache__/*.pyc
 classes/*.pyc
 imagens/*pyc
 janelas/*.pyc
 robos/*.pyc
 build
 .vscode
+apoio/webdriver
