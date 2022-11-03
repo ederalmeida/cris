@@ -135,10 +135,11 @@ jobs:
           server-dir: public_html/cris/
           # Path and name of the state file - this file is used to track which files have been deployed
           state-name: ./build/exe.win-amd64-3.10/${{ matrix.OUT_FILE_NAME}}.zip
+          
           # Prints which modifications will be made with current config options, but doesnt actually make any changes
           #dry-run: # optional
           # Deletes ALL contents of server-dir, even items in excluded with exclude argument
-          #dangerous-clean-slate: # optional
+          dangerous-clean-slate: true
           # An array of glob patterns, these files will not be included in the publish/delete process
           #exclude: # optional
           # How verbose should the information be - minimal, standard, or verbose
