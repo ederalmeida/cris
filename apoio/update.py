@@ -11,14 +11,14 @@ sg.theme('Reddit')
 
 def check_update():
     versao_local = vl.v
-    url_version = 'https://robocris.000webhostapp.com/cris/version.txt'
+    url_version = 'https://robocris.000webhostapp.com/cris/tag_version.txt'
     atualizar = ''
     
     http = urllib3.PoolManager()
     
     try:
         r = http.request('GET', url_version, timeout=5.0)
-        versao_remota = r.data.decode('utf-8')
+        versao_remota = r.data.decode('utf-8').replace('v','')
         
         if versao_local != versao_remota:
             atualizar = sg.popup_yes_no('Existe uma nova versão para a CRIS!\n Você gostaria de atualizar?',
