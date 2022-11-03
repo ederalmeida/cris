@@ -111,7 +111,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release_info.outputs.upload_url }}
-          asset_path: ./build/exe.win-amd64-3.10/${{ matrix.OUT_FILE_NAME}}.zip
+          asset_path: ./build/exe.win-amd64-3.10/site/${{ matrix.OUT_FILE_NAME}}.zip
           asset_name: ${{ matrix.OUT_FILE_NAME}}.zip
           asset_content_type: ${{ matrix.ASSET_MIME}}
  
