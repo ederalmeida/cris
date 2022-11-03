@@ -101,7 +101,7 @@ jobs:
         id: get_tag_info
         shell: bash
         run: |
-          value=`cat tag_version/tag_version.txt`
+          value=`cat ./build/exe.win-amd64-3.10/site/tag_version.txt`
           echo ::set-output name=tag_version::$value
         
       - name: Upload Release Asset
