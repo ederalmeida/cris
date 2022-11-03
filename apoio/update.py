@@ -7,13 +7,14 @@ from urllib import request
 from zipfile import ZipFile
 from apoio import versao_local as vl
 
+sg.theme('Reddit')
+
 def check_update():
     versao_local = vl.v
     url_version = 'https://robocris.000webhostapp.com/cris/version.txt'
-    url_file = 'https://robocris.000webhostapp.com/cris/cris.zip'
-    http = urllib3.PoolManager()
-    
     atualizar = ''
+    
+    http = urllib3.PoolManager()
     
     try:
         r = http.request('GET', url_version, timeout=5.0)
@@ -26,12 +27,11 @@ def check_update():
     except:
         atualizar = 'No'
         
-    if atualizar == 'Yes':
-        update(url_file)
+    return atualizar
 
-def update(url):
+def download_arquivos():
+    url_file = 'https://robocris.000webhostapp.com/cris/cris.zip'
     file = 'cris.zip'
-
     path = os.getcwd()
 
     if os.path.isdir(os.sep.join([path, 'lib,' 'tmp'])):
@@ -39,23 +39,13 @@ def update(url):
     else:
         os.makedirs(os.sep.join([path, 'lib', 'tmp']))
 
-    r = request.urlretrieve(url, file)
+    r = request.urlretrieve(url_file, file)
 
     extracao_zip = ZipFile(r[0], 'r')
     extracao_zip.extractall(os.sep.join([path, 'lib', 'tmp']))
     extracao_zip.close()
-    
-    update_files()
-    
-    # Substituindo o arquivo de hash local
-    os.remove(os.sep.join([path, 'lib', 'hash_arquivos_versao.csv']))
-    shutil.copyfile(os.sep.join([path, 'lib', 'tmp', 'lib', 'hash_arquivos_versao.csv']), os.sep.join([path, 'lib', 'hash_arquivos_versao.csv']))
-    
-    # Excluindo o arquivo baixado
-    shutil.rmtree(os.sep.join([path, 'lib', 'tmp']))
-    os.remove(path + '\\cris.zip')
-    
-def update_files():
+
+def atualizar_arquivos():
     path = os.getcwd()
     tabela_aux_log = []
     # HAL = hash_arquivos_local
@@ -94,13 +84,23 @@ def update_files():
             shutil.copyfile(os.sep.join([path, 'lib', key]), os.sep.join([path, 'lib', 'tmp', key]))
             tabela_aux_log.append([hash_hal, hash_har, 'Transferir'])
 
-        # Criando arquivo de logging
+    # Criando arquivo de logging
     arquivo_de_log = open(os.sep.join([path, 'lib', 'log de execução.txt']), 'w')
     
     for linha in tabela_aux_log:
         arquivo_de_log.writelines(linha[0] + ' - ' + linha[1] + ' - ' + linha[2] + '\n')
     arquivo_de_log.close()
         
-            
+def substituir_hash():
+    path = os.getcwd()
+    # Substituindo o arquivo de hash local
+    os.remove(os.sep.join([path, 'lib', 'hash_arquivos_versao.csv']))
+    shutil.copyfile(os.sep.join([path, 'lib', 'tmp', 'lib', 'hash_arquivos_versao.csv']), os.sep.join([path, 'lib', 'hash_arquivos_versao.csv']))
+
+def excluir_arquivos_tmp():
+    path = os.getcwd()   
+    # Excluindo o arquivo baixado
+    shutil.rmtree(os.sep.join([path, 'lib', 'tmp']))
+    os.remove(path + '\\cris.zip')
         
         
