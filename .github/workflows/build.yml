@@ -94,14 +94,14 @@ jobs:
         id: get_tag_info
         shell: bash
         run: |
-          value=`cat tag_version/tag_version.txt`
+          value=`cat ./build/exe.win-amd64-3.10/site/tag_version.txt`
           echo ::set-output name=tag_version::$value
          
       - name: compress directory
         uses: papeloto/action-zip@v1
         with:
           files: ./build/exe.win-amd64-3.10/
-          dest: ./build/exe.win-amd64-3.10/${{ matrix.OUT_FILE_NAME}}.zip
+          dest: ./build/exe.win-amd64-3.10/site/${{ matrix.OUT_FILE_NAME}}.zip
         
       - name: Upload Release Asset
         id: upload-release-asset
@@ -130,11 +130,11 @@ jobs:
           # protocol to deploy with - ftp, ftps, or ftps-legacy
           protocol: ftp
           # Folder to upload from, must end with trailing slash /
-          #local-dir: ./build/exe.win-amd64-3.10/
+          local-dir: ./build/exe.win-amd64-3.10/site/
           # Path to upload to on the server. Must end with trailing slash /
           server-dir: public_html/cris/
           # Path and name of the state file - this file is used to track which files have been deployed
-          state-name: ./build/exe.win-amd64-3.10/${{ matrix.OUT_FILE_NAME}}.zip
+          # state-name: ./build/exe.win-amd64-3.10/${{ matrix.OUT_FILE_NAME}}.zip
           
           # Prints which modifications will be made with current config options, but doesnt actually make any changes
           #dry-run: # optional
