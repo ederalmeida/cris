@@ -18,8 +18,11 @@ def check_update():
     
     try:
         r = http.request('GET', url_version, timeout=5.0)
-        versao_remota = r.data.decode('utf-8').replace('v','')
+        versao_remota = r.data.decode('utf-8').replace('v','').strip()
         
+
+        #TODO melhorar isso. Fazer com que a checagem verifique por número, e não só 
+        #      se é a string é diferente.
         if versao_local != versao_remota:
             atualizar = sg.popup_yes_no('Existe uma nova versão para a CRIS!\n Você gostaria de atualizar?',
                                         title = 'Atualização')

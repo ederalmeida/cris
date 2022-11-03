@@ -29,7 +29,7 @@ def exibir():
             janela['Iniciar Atualização'].update(disabled=True)
             i=0
             print(lista_eventos[i])
-            up.download_arquivos
+            up.download_arquivos()
             progress_bar.UpdateBar(i + 1)
             i += 1
             print(lista_eventos[i])
