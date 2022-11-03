@@ -113,3 +113,17 @@ jobs:
           asset_path: ./build/exe.win-amd64-3.10/${{ matrix.OUT_FILE_NAME}}.zip
           asset_name: ${{ matrix.OUT_FILE_NAME}}.zip
           asset_content_type: ${{ matrix.ASSET_MIME}}
+          
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      with:
+        server: files.000webhost.com
+        username: robocris
+        password: ${{ secrets.ftp_password }}
