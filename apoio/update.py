@@ -77,14 +77,14 @@ def atualizar_arquivos():
         # se forem diferentes, copiar aquivo remoto para local
         if hash_hal != hash_har:
             os.remove(os.sep.join([path, key]))
-            shutil.copyfile(os.sep.join([path, 'lib', 'tmp', key]), os.sep.join([path, 'lib', key]))
+            shutil.copyfile(os.sep.join([path, 'lib', 'tmp', key]), os.sep.join([path, key]))
             tabela_aux_log.append([hash_hal, hash_har, 'Atualizar'])
 
     # se o caminho existir no remoto e não no local, copiar para local
     for key in lista_har.keys():
         hash_hal = lista_hal.get(key)
         if hash_hal == None:
-            shutil.copyfile(os.sep.join([path, 'lib', key]), os.sep.join([path, 'lib', 'tmp', key]))
+            shutil.copyfile(os.sep.join([path, key]), os.sep.join([path, 'lib', 'tmp', key]))
             tabela_aux_log.append([hash_hal, hash_har, 'Transferir'])
 
     # Criando arquivo de logging

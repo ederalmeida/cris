@@ -6,7 +6,7 @@ sg.theme('Reddit')
 
 def exibir():
 
-    lista_eventos = ["Baixando nova versão", "Atualizando arquivos locais", "Finalizando Atualização", "Excluindo arquivos temporarios", "Atualização efetuada com sucesso!"]
+    lista_eventos = ["Iniciando Atualização", "Baixando nova versão", "Atualizando arquivos locais", "Finalizando Atualização", "Excluindo arquivos temporarios", "Atualização efetuada com sucesso!"]
 
     progressbar = [[sg.ProgressBar(len(lista_eventos), orientation='h', size=(27, 20), key='progressbar')]]
 
@@ -23,6 +23,9 @@ def exibir():
     while True:
         event, values = janela.read(timeout=10)
         i=0
+        print(lista_eventos[i])
+        time.sleep(3)
+        i += 1
         print(lista_eventos[i])
         up.download_arquivos()
         progress_bar.UpdateBar(i + 1)
