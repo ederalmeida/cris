@@ -27,6 +27,7 @@ def exibir():
         time.sleep(3)
         i += 1
         print(lista_eventos[i])
+        time.sleep(3)
         up.download_arquivos()
         progress_bar.UpdateBar(i + 1)
         i += 1

@@ -15,7 +15,7 @@ class amse_site():
         self.dir_path = os.getcwd()
         #self.chrome = os.sep.join([self.dir_path, 'apoio', 'webdriver'])
         self.options = webdriver.ChromeOptions()
-        self.options.add_argument(r"user-data-dir=" + os.sep.join([self.dir_path, 'apoio', 'webdriver', 'profile', 'wpp']))
+        self.options.add_argument(r"user-data-dir=" + os.sep.join([self.dir_path,'lib', 'apoio', 'webdriver', 'profile', 'wpp']))
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=self.options)
         self.driver.get('http://amse.ons.org.br/intunica/')
 
