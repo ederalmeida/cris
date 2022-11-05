@@ -25,6 +25,7 @@ def exibir():
         i=0
         print(lista_eventos[i])
         time.sleep(3)
+        progress_bar.UpdateBar(i + 1)
         i += 1
         print(lista_eventos[i])
         time.sleep(3)
@@ -33,13 +34,18 @@ def exibir():
         i += 1
         print(lista_eventos[i])
         up.atualizar_arquivos()
+        progress_bar.UpdateBar(i + 1)
         i += 1
         print(lista_eventos[i])
         up.substituir_hash()
+        progress_bar.UpdateBar(i + 1)
         i += 1
         print(lista_eventos[i])
         up.excluir_arquivos_tmp()
+        progress_bar.UpdateBar(i + 1)
         i += 1
         print(lista_eventos[i])
+        progress_bar.UpdateBar(i + 1)
         time.sleep(3)
+        janela.close()
         break
