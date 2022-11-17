@@ -4,6 +4,7 @@ import pyautogui as pg
 import PySimpleGUI as sg
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.support.select import Select
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.alert import Alert
@@ -16,7 +17,7 @@ class amse_site():
         #self.chrome = os.sep.join([self.dir_path, 'apoio', 'webdriver'])
         self.options = webdriver.ChromeOptions()
         self.options.add_argument(r"user-data-dir=" + os.sep.join([self.dir_path,'lib', 'apoio', 'webdriver', 'profile', 'wpp']))
-        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=self.options)
+        self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=self.options)
         self.driver.get('http://amse.ons.org.br/intunica/')
 
     def logon(self, login_informado, passwd_informado):
