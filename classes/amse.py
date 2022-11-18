@@ -15,13 +15,11 @@ class amse_site():
     def __init__ (self):
         os.environ['WDM_LOG'] = str(logging.NOTSET)
         self.dir_path = os.getcwd()
-        #self.chrome = os.sep.join([self.dir_path, 'apoio', 'webdriver'])
         self.options = webdriver.ChromeOptions()
         self.options.add_argument(r"user-data-dir=" + os.sep.join([self.dir_path,'lib', 'apoio', 'webdriver', 'profile', 'wpp']))
         self.options.add_argument('log_level=0')
-        self.options.add_argument("user-agent=Chrome/80.0.3987.132")
-        
-        self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=self.options)
+        webdriver_path = os.sep.join([self.dir_path, 'apoio', 'chromedriver', 'chromedriver.exe'])
+        self.driver = webdriver.Chrome(executable_path=webdriver_path , options=self.options)
         self.driver.get('http://amse.ons.org.br/intunica/')
 
     def logon(self, login_informado, passwd_informado):
