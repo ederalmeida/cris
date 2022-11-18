@@ -89,6 +89,11 @@ def atualizar_arquivos():
     for key in lista_har.keys():
         hash_hal = lista_hal.get(key)
         if hash_hal == None:
+            # verificando se o caminho existe, e em caso negativo, cria o mesmo
+            posicao_slash = obter_posicao_slash(key)
+            diretorio_a_criar = key[0:posicao_slash]
+            if not os.path.exists(os.sep.join([path, diretorio_a_criar])):
+                os.makedirs(os.sep.join([path, diretorio_a_criar]))
             shutil.copyfile(os.sep.join([path, key]), os.sep.join([path, 'lib', 'tmp', key]))
             tabela_aux_log.append([hash_hal, hash_har, 'Transferir'])
 
@@ -110,5 +115,13 @@ def excluir_arquivos_tmp():
     # Excluindo o arquivo baixado
     shutil.rmtree(os.sep.join([path, 'lib', 'tmp']))
     os.remove(path + '\\cris.zip')
-        
+
+#sempre enviar o path da função abaixo em formato raw
+def obter_posicao_slash(key):
+    ocorrencias_string = []
+    string = '\\'
+    for ocorrencia in enumerate(key):
+        if ocorrencia[1] == string:
+            ocorrencias_string.append(ocorrencia[0])
+    return ocorrencias_string[-1]
         
