@@ -42,8 +42,11 @@ def download_arquivos():
     else:
         os.makedirs(os.sep.join([path, 'lib', 'tmp']))
 
+    print('Conectando ao servidor')
+    print('Baixando arquivo ZIP')
     r = request.urlretrieve(url_file, file)
-
+    
+    print('Descompactando arquivo ZIP')
     extracao_zip = ZipFile(r[0], 'r')
     extracao_zip.extractall(os.sep.join([path, 'lib', 'tmp']))
     extracao_zip.close()
@@ -52,12 +55,14 @@ def atualizar_arquivos():
     path = os.getcwd()
     tabela_aux_log = []
     # HAL = hash_arquivos_local
+    print('Verificando HASH local')
     with open(os.sep.join([path, 'lib', 'hash_arquivos_versao.csv']), 'r') as hal:
         csv_reader_hal = csv.reader(hal, delimiter=';')
         lista_hal = {linha[0]: linha[1] for linha in csv_reader_hal}
     hal.close()
 
     # HAR = hash_arquivos_remoto
+    print('Verificando HASH remoto')
     with open(os.sep.join([path, 'lib', 'tmp', 'lib', 'hash_arquivos_versao.csv']), 'r') as har:
         csv_reader_har = csv.reader(har, delimiter=';')
         lista_har = {linha[0]: linha[1] for linha in csv_reader_har}

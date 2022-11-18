@@ -6,6 +6,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.support.select import Select
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.alert import Alert
 from apoio import gravar_log_cadastro_documento_inadimplente as glcdi
@@ -17,7 +18,9 @@ class amse_site():
         #self.chrome = os.sep.join([self.dir_path, 'apoio', 'webdriver'])
         self.options = webdriver.ChromeOptions()
         self.options.add_argument(r"user-data-dir=" + os.sep.join([self.dir_path,'lib', 'apoio', 'webdriver', 'profile', 'wpp']))
-        self.options.add_argument(r'log_level=0')
+        self.options.add_argument('log_level=0')
+        self.options.add_argument("user-agent=Chrome/80.0.3987.132")
+        
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=self.options)
         self.driver.get('http://amse.ons.org.br/intunica/')
 

@@ -24,11 +24,11 @@ def exibir():
         event, values = janela.read(timeout=10)
         i=0
         print(lista_eventos[i])
-        time.sleep(3)
+        time.sleep(1)
         progress_bar.UpdateBar(i + 1)
         i += 1
         print(lista_eventos[i])
-        time.sleep(3)
+        time.sleep(1)
         up.download_arquivos()
         progress_bar.UpdateBar(i + 1)
         i += 1
