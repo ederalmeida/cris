@@ -98,7 +98,8 @@ def exibir():
                 sg.popup('Favor inserir o ledger a ser analisado', title='Erro')
             else:
                 janela.close()
-                informacoes_fagll03 = {'arquivo_contas': values['-ARQUIVO_CONTAS-'],
+                informacoes_fagll03 = {
+                           'arquivo_contas': values['-ARQUIVO_CONTAS-'],
                            'pasta': values['-PASTA-'],
                            'socidades_parceiras': values['-ARQUIVO_SOCPAR-'],
                            'data_cont_emde': (values['-DATA_CONT_EMDE-'].replace('.','')).replace('/',''),

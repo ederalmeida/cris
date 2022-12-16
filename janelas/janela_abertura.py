@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 from imagens import imagens_base64 as imgs
 from janelas import janela_avd_j1b1n, janela_fagll03, janela_fbl1n, janela_fbl3n, janela_fbl5n, janela_kob1,\
-     janela_inadimplencia_amse, janela_zwf100
+     janela_inadimplencia_amse, janela_zwf100, janela_zmd_dirf
 from apoio import versao_local as vl
 import sys
 
@@ -74,6 +74,10 @@ def exibir():
         if event == '-ZWF100-':
             janela.close()
             janela_zwf100.exibir()
+
+        if event == '-ZMD_DIRF-':
+            janela.close()
+            janela_zmd_dirf.exibir()
 
         else:
             continue
