@@ -37,3 +37,10 @@ def verifica_cria_subpastas(caminho_pasta, conta):
     os.makedirs(os.sep.join([caminho_pasta, conta, 'relatorios']).replace('\\','/'))
     logging.info(os.sep.join([caminho_pasta, conta, 'relatorios']).replace('\\','/'))
     return os.sep.join([caminho_pasta, conta]).replace('\\','/')
+
+def verifica_pasta_print_rels(caminho_pasta, rel):
+    if not os.path.isdir(os.sep.join([caminho_pasta, rel, 'prints'])):
+        os.makedirs(os.sep.join([caminho_pasta, rel, 'prints']).replace('\\','/'))
+    if not os.path.isdir(os.sep.join([caminho_pasta, rel, 'relatorios'])):
+        os.makedirs(os.sep.join([caminho_pasta, rel, 'relatorios']).replace('\\','/'))
+    return os.sep.join([caminho_pasta, rel]).replace('\\','/')

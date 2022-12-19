@@ -18,7 +18,7 @@ def exibir():
                  ],
                  [
                     sg.InputText('', key='-REL_CTG_IMP_RET_FONTE-', size=(68, 1)), sg.FileBrowse('procurar')
-                 ]], size=(580,110)
+                 ]], size=(680,110)
                  )]]
     
     linha3 = [
@@ -33,16 +33,24 @@ def exibir():
                                 sg.Text('Número CPF', size=(18,1)), sg.InputText(default_text='', size=(16,1), key='-NCPF-', enable_events=True)
                             ]
                         
-                    ], size=(580,80)
+                    ], size=(680,80)
                 )]]
 
-    linha4 = [[sg.Text('')],
+    linha4 = [[[
+                    sg.Text('Local para salvar relatórios e IPE')
+                 ],
+                 [
+                    sg.InputText('', key='-LOCAL_SALVAR_REL_IPE-', size=(68, 1)), sg.FolderBrowse('procurar')
+                 ]]]
+
+    linha5 = [[sg.Text('')],
               [sg.Button('Executar Robô', key='-EXECUTAR_ROBO-', enable_events=True)]]
     
     layout = [linha1,
               linha2,
               linha3,
-              linha4]
+              linha4,
+              linha5]
     
     janela = sg.Window('Robô para Extração de ZMD_DIRF', layout, default_element_size=(40, 1), element_justification='left', grab_anywhere=False) 
 
@@ -73,6 +81,9 @@ def exibir():
 
             elif values['-NCPF-'] == '':
                 sg.popup('Favor inserir um número de CPF', title='Erro')
+                
+            elif values['-LOCAL_SALVAR_REL_IPE-'] == '':
+                sg.popup('Favor inserir local para salva os IPEs', title='Erro')
 
             else:
                 janela.close()
@@ -83,6 +94,7 @@ def exibir():
                     'exercicio_corrente': values['-EXERCICIO_CORRENTE-'],
                     'exercicio_anterior': values['-EXERCICIO_ANTERIOR-'],
                     'layout': values['-ID_LAYOUT-'],
-                    'ncpf': values['-NCPF-']
+                    'ncpf': values['-NCPF-'],
+                    'local_salvar_ipe': values['-LOCAL_SALVAR_REL_IPE-']
                     }
                 zmd_dirf.executar_robo(informacoes_zmd_dirf)
