@@ -18,7 +18,7 @@ def exibir():
                  ],
                  [
                     sg.InputText('', key='-REL_CTG_IMP_RET_FONTE-', size=(68, 1)), sg.FileBrowse('procurar')
-                 ]], size=(680,110)
+                 ]], size=(580,110)
                  )]]
     
     linha3 = [
@@ -33,7 +33,7 @@ def exibir():
                                 sg.Text('Número CPF', size=(18,1)), sg.InputText(default_text='', size=(16,1), key='-NCPF-', enable_events=True)
                             ]
                         
-                    ], size=(680,80)
+                    ], size=(580,80)
                 )]]
 
     linha4 = [[[

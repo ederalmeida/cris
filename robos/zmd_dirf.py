@@ -72,7 +72,7 @@ def executar_robo(informacoes_zmd_dirf):
                             
         for screen in screen_cod_ctg_imp:
             screen[1].save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + str(exercicio) + ' - ' + \
-                    data_execucao + ' - código categoria impostos - ' + str(screen[0]) + '.jpg')
+                    data_execucao + ' - 01 - código categoria impostos - ' + str(screen[0]) + '.jpg')
         sap.session.findById("wnd[1]/tbar[0]/btn[8]").press()
      
     # dados gerais
@@ -91,7 +91,7 @@ def executar_robo(informacoes_zmd_dirf):
            
     screen_dados_gerais = pag.screenshot()
     screen_dados_gerais.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + str(exercicio) + ' - ' + \
-                    data_execucao + ' - dados gerais.jpg')
+                    data_execucao + ' - 02 - dados gerais.jpg')
     sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
     
     # Dados do contador
@@ -116,7 +116,7 @@ def executar_robo(informacoes_zmd_dirf):
     
     screen_dados_contador = pag.screenshot()
     screen_dados_contador.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + str(exercicio) + ' - ' + \
-                    data_execucao + ' - dados contador.jpg')
+                    data_execucao + ' - 03 - dados contador.jpg')
     sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
 
     # Dados de Saida
@@ -139,7 +139,7 @@ def executar_robo(informacoes_zmd_dirf):
     
     screen_dados_saida = pag.screenshot()
     screen_dados_saida.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + str(exercicio) + ' - ' + \
-                    data_execucao + ' - dados saida.jpg')
+                    data_execucao + ' - 04 - dados saida.jpg')
     sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
 
     
@@ -162,10 +162,11 @@ def executar_robo(informacoes_zmd_dirf):
     i = 0
     screen_resultado_execucao_inicio = pag.screenshot()
     screen_resultado_execucao_inicio.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + str(exercicio) + ' - ' + \
-                    data_execucao + ' - resultado execução - início.jpg')
+                    data_execucao + ' - 05 - resultado execução - 01 - início.jpg')
     sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
     time.sleep(1)
     sap.session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectedRows = "0"
+    pag.click()
     pag.keyDown('ctrl')
     pag.keyDown('end')
     pag.keyUp('end')
@@ -185,7 +186,10 @@ def executar_robo(informacoes_zmd_dirf):
     
     screen_resultado_execucao_final = pag.screenshot()
     screen_resultado_execucao_final.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + str(exercicio) + ' - ' + \
-                    data_execucao + ' - resultado execução - final.jpg')
+                    data_execucao + ' - 05 - resultado execução - 02 - final.jpg')
+
+    # Fecha a janela de informações
+    sap.session.findById('wnd[0]').sendVKey(0)
     time.sleep(1)
     
     #Exportanto para Excel
@@ -205,7 +209,7 @@ def executar_robo(informacoes_zmd_dirf):
     os.system('TASKKILL /F /IM EXCEL.EXE')
 
     # Espera um segundo, para que o processo seja finalizado
-    time.sleep(1)
+    time.sleep(2)
     
-    sap.session.findById("wnd[0]/tbar[0]/btn[3]").press()
+   #sap.session.findById("wnd[0]/tbar[0]/btn[3]").press()
     sg.popup('Execução efetuada com sucesso')
