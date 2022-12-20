@@ -94,7 +94,7 @@ def atualizar_arquivos():
             diretorio_a_criar = key[0:posicao_slash]
             if not os.path.exists(os.sep.join([path, diretorio_a_criar])):
                 os.makedirs(os.sep.join([path, diretorio_a_criar]))
-            shutil.copyfile(os.sep.join([path, key]), os.sep.join([path, 'lib', 'tmp', key]))
+            shutil.copyfile(os.sep.join([path, 'lib', 'tmp', key]), os.sep.join([path, key]))
             tabela_aux_log.append([hash_hal, hash_har, 'Transferir'])
 
     # Criando arquivo de logging
