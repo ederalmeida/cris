@@ -36,7 +36,7 @@ class NFe():
 
         for i in range(0, len(relacao_xml)):
 
-            with open(relacao_xml[i][0] + '\\' + relacao_xml[i][1], encoding='utf-8') as arquivo_nfe:
+            with open(relacao_xml[i][0] + '\\' + relacao_xml[i][1], encoding='ISO-8859-1') as arquivo_nfe:
                 xml = unt.parse(arquivo_nfe.read())
 
             NFes[i] = NFe()
