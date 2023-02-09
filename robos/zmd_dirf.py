@@ -23,6 +23,8 @@ def executar_robo(informacoes_zmd_dirf):
     cpf = informacoes_zmd_dirf.get('ncpf')
     caminho_cod_ctg_imp = informacoes_zmd_dirf.get('cod_imposto')
     caminho_salvar_ipe = informacoes_zmd_dirf.get('local_salvar_ipe')
+    gerar_dados_background = informacoes_zmd_dirf.get('gerar_dados_background')
+    exibir_dados_gerados = informacoes_zmd_dirf.get('exibir_dados_gerados')
 
     relacao_cod_cat_imposto = orc.obter_relacao_contas(caminho_cod_ctg_imp)
     
@@ -40,12 +42,16 @@ def executar_robo(informacoes_zmd_dirf):
     sap.session.findById("wnd[0]/usr/ctxtPCOMPANY").text = empresa
     sap.session.findById("wnd[0]/usr/txtPYEAR").text = exercicio
     sap.session.findById("wnd[0]/usr/radP_COMPE").select()
-    sap.session.findById("wnd[0]/usr/radPRBACKGR").select()
+    
     
     # Parametros de Execução
-    sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpMAIN_DATA/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1001/chkP_PUBLIC").selected = True
+    if gerar_dados_background:
+        sap.session.findById("wnd[0]/usr/radPRBACKGR").select()
+    else:
+        sap.session.findById("wnd[0]/usr/radPGBACKGR").select()
   
     # Dados Principais
+    sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpMAIN_DATA/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1001/chkP_PUBLIC").selected = True
     sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpMAIN_DATA/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1001/txtCUR_YEAR").text = exercicio_corrente
     sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpMAIN_DATA/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1001/txtPRE_YEAR").text = exercicio_anterior
     sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpMAIN_DATA/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1001/txtLAYOUT").text = layout
@@ -143,73 +149,84 @@ def executar_robo(informacoes_zmd_dirf):
     sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
 
     
-    ####### 
-    # EXECUCANDO RELATORIO
-    sap.session.findById("wnd[0]/tbar[1]/btn[8]").press()
-    
-    # Abrindo tela de status para confirmar ambiente
-    time.sleep(2)
-    sap.session.findById("wnd[0]/mbar/menu[5]/menu[11]").select()
-    
-    # colocando a tela de informação para o lado para não cobrir as informações geradas
-    time.sleep(1)
-    pag.press('alt')
-    pag.press('m')
-    for i in range(0, 11):
-        pag.press('right', presses=10)
-        time.sleep(0.5)
-    pag.click()
-    i = 0
-    screen_resultado_execucao_inicio = pag.screenshot()
-    screen_resultado_execucao_inicio.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + str(exercicio) + ' - ' + \
-                    data_execucao + ' - 05 - resultado execução - 01 - início.jpg')
-    sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
-    time.sleep(1)
-    sap.session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectedRows = "0"
-    pag.click()
-    pag.keyDown('ctrl')
-    pag.keyDown('end')
-    pag.keyUp('end')
-    pag.keyUp('ctrl')
-    
-    # Abrindo tela de status para confirmar ambiente
-    sap.session.findById("wnd[0]/mbar/menu[5]/menu[11]").select()
-     # colocando a tela de informação para o lado para não cobrir as informações geradas
-    time.sleep(1)
-    pag.press('alt')
-    pag.press('m')
-    for i in range(0, 11):
-        pag.press('right', presses=10)
-        time.sleep(0.5)
-    pag.click()
-    i = 0
-    
-    screen_resultado_execucao_final = pag.screenshot()
-    screen_resultado_execucao_final.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + str(exercicio) + ' - ' + \
-                    data_execucao + ' - 05 - resultado execução - 02 - final.jpg')
+    if gerar_dados_background:
+        sap.session.findById("wnd[0]/mbar/menu[0]/menu[2]").select()
+        sap.session.findById("wnd[1]/usr/ctxtPRI_PARAMS-PDEST").text = "LOCL"
+        sap.session.findById("wnd[1]/usr/radRADIO0500_2").select()
+        sap.session.findById("wnd[1]/usr/subSUBSCREEN:SAPLSPRI:0600/cmbPRIPAR_DYN-PRIMM2").key = "X"
+        sap.session.findById("wnd[1]/tbar[0]/btn[13]").press()
+        sap.session.findById("wnd[1]/usr/btnSOFORT_PUSH").press()
+        sap.session.findById("wnd[1]/tbar[0]/btn[11]").press()
 
-    # Fecha a janela de informações
-    sap.session.findById('wnd[0]').sendVKey(0)
-    time.sleep(1)
-    
-    #Exportanto para Excel
-    sap.session.findById('wnd[0]/mbar/menu[0]/menu[3]/menu[1]').select()
-    sap.session.findById('wnd[0]').sendVKey(0)
-    sap.session.findById('wnd[1]/usr/ctxtDY_PATH').text = caminho_pasta_salvar_ipes + '/relatorios'
-    sap.session.findById('wnd[1]/usr/ctxtDY_FILENAME').text = (str(exercicio) + ' - ' + data_execucao + ' - relatório gerado.xlsx')
-    sap.session.findById('wnd[1]').sendVKey(0)
+    else:
 
-    # mapeando a janela ativa. Quando detectar que é o Excel, mata o processo.
-    janela_ativa = ''
-    while janela_ativa != 'EXCEL.EXE':
+        ####### 
+        # EXECUCANDO RELATORIO
+        sap.session.findById("wnd[0]/tbar[1]/btn[8]").press()
+        
+        # Abrindo tela de status para confirmar ambiente
+        time.sleep(2)
+        sap.session.findById("wnd[0]/mbar/menu[5]/menu[11]").select()
+        
+        # colocando a tela de informação para o lado para não cobrir as informações geradas
         time.sleep(1)
-        janela_ativa = vj.verifica_janela_ativa()
+        pag.press('alt')
+        pag.press('m')
+        for i in range(0, 11):
+            pag.press('right', presses=10)
+            time.sleep(0.5)
+        pag.click()
+        i = 0
+        screen_resultado_execucao_inicio = pag.screenshot()
+        screen_resultado_execucao_inicio.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + str(exercicio) + ' - ' + \
+                        data_execucao + ' - 05 - resultado execução - 01 - início.jpg')
+        sap.session.findById("wnd[1]/tbar[0]/btn[0]").press()
+        time.sleep(1)
+        sap.session.findById("wnd[0]/usr/cntlGRID1/shellcont/shell").selectedRows = "0"
+        pag.click()
+        pag.keyDown('ctrl')
+        pag.keyDown('end')
+        pag.keyUp('end')
+        pag.keyUp('ctrl')
+        
+        # Abrindo tela de status para confirmar ambiente
+        sap.session.findById("wnd[0]/mbar/menu[5]/menu[11]").select()
+        # colocando a tela de informação para o lado para não cobrir as informações geradas
+        time.sleep(1)
+        pag.press('alt')
+        pag.press('m')
+        for i in range(0, 11):
+            pag.press('right', presses=10)
+            time.sleep(0.5)
+        pag.click()
+        i = 0
+        
+        screen_resultado_execucao_final = pag.screenshot()
+        screen_resultado_execucao_final.save(vcs.winapi_path(caminho_pasta_salvar_ipes) + '\\prints\\' + str(exercicio) + ' - ' + \
+                        data_execucao + ' - 05 - resultado execução - 02 - final.jpg')
 
-    # neste ponto, foi detectado que o Excel passou a ser a janela ativa, e com isso o processo é encerrado
-    os.system('TASKKILL /F /IM EXCEL.EXE')
+        # Fecha a janela de informações
+        sap.session.findById('wnd[0]').sendVKey(0)
+        time.sleep(1)
+        
+        #Exportanto para Excel
+        sap.session.findById('wnd[0]/mbar/menu[0]/menu[3]/menu[1]').select()
+        sap.session.findById('wnd[0]').sendVKey(0)
+        sap.session.findById('wnd[1]/usr/ctxtDY_PATH').text = caminho_pasta_salvar_ipes + '/relatorios'
+        sap.session.findById('wnd[1]/usr/ctxtDY_FILENAME').text = (str(exercicio) + ' - ' + data_execucao + ' - relatório gerado.xlsx')
+        sap.session.findById('wnd[1]').sendVKey(0)
 
-    # Espera um segundo, para que o processo seja finalizado
-    time.sleep(2)
+        # mapeando a janela ativa. Quando detectar que é o Excel, mata o processo.
+        janela_ativa = ''
+        while janela_ativa != 'EXCEL.EXE':
+            time.sleep(1)
+            janela_ativa = vj.verifica_janela_ativa()
+
+        # neste ponto, foi detectado que o Excel passou a ser a janela ativa, e com isso o processo é encerrado
+        os.system('TASKKILL /F /IM EXCEL.EXE')
+
+        # Espera um segundo, para que o processo seja finalizado
+        time.sleep(2)
     
    #sap.session.findById("wnd[0]/tbar[0]/btn[3]").press()
     sg.popup('Execução efetuada com sucesso')

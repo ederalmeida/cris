@@ -21,7 +21,14 @@ def exibir():
                  ]], size=(580,110)
                  )]]
     
-    linha3 = [
+    linha3 = [[sg.Frame('Parâmetros de Execução',
+                [[
+                    sg.Radio('Gerar Dados Background', 'PAREXEC', key='-PAREXEC_BACKGROUND-'),
+                    sg.Radio('Exibir Dados Gerados', 'PAREXEC', key='-PAREXEC_EXIBIR-', default=True),
+                ]], size=(580,110)
+                )]]   
+   
+    linha4 = [
                 [sg.Frame('Dados Principais',
                     [
                         [
@@ -36,21 +43,22 @@ def exibir():
                     ], size=(580,80)
                 )]]
 
-    linha4 = [[[
+    linha5 = [[[
                     sg.Text('Local para salvar relatórios e IPE')
                  ],
                  [
                     sg.InputText('', key='-LOCAL_SALVAR_REL_IPE-', size=(68, 1)), sg.FolderBrowse('procurar')
                  ]]]
 
-    linha5 = [[sg.Text('')],
+    linha6 = [[sg.Text('')],
               [sg.Button('Executar Robô', key='-EXECUTAR_ROBO-', enable_events=True)]]
     
     layout = [linha1,
               linha2,
               linha3,
               linha4,
-              linha5]
+              linha5,
+              linha6]
     
     janela = sg.Window('Robô para Extração de ZMD_DIRF', layout, default_element_size=(40, 1), element_justification='left', grab_anywhere=False) 
 
@@ -96,5 +104,7 @@ def exibir():
                     'layout': values['-ID_LAYOUT-'],
                     'ncpf': values['-NCPF-'],
                     'local_salvar_ipe': values['-LOCAL_SALVAR_REL_IPE-']
+                    'gerar_dados_background': values['-PAREXEC_BACKGROUND-'],
+                    'exibir_dados_gerados': values['-PAREXEC_EXIBIR-']
                     }
                 zmd_dirf.executar_robo(informacoes_zmd_dirf)
