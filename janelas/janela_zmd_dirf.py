@@ -103,7 +103,7 @@ def exibir():
                     'exercicio_anterior': values['-EXERCICIO_ANTERIOR-'],
                     'layout': values['-ID_LAYOUT-'],
                     'ncpf': values['-NCPF-'],
-                    'local_salvar_ipe': values['-LOCAL_SALVAR_REL_IPE-']
+                    'local_salvar_ipe': values['-LOCAL_SALVAR_REL_IPE-'],
                     'gerar_dados_background': values['-PAREXEC_BACKGROUND-'],
                     'exibir_dados_gerados': values['-PAREXEC_EXIBIR-']
                     }
