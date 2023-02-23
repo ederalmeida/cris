@@ -167,7 +167,7 @@ def executar_robo(informacoes_zmd_dirf):
     if gerar_dados_background:
         sap.session.findById("wnd[0]/mbar/menu[0]/menu[2]").select()
         sap.session.findById("wnd[1]/usr/ctxtPRI_PARAMS-PDEST").text = "LOCL"
-        sap.session.findById("wnd[1]/usr/radRADIO0500_2").select()
+        sap.session.findById("wnd[1]/usr/radRADIO0500_1").select()
         sap.session.findById("wnd[1]/usr/subSUBSCREEN:SAPLSPRI:0600/cmbPRIPAR_DYN-PRIMM2").key = "X"
         sap.session.findById("wnd[1]/tbar[0]/btn[13]").press()
         sap.session.findById("wnd[1]/usr/btnSOFORT_PUSH").press()
