@@ -25,6 +25,9 @@ def executar_robo(informacoes_zmd_dirf):
     caminho_salvar_ipe = informacoes_zmd_dirf.get('local_salvar_ipe')
     gerar_dados_background = informacoes_zmd_dirf.get('gerar_dados_background')
     exibir_dados_gerados = informacoes_zmd_dirf.get('exibir_dados_gerados')
+    apuracao_lancamento = informacoes_zmd_dirf.get('apuracao_lancamento')
+    apuracao_compensado = informacoes_zmd_dirf.get('apuracao_compensado')
+    local_salvar_rel_back = informacoes_zmd_dirf.get('local_salvar_rel_back')
 
     relacao_cod_cat_imposto = orc.obter_relacao_contas(caminho_cod_ctg_imp)
     
@@ -41,14 +44,19 @@ def executar_robo(informacoes_zmd_dirf):
     # Cóndições de seleção
     sap.session.findById("wnd[0]/usr/ctxtPCOMPANY").text = empresa
     sap.session.findById("wnd[0]/usr/txtPYEAR").text = exercicio
-    sap.session.findById("wnd[0]/usr/radP_COMPE").select()
+    
+    if apuracao_lancamento:
+        sap.session.findById("wnd[0]/usr/radP_LANCA").select()
+    
+    if apuracao_compensado:
+        sap.session.findById("wnd[0]/usr/radP_COMPE").select()
     
     
     # Parametros de Execução
     if gerar_dados_background:
-        sap.session.findById("wnd[0]/usr/radPRBACKGR").select()
-    else:
         sap.session.findById("wnd[0]/usr/radPGBACKGR").select()
+    else:
+        sap.session.findById("wnd[0]/usr/radPRBACKGR").select()
   
     # Dados Principais
     sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpMAIN_DATA/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1001/chkP_PUBLIC").selected = True
@@ -127,9 +135,16 @@ def executar_robo(informacoes_zmd_dirf):
 
     # Dados de Saida
     sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpOUTPUT/").select()
-    sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpOUTPUT/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1003/radAPPLSERV").select()
-    sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpOUTPUT/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1003/txtFNAMEAPS").text = r"\\ELB3420\EP0\ESUL\FI\DIRF\2021\teste01.txt"
     
+    if exibir_dados_gerados:
+        sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpOUTPUT/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1003/radAPPLSERV").select()
+        sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpOUTPUT/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1003/txtFNAMEAPS").text = local_salvar_rel_back + '\ZMD_DIRF_' + data_execucao + '.txt'
+
+    if gerar_dados_background:
+        sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpOUTPUT/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1003/radPRESSERV").select()
+        sap.session.findById("wnd[0]/usr/tabsTABSTRIP_TDATA/tabpOUTPUT/ssub%_SUBSCREEN_TDATA:ZJ_1BLFDI:1003/ctxtFNAMEPRS").text = local_salvar_rel_back + '\ZMD_DIRF_' + data_execucao + '.txt'
+
+
     # Abrindo tela de status para confirmar ambiente
     sap.session.findById("wnd[0]/mbar/menu[3]/menu[11]").select()
 

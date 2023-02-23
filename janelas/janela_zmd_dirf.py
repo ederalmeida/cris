@@ -18,17 +18,27 @@ def exibir():
                  ],
                  [
                     sg.InputText('', key='-REL_CTG_IMP_RET_FONTE-', size=(68, 1)), sg.FileBrowse('procurar')
+                 ],
+                 [
+                    sg.Radio('Lançamento', 'APURACAO', key='-APURACAO_LANCAMENTO-'),
+                    sg.Radio('Compensados', 'APURACAO', key='-APURACAO_COMPENSADOS-')
                  ]], size=(580,110)
                  )]]
     
     linha3 = [[sg.Frame('Parâmetros de Execução',
                 [[
-                    sg.Radio('Gerar Dados Background', 'PAREXEC', key='-PAREXEC_BACKGROUND-'),
-                    sg.Radio('Exibir Dados Gerados', 'PAREXEC', key='-PAREXEC_EXIBIR-', default=True),
-                ]], size=(580,110)
+                    sg.Radio('Gerar Dados Background', 'PAREXEC', key='-PAREXEC_BACKGROUND-', enable_events=True),
+                    sg.Radio('Exibir Dados Gerados', 'PAREXEC', key='-PAREXEC_EXIBIR-', enable_events=True),
+                ]], size=(580,50)
+                )]]
+
+    linha4 = [[sg.Frame('Local para salvar arquivo Execução Background',
+                [[
+                    sg.InputText('', key='-LOCAL_SALVAR_REL_BACK-',enable_events=True , size=(68, 1)), sg.FolderBrowse('procurar')
+                ]], size=(580,50)
                 )]]   
    
-    linha4 = [
+    linha5 = [
                 [sg.Frame('Dados Principais',
                     [
                         [
@@ -43,14 +53,14 @@ def exibir():
                     ], size=(580,80)
                 )]]
 
-    linha5 = [[[
+    linha6 = [[[
                     sg.Text('Local para salvar relatórios e IPE')
                  ],
                  [
                     sg.InputText('', key='-LOCAL_SALVAR_REL_IPE-', size=(68, 1)), sg.FolderBrowse('procurar')
                  ]]]
 
-    linha6 = [[sg.Text('')],
+    linha7 = [[sg.Text('')],
               [sg.Button('Executar Robô', key='-EXECUTAR_ROBO-', enable_events=True)]]
     
     layout = [linha1,
@@ -58,7 +68,8 @@ def exibir():
               linha3,
               linha4,
               linha5,
-              linha6]
+              linha6,
+              linha7]
     
     janela = sg.Window('Robô para Extração de ZMD_DIRF', layout, default_element_size=(40, 1), element_justification='left', grab_anywhere=False) 
 
@@ -77,6 +88,15 @@ def exibir():
 
             elif values['-REL_CTG_IMP_RET_FONTE-'] == '':
                 sg.popup('Favor selecionar o arquivo coma lista de Códigos de Imposto', title='Erro')
+
+            elif values['-APURACAO_LANCAMENTO-'] == False and values['-APURACAO_COMPENSADOS-'] == False:
+                sg.popup('Favor selecionar um tipo de apuração: Lançamento ou Compensado', title='Erro')
+            
+            elif values['-PAREXEC_BACKGROUND-'] == False and values['-PAREXEC_EXIBIR-'] == False:
+                sg.popup('Favor selecionar um tipo de execução', title='Erro')
+            
+            elif values['-PAREXEC_BACKGROUND-'] == True and values['-LOCAL_SALVAR_REL_BACK-'] == '':
+                sg.popup('Favor indicar um local para salvar o arquivo gerado em background', title='Erro')
 
             elif values['-EXERCICIO_CORRENTE-'] == '':
                 sg.popup('Favor inserir um ano para o exercício corrente', title='Erro')
@@ -105,6 +125,9 @@ def exibir():
                     'ncpf': values['-NCPF-'],
                     'local_salvar_ipe': values['-LOCAL_SALVAR_REL_IPE-'],
                     'gerar_dados_background': values['-PAREXEC_BACKGROUND-'],
-                    'exibir_dados_gerados': values['-PAREXEC_EXIBIR-']
+                    'exibir_dados_gerados': values['-PAREXEC_EXIBIR-'],
+                    'apuracao_lancamento': values['-APURACAO_LANCAMENTO-'],
+                    'apuracao_compensado': values['-APURACAO_COMPENSADOS-'],
+                    'local_salvar_rel_back': values['-LOCAL_SALVAR_REL_BACK-']
                     }
                 zmd_dirf.executar_robo(informacoes_zmd_dirf)
