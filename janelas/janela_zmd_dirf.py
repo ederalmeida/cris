@@ -22,7 +22,7 @@ def exibir():
                  [
                     sg.Radio('Lançamento', 'APURACAO', key='-APURACAO_LANCAMENTO-'),
                     sg.Radio('Compensados', 'APURACAO', key='-APURACAO_COMPENSADOS-')
-                 ]], size=(580,110)
+                 ]], size=(580,140)
                  )]]
     
     linha3 = [[sg.Frame('Parâmetros de Execução',
