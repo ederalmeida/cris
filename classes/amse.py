@@ -87,14 +87,21 @@ class amse_site():
             self.driver.implicitly_wait(1)
             Select(self.driver.find_element(By.NAME, 'cbo_vencimento')).select_by_value(documento.vencimento)
             self.driver.find_element(By.NAME, 'ibt_pesquisar').click()
-            self.driver.find_element(By.ID, 'grdLiquidacao__ctl2_chk_pagou').click()
-            Select(self.driver.find_element(By.ID,'grdLiquidacao__ctl2_ddl_tpocorr')).select_by_value('2')
-            self.driver.find_element(By.ID, 'imgAtualizar').click()
-            self.driver.find_element(By.ID, 'ibtAdimpTotal').click()
-            alerta_sucesso = Alert(self.driver)
-            alerta_sucesso.accept()
-            self.driver.implicitly_wait(1)
-            glcdi.gravar_log(caminho, documento, 'Inadimplência Cadastrada com sucesso!')
+            movimento_previo_cadastrado = Select(self.driver.find_element(By.ID, 'grdLiquidacao__ctl2_ddl_tpocorr'))
+            movimento_previo_cadastrado_opcao = movimento_previo_cadastrado.first_selected_option
+            
+            #se já houver um momento cadastrado previamente, gera o log com essa informação
+            if movimento_previo_cadastrado_opcao.text != '':
+                glcdi.gravar_log(caminho, documento, 'Título com movimento prévio já lançado ==> ' + movimento_previo_cadastrado_opcao.text)
+            else:
+                self.driver.find_element(By.ID, 'grdLiquidacao__ctl2_chk_pagou').click()
+                Select(self.driver.find_element(By.ID,'grdLiquidacao__ctl2_ddl_tpocorr')).select_by_value('2')
+                self.driver.find_element(By.ID, 'imgAtualizar').click()
+                self.driver.find_element(By.ID, 'ibtAdimpTotal').click()
+                alerta_sucesso = Alert(self.driver)
+                alerta_sucesso.accept()
+                self.driver.implicitly_wait(1)
+                glcdi.gravar_log(caminho, documento, 'Inadimplência Cadastrada com sucesso!')
 
     def logoff(self):
         self.driver.close()
