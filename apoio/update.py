@@ -100,9 +100,11 @@ def atualizar_arquivos():
     # Criando arquivo de logging
     arquivo_de_log = open(os.sep.join([path, 'lib', 'log de execução.txt']), 'w')
     
-    for linha in tabela_aux_log:
-        arquivo_de_log.writelines(linha[0] + ' - ' + linha[1] + ' - ' + linha[2] + '\n')
-    arquivo_de_log.close()
+    try:
+        for linha in tabela_aux_log:
+            arquivo_de_log.writelines(linha[0] + ' - ' + linha[1] + ' - ' + linha[2] + '\n')
+    except:
+        arquivo_de_log.close()
         
 def substituir_hash():
     path = os.getcwd()
