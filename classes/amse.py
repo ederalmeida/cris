@@ -88,10 +88,14 @@ class amse_site():
             Select(self.driver.find_element(By.NAME, 'cbo_vencimento')).select_by_value(documento.vencimento)
             self.driver.find_element(By.NAME, 'ibt_pesquisar').click()
             movimento_previo_cadastrado = Select(self.driver.find_element(By.ID, 'grdLiquidacao__ctl2_ddl_tpocorr'))
-            movimento_previo_cadastrado_opcao = movimento_previo_cadastrado.first_selected_option
+            try:
+                movimento_previo_cadastrado_opcao = movimento_previo_cadastrado.first_selected_option
+                movimento_previo = True
+            except:
+                movimento_previo = False
             
             #se já houver um momento cadastrado previamente, gera o log com essa informação
-            if movimento_previo_cadastrado_opcao.text != '':
+            if movimento_previo:
                 glcdi.gravar_log(caminho, documento, 'Título com movimento prévio já lançado ==> ' + movimento_previo_cadastrado_opcao.text)
             else:
                 self.driver.find_element(By.ID, 'grdLiquidacao__ctl2_chk_pagou').click()

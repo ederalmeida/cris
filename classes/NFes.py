@@ -48,7 +48,8 @@ class NFe():
             NFes[i].id_sap = relacao_fornecedores.get(xml.nfeProc.NFe.infNFe.emit.CNPJ.cdata, '#N/D')
 
             # Armazena o número da nota fiscal
-            NFes[i].nNF = xml.nfeProc.NFe.infNFe.ide.nNF.cdata
+            nNF = str(xml.nfeProc.NFe.infNFe.ide.nNF.cdata)
+            NFes[i].nNF = (str(0) * (9 - len(nNF))) + nNF
 
             # Armazena a série da nota fiscal
             NFes[i].serie = xml.nfeProc.NFe.infNFe.ide.serie.cdata
@@ -89,7 +90,7 @@ class NFe():
                                 (xml.nfeProc.NFe.infNFe.det.prod.NCM.cdata[0:4] + '.' + \
                                     xml.nfeProc.NFe.infNFe.det.prod.NCM.cdata[4:6] + '.' + \
                                     xml.nfeProc.NFe.infNFe.det.prod.NCM.cdata[6:8]),
-                                str(round(float(xml.nfeProc.NFe.infNFe.det.prod.qCom.cdata),2)).replace('.',','),
+                                str(round(float(xml.nfeProc.NFe.infNFe.det.prod.qCom.cdata),3)).replace('.',','),
                                 str(round(float(xml.nfeProc.NFe.infNFe.det.prod.vUnCom.cdata), 6)).replace('.',','),
                                 str(round(float(xml.nfeProc.NFe.infNFe.det.prod.vProd.cdata), 2)).replace('.',',')]]
             
@@ -101,7 +102,7 @@ class NFe():
                                 (xml.nfeProc.NFe.infNFe.det[l].prod.NCM.cdata[0:4] + '.' + \
                                     xml.nfeProc.NFe.infNFe.det[l].prod.NCM.cdata[4:6] + '.' + \
                                     xml.nfeProc.NFe.infNFe.det[l].prod.NCM.cdata[6:8]),
-                                str(round(float(xml.nfeProc.NFe.infNFe.det[l].prod.qCom.cdata),2)).replace('.',','),
+                                str(round(float(xml.nfeProc.NFe.infNFe.det[l].prod.qCom.cdata),3)).replace('.',','),
                                 str(round(float(xml.nfeProc.NFe.infNFe.det[l].prod.vUnCom.cdata), 6)).replace('.',','),
                                 str(round(float(xml.nfeProc.NFe.infNFe.det[l].prod.vProd.cdata), 2)).replace('.',',')])
                     l += 1

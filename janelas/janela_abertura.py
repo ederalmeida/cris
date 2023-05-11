@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 from imagens import imagens_base64 as imgs
 from janelas import janela_avd_j1b1n, janela_fagll03, janela_fbl1n, janela_fbl3n, janela_fbl5n, janela_kob1,\
-     janela_inadimplencia_amse, janela_zwf100, janela_zmd_dirf
+     janela_inadimplencia_amse, janela_zwf100, janela_zmd_dirf, janela_fb03
 from apoio import versao_local as vl
 import sys
 
@@ -19,6 +19,7 @@ def exibir():
                           sg.Button('FAGLL03', size=(10,1), key='-FAGLL03-')],
                          [sg.Button('KOB1', size=(10,1), key='-KOB1-'),
                           sg.Button('AVD J1B1N', size=(10,1), key='-AVDJ1B1N-'),
+                          sg.Button('INFOs FB03', size=(10,1), key='-FB03-')
                           ]])],
                        [sg.Text('')],
                        [sg.Frame('TESOURARIA',
@@ -66,6 +67,10 @@ def exibir():
         if event == '-AVDJ1B1N-':
             janela.close()
             janela_avd_j1b1n.exibir()
+
+        if event == '-FB03-':
+            janela.close()
+            janela_fb03.exibir()
 
         if event == '-INADIMPLENCIA_AMSE-':
             janela.close()
